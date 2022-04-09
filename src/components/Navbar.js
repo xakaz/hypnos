@@ -1,5 +1,5 @@
 import React from 'react'
-import Logo from '../assets/Navbar/logoHotel.jpg'
+import Logo from '../assets/componentsAssets/Navbar/logoHotel.jpg'
 import { NavLink } from 'react-router-dom'
 
 export default function Navbar() {
@@ -65,16 +65,16 @@ export default function Navbar() {
 
         {/* BOUTONS INSCRIPTION - CONNEXION - DECONNEXION */}
         <div>
-          <button className="btn btn-primary ms-2">
+          <button className="btn btn-outline-dark ms-2">
             Mon compte
           </button>
-          <button className="btn btn-primary ms-2">
+          <button className="btn btn-outline-dark ms-2">
             Inscription
           </button>
-          <button className="btn btn-primary ms-2">
+          <button className="btn btn-outline-dark ms-2">
             Connexion
           </button>
-          <button className="btn btn-danger ms-2">
+          <button className="btn btn-outline-danger ms-2">
             Deconnexion
           </button>
         </div>
