@@ -9,7 +9,9 @@ export default function Navbar() {
 
         {/* LOGO */}
         <div>
-          <img src={Logo} alt="hypnosLogo" style={{height:"50px"}} className='img-fluid'/>
+          <a href="/">
+            <img src={Logo} alt="hypnosLogo" style={{height:"50px"}} className='img-fluid'/>
+          </a>
         </div>
 
         {/* ONGLETS PAGES */}
