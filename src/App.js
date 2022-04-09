@@ -2,14 +2,15 @@ import React from "react";
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import Accueil from "./containers/Accueil";
 
 function App() {
   return (
-    <>
+    <div className="bg-dark">
       <BrowserRouter>
         <Navbar/>
         <Routes>
-          <Route path="/" element={<h1>Accueil</h1>}/>
+          <Route path="/" element={<Accueil/>}/>
           <Route path="/hotels" element={<h1>Hotels</h1>}/>
           <Route path="/bien-etre" element={<h1>Bien-être</h1>}/>
           <Route path="/restaurants" element={<h1>Restaurants</h1>}/>
@@ -19,7 +20,7 @@ function App() {
         </Routes>
         <Footer/>
       </BrowserRouter>
-    </>
+    </div>
   );
 }
 
