@@ -1,8 +1,15 @@
+import React from "react";
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
+
 function App() {
   return (
-    <div className="App">
-      
-    </div>
+    <>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<h1>Accueil</h1>}/>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
