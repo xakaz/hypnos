@@ -1,0 +1,23 @@
+<?php
+
+abstract class Model {
+  private static $pdo;
+
+  protected function getBdd(){
+    try{
+        self::$pdo = new PDO('sqlite:C:\Users\xakaz\Desktop\EvalStudi\hypnos\react\db.sqlite', '', '', array(
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+      ));
+      return self::$pdo;
+    } catch(Exception $e) {
+      echo "Impossible d'accéder à la base de données SQLite : ".$e->getMessage();
+      die();
+    }
+  }
+
+  public static function sendJSON($info){
+    header("Access-Control-Allow-Origin: *");
+    header("Content-Type: application/json");
+    echo json_encode($info);
+  }
+}

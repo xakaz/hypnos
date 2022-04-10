@@ -3,15 +3,8 @@
 define("URL", str_replace("index.php","",(isset($_SERVER['HTTPS']) ? "https" : "http").
 "://$_SERVER[HTTP_HOST]$_SERVER[PHP_SELF]"));
 
-// try{
-//     $pdo = new PDO('sqlite:../react/db.sqlite');
-//     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-//     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // ERRMODE_WARNING | ERRMODE_EXCEPTION | ERRMODE_SILENT
-//     echo "connexion réussie";
-// } catch(Exception $e) {
-//     echo "Impossible d'accéder à la base de données SQLite : ".$e->getMessage();
-//     die();
-// }
+require_once ("./controllers/front/Api.controller.php");
+$apiController = new APIController();
 
 try{
     if(empty($_GET['url'])){
@@ -22,17 +15,19 @@ try{
         switch($url[0]){
             case "front" :
                 switch($url[1]){
-                    case "hotels" : echo "la page des hotels";
+                    case "hotels" : $apiController->getHotels();
                     break;
-                    case "suites" : echo "la page des suites";
+                    case "suites" : $apiController->getSuites();
                     break;
-                    case "restaurants" : echo "la page des restaurants";
+                    case "restaurants" : $apiController->getRestaurants();
                     break;
-                    case "bien-etre" : echo "la page bien-être";
+                    case "bien-etre" : $apiController->getBienEtre();
                     break;
-                    case "evenements" : echo "la page des évènements";
+                    case "evenements" : $apiController->getEvenements();
                     break;
-                    case "contact" : echo "la page des contacts";
+                    case "contact" : $apiController->getContact();
+                    break;
+                    case "services" : $apiController->getServices();
                     break;
                     default : throw new Exception("La page n'existe pas") ;
                 }
