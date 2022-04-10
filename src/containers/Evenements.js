@@ -2,7 +2,7 @@ import React from 'react'
 import Content from '../components/Content'
 import Event from '../assets/containersAssets/evenements/wedding.jpg'
 
-const BienEtre = (props) => {
+const Evenements = (props) => {
   return (
     <div className='text-white'>
       <div className="d-flex justify-content-center">
@@ -23,4 +23,4 @@ const BienEtre = (props) => {
   )
 }
 
-export default BienEtre;
+export default Evenements;

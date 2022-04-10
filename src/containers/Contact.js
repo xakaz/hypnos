@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class Nom extends Component {
+class Contact extends Component {
 
   render() {
     return (
@@ -29,7 +29,7 @@ class Nom extends Component {
                   <div className="mb-3 ">
                     <label htmlFor="email" className="form-label">Adresse mail</label>
                     <input type="email"
-                      className="form-control" id="email" aria-describedby="emailHelp" name="email" />
+                      className="form-control" id="email" name="email" />
                   </div>
                   
                 {/** OBJET */}
@@ -61,4 +61,4 @@ class Nom extends Component {
   }
 }
 
-export default Nom;
+export default Contact;

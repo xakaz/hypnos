@@ -21,3 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# sql files
+sqldiff.exe
+sqlite3_analyzer.exe
+sqlite3.exe
