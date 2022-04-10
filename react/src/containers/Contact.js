@@ -50,7 +50,7 @@ class Contact extends Component {
                   </div>
                   
                 {/** BOUTON */}
-                <button type="submit" className="btn btn-primary ">Envoyer</button>
+                <button type="submit" className="btn btn-outline-light">Envoyer</button>
               </form>
             </div>
           
