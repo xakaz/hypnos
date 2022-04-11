@@ -98,6 +98,15 @@
     "bienEtre_description" VARCHAR (150) NOT NULL,
     "bienEtre_alt" VARCHAR (150) NOT NULL
     );
+  
+  -- ACCUEIL
+  /**
+    CREATE TABLE accueil (
+    accueil_id integer not null primary key AUTOINCREMENT,
+    accueil_title varchar(100) not null,
+    accueil_image varchar(100) not null,
+    accueil_description text not null,
+    accueil_alt varchar(30) not null);
 
 
 ----------------------------INSERTIONS DANS TABLES
@@ -246,6 +255,14 @@
     ("breakfast.jpg", "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus asperiores veniam impedit, ipsa rem quasi delectus autem fugiat doloribus cupiditate!","breakfast","Petit déjeuner"),
     ("chef.jpg", "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus asperiores veniam impedit, ipsa rem quasi delectus autem fugiat doloribus cupiditate!","chef","Chef étoilé"),
     ("lunch.jpg", "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus asperiores veniam impedit, ipsa rem quasi delectus autem fugiat doloribus cupiditate!","lunch","Repas");
+  
+  --ACCUEIL
+  /**
+    INSERT INTO accueil (accueil_title,accueil_image,accueil_description,accueil_alt ) 
+    VALUES 
+    ("Reception", "reception.jpg","Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, quis eius. Vero optio natus deserunt error sint rerum corporis porro.","image reception"),
+    ("Evenements", "events.jpg","Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, quis eius. Vero optio natus deserunt error sint rerum corporis porro.","image evenements"),
+    ("Bien-être", "wellness.jpg","Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, quis eius. Vero optio natus deserunt error sint rerum corporis porro.","image massage");
   
   
 ----------------------------SUPPRESSIONS DANS TABLES 
