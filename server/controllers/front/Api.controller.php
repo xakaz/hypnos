@@ -39,4 +39,8 @@ class APIController
     $services = $this->apiManager->getDBServices();
     Model::sendJSON($services);
   }
+  public function getAccueil(){
+    $accueil = $this->apiManager->getDBAccueil();
+    Model::sendJSON($accueil);
+  }
 }

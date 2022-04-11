@@ -65,5 +65,14 @@ class APIManager extends Model
     $stmt->closeCursor();
     return $services;
   }
+  
+  public function getDBAccueil(){
+    $req ="SELECT * FROM accueil";
+    $stmt= $this->getBdd()->prepare($req);
+    $stmt->execute();
+    $accueil = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $accueil;
+  }
 
 }

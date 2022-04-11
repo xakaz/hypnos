@@ -29,6 +29,8 @@ try{
                     break;
                     case "services" : $apiController->getServices();
                     break;
+                    case "accueil" : $apiController->getAccueil();
+                    break;
                     default : throw new Exception("La page n'existe pas") ;
                 }
             break;
