@@ -36,7 +36,8 @@ class BienEtre extends Component {
                 vignette={require(`../assets/containersAssets/bien-etre/${wellness.bienEtre_image}`)}
                 alt={wellness.bienEtre_alt}
                 title={wellness.bienEtre_title}
-                description={wellness.bienEtre_description}/>
+                description={wellness.bienEtre_description}
+                key = {wellness.bienEtre_id}/>
                 )
               })
           }

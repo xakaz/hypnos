@@ -36,7 +36,8 @@ class Restaurants extends Component {
                 vignette={require(`../assets/containersAssets/restaurants/${restaurant.restaurant_image}`)}
                 alt={restaurant.restaurant_alt}
                 title={restaurant.restaurant_title}
-                description={restaurant.restaurant_description}/>
+                description={restaurant.restaurant_description}
+                key={restaurant.restaurant_id}/>
                 )
               })
           }

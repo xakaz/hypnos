@@ -36,7 +36,8 @@ class Evenements extends Component
                 vignette={require(`../assets/containersAssets/evenements/${evenement.evenements_image}`)}
                 alt={evenement.evenements_alt}
                 title={evenement.evenements_title}
-                description={evenement.evenements_description}/>
+                description={evenement.evenements_description}
+                key={evenement.evenements_id}/>
                 )
               })
           }

@@ -37,9 +37,9 @@ class Contact extends Component {
                   </div>
                   
                 {/** OBJET */}
-                <div class="form-group mb-3">
+                <div className="form-group mb-3">
                   <label htmlFor="object" className="form-label">Objet</label>
-                  <select class="form-control" id="object" name="object" >
+                  <select className="form-control" id="object" name="object" >
                     <option>Je souhaite poser une réclamation</option>
                     <option>Je souhaite commander un service supplémentaire</option>
                     <option>Je souhaite en savoir plus sur une suite</option>
