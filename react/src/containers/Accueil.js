@@ -5,6 +5,10 @@ import Card from "../components/Card";
 
 class Accueil extends Component {
 
+  componentDidMount = () =>{
+    document.title = "Accueil";
+  }
+
   render() {
     return (
       <>

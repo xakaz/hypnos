@@ -72,6 +72,34 @@
     FOREIGN KEY (service_id) REFERENCES services (service_id)
     );
 
+  -- EVENEMENTS
+  /**
+    CREATE TABLE "evenements" (
+    "evenements_id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "evenements_image" VARCHAR (150) NOT NULL,
+    "evenements_description" VARCHAR (150) NOT NULL,
+    "evenements_alt" VARCHAR (150) NOT NULL
+    );
+
+  -- RESTAURANTS
+  /**
+    CREATE TABLE "restaurants" (
+    "restaurant_id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "restaurant_image" VARCHAR (150) NOT NULL,
+    "restaurant_description" VARCHAR (150) NOT NULL,
+    "restaurant_alt" VARCHAR (150) NOT NULL
+    );
+
+  -- BIEN-ETRE
+  /**
+    CREATE TABLE "bienEtre" (
+    "bienEtre_id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "bienEtre_image" VARCHAR (150) NOT NULL,
+    "bienEtre_description" VARCHAR (150) NOT NULL,
+    "bienEtre_alt" VARCHAR (150) NOT NULL
+    );
+
+
 ----------------------------INSERTIONS DANS TABLES
 /**
   -- SUITES
@@ -189,6 +217,36 @@
     ("Mini-bar"),("Machine à expresso"),("Bouteille d'eau gratuite"),
     ("Ménage quotidien"),("Service d'étage (24h/24)"),("Wifi gratuit"),
     ("Climatisation"),("Non-fumeurs");
+
+  --BIEN-ETRE
+  /**
+    INSERT INTO 
+    bienEtre (bienEtre_image, bienEtre_description,bienEtre_alt ) 
+    VALUES 
+    ("massage.jpg", "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus asperiores veniam impedit, ipsa rem quasi delectus autem fugiat doloribus cupiditate!","massage"),
+    ("pool.jpg", "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus asperiores veniam impedit, ipsa rem quasi delectus autem fugiat doloribus cupiditate!","piscine"),
+    ("spaPrivatif.jpg", "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus asperiores veniam impedit, ipsa rem quasi delectus autem fugiat doloribus cupiditate!","spa"),
+    ("sport.jpg", "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus asperiores veniam impedit, ipsa rem quasi delectus autem fugiat doloribus cupiditate!","salle de sport");
+  
+  --EVENEMENTS
+  /**
+    INSERT INTO 
+    evenements (evenements_image, evenements_description,evenements_alt, evenements_title ) 
+    VALUES 
+    ("baptism.jpg", "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus asperiores veniam impedit, ipsa rem quasi delectus autem fugiat doloribus cupiditate!","reception","Baptèmes & Mariages"),
+    ("business.jpg", "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus asperiores veniam impedit, ipsa rem quasi delectus autem fugiat doloribus cupiditate!","breakfast","Repas d'affaires"),
+    ("party.jpg", "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus asperiores veniam impedit, ipsa rem quasi delectus autem fugiat doloribus cupiditate!","chef","Concerts & orchestres");
+  
+  --RESTAURANTS
+  /**
+    INSERT INTO 
+    restaurants (restaurant_image, restaurant_description,restaurant_alt, restaurant_title ) 
+    VALUES 
+    ("bar.jpg", "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus asperiores veniam impedit, ipsa rem quasi delectus autem fugiat doloribus cupiditate!","bar","Bar"),
+    ("breakfast.jpg", "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus asperiores veniam impedit, ipsa rem quasi delectus autem fugiat doloribus cupiditate!","breakfast","Petit déjeuner"),
+    ("chef.jpg", "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus asperiores veniam impedit, ipsa rem quasi delectus autem fugiat doloribus cupiditate!","chef","Chef étoilé"),
+    ("lunch.jpg", "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minus asperiores veniam impedit, ipsa rem quasi delectus autem fugiat doloribus cupiditate!","lunch","Repas");
+  
   
 ----------------------------SUPPRESSIONS DANS TABLES 
 /**
@@ -197,13 +255,38 @@
 ----------------------------MODIFICATIONS DANS TABLES
 /**
   -- AJOUT D'UNE COLONNE
-  -- ALTER TABLE suites ADD suite_prix FLOAT;
+    /**
+      --SUITES
+        /*
+          -- ALTER TABLE suites ADD suite_prix FLOAT;
+      
+      --BIENETRE
+        /*
+          -- ALTER TABLE bienEtre ADD bienEtre_title VARCHAR(100);
+
+      --RESTAURANTS
+        /*
+          -- ALTER TABLE restaurants ADD restaurant_title VARCHAR(100);
+
+      --EVENEMENTS
+        /*
+          -- ALTER TABLE evenements ADD evenements_title VARCHAR(100);
+
 
   -- MODIFICATION DONNEES DANS TABLE
-  -- UPDATE suites set suite_prix = 355 where suite_id = 3;
-
-  --AJOUT COLONNE + FOREIG_KEY
-  /**
+    /**
+      --SUITES
+        /**
+        UPDATE suites set suite_prix = 355 where suite_id = 3;
+      -- BIEN-ETRE
+        /**
+        UPDATE bienEtre set bienEtre_title = "Massage" where bienEtre_id = 1;
+        UPDATE bienEtre set bienEtre_title = "Piscine" where bienEtre_id = 2;
+        UPDATE bienEtre set bienEtre_title = "Spa" where bienEtre_id = 3;
+        UPDATE bienEtre set bienEtre_title = "Salle de sport" where bienEtre_id = 4;
+    
+  -- AJOUT COLONNE + FOREIG_KEY
+    /**
     ALTER TABLE user
     ADD user_role INTEGER NOT NULL  
     REFERENCES role (role_id);
