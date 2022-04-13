@@ -43,4 +43,5 @@ class APIController
     $accueil = $this->apiManager->getDBAccueil();
     Model::sendJSON($accueil);
   }
+
 }

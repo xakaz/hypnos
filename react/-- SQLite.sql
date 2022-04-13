@@ -108,6 +108,15 @@
     accueil_description text not null,
     accueil_alt varchar(30) not null);
 
+  -- HISTORIQUE
+  /**
+    CREATE TABLE historique (
+    historique_suite INTEGER NOT NULL,
+    historique_user INTEGER NOT NULL,
+    FOREIGN KEY (historique_suite) 
+    REFERENCES suites (suite_id),
+    FOREIGN KEY (historique_user) 
+    REFERENCES user (user_id));
 
 ----------------------------INSERTIONS DANS TABLES
 /**

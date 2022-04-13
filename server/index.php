@@ -3,8 +3,11 @@
 define("URL", str_replace("index.php","",(isset($_SERVER['HTTPS']) ? "https" : "http").
 "://$_SERVER[HTTP_HOST]$_SERVER[PHP_SELF]"));
 
-require_once ("./controllers/front/Api.controller.php");
+require_once "./controllers/front/Api.controller.php";
+require_once "./controllers/back/Connexion.controller.php";
+
 $apiController = new APIController();
+$connexionController = new ConnexionController();
 
 try{
     if(empty($_GET['url'])){
@@ -31,10 +34,25 @@ try{
                     break;
                     case "accueil" : $apiController->getAccueil();
                     break;
+                    case "admin" : $apiController->getAdmin();
+                    break;    
+                    case "user" : $apiController->getUser();
+                    break;    
+                    case "manager" : $apiController->getManager();
+                    break;    
                     default : throw new Exception("La page n'existe pas") ;
                 }
-            break;
-            case "back" : echo "backend de mon application";
+                break;
+            case "back" : 
+                switch($url[1]){    
+                    case "inscription" : $connexionController->setUser();
+                    break;    
+                    case "connexion" : $connexionController->setConnexion();
+                    break;    
+                    case "email" : $connexionController->getEmailAddresses();
+                    break;    
+                    default : throw new Exception("La page n'existe pas") ;    
+                }
             break;
             default : throw new Exception("La page n'existe pas") ;
         }

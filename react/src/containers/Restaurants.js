@@ -16,9 +16,8 @@ class Restaurants extends Component {
       .then(response => {
         this.setState({ restaurants: response.data });
       })
-  }
-
-  render(){
+    } 
+  render(){ 
     return (
       <div className='text-white'>
         <div className="d-flex justify-content-center">

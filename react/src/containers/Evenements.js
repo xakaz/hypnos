@@ -16,8 +16,8 @@ class Evenements extends Component
       .then(response => {
         this.setState({ evenements: response.data });
       })
+
   }
-  
   render(){
     return (
       <div className='text-white'>

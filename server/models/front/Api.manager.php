@@ -74,5 +74,6 @@ class APIManager extends Model
     $stmt->closeCursor();
     return $accueil;
   }
+  
 
 }

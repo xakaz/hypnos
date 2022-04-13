@@ -54,7 +54,7 @@ class Hotels extends Component {
                         </div>
                       </div>
                       <div className='d-flex justify-content-center col-4'>
-                        <NavLink to="/" className="btn btn-light mb-3">Voir les Suites</NavLink>
+                        <NavLink to={`/${hotel.hotel_id}`} className="btn btn-light mb-3">Visiter</NavLink>
                       </div>
                     </div>
                   </div>
