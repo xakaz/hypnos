@@ -1,13 +1,16 @@
 <?php
 
 require_once "../../models/front/User.Manager.php";
+require_once "../../models/Model.php";
 
-class UserController {
+class UserController extends Model
+{
 
   private $userManager;
 
   public function __construct(){
-    $this->userManager = new UserManager();
+    $user=$this->userManager = new UserManager();
+    Model::sendJSON($user);
   }
 
   public function getUser(){

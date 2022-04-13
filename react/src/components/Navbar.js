@@ -1,11 +1,16 @@
 import React, { useContext } from 'react'
 import Logo from '../assets/componentsAssets/Navbar/logoHotel.jpg'
 import { NavLink } from 'react-router-dom'
+import {ConnexionContext} from '../context/connexionContext'
+
 
 export default function Navbar() {
 
-
-
+  const {isConnected, connexion} = useContext(ConnexionContext)
+  
+  const handleChange = () =>{
+    connexion()
+  }
 
 
   return (
@@ -72,15 +77,18 @@ export default function Navbar() {
 
         {/* BOUTONS INSCRIPTION - CONNEXION - DECONNEXION - MON COMPTE */}
 
-        <div>
-          <NavLink to='/mon-compte' className="btn btn-outline-dark ms-2">Mon compte</NavLink>
-          <NavLink to='/' className="btn btn-outline-danger ms-2">Deconnexion</NavLink>
-        </div>
-
-        <div>
-          <NavLink to='/inscription' className="btn btn-outline-dark ms-2">Inscription</NavLink>
-          <NavLink to='/connexion' className="btn btn-outline-dark ms-2">Connexion</NavLink>
-        </div>
+        {
+           isConnected ?
+            <div>
+              <NavLink to='/mon-compte' className="btn btn-outline-dark ms-2" onClick={handleChange}>Mon compte</NavLink>
+              <NavLink to='/' className="btn btn-outline-danger ms-2" onclick={handleChange}>Deconnexion</NavLink>
+            </div>
+            :
+            <div>
+              <NavLink to='/inscription' className="btn btn-outline-dark ms-2" onClick={handleChange}>Inscription</NavLink>
+              <NavLink to='/connexion' className="btn btn-outline-dark ms-2" onClick={handleChange}>Connexion</NavLink>
+            </div>
+        }
       </nav>
     </>
   )

@@ -4,10 +4,12 @@ define("URL", str_replace("index.php","",(isset($_SERVER['HTTPS']) ? "https" : "
 "://$_SERVER[HTTP_HOST]$_SERVER[PHP_SELF]"));
 
 require_once "./controllers/front/Api.controller.php";
+require_once "./controllers/front/User.controller.php";
 require_once "./controllers/back/Connexion.controller.php";
 
 $apiController = new APIController();
 $connexionController = new ConnexionController();
+$userController = new UserController();
 
 try{
     if(empty($_GET['url'])){
@@ -36,7 +38,7 @@ try{
                     break;
                     case "admin" : $apiController->getAdmin();
                     break;    
-                    case "user" : $apiController->getUser();
+                    case "user" : $userController->getUser();
                     break;    
                     case "manager" : $apiController->getManager();
                     break;    

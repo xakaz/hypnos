@@ -1,24 +1,20 @@
 import React, {createContext, useState} from "react";
 
-//création du contexte
-export const connexionContext = createContext();
+export const ConnexionContext = createContext();
 
-const ConnexionContextProvider = props => {
+const ConnexionContextProvider  = (props) => {
+  
+  const [isConnected, setIsConnected] = useState(true);
 
-  const [isConnect, setIsConnect] = useState(false)
-
-  const connected = () => {
-    setIsConnect(true)
+  const connexion = () => {
+    setIsConnected(!isConnected)
   }
 
   return (
-    // Le provider va apporder les données du contexte dans props.children
-    // Les données ce sont les props dans value
-    <connexionContext.Provider value={{connected}}>
+    <ConnexionContext.Provider value={{isConnected, connexion}}>
       {props.children}
-    </connexionContext.Provider>
+    </ConnexionContext.Provider>
   )
-  
 }
 
 export default ConnexionContextProvider;

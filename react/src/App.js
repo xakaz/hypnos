@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Routes, Route } from 'react-router-dom';
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -11,7 +11,7 @@ import Hotel from "./containers/Hotel"
 import Inscription from './containers/Inscription'
 import Connexion from './containers/Connexion'
 import MonCompte from "./containers/MonCompte";
-import ConnexionContextProvider from './context/connexionContext'
+import ConnexionContextProvider  from "./context/connexionContext";
 
 function App() {
 
