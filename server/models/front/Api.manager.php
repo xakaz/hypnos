@@ -75,5 +75,16 @@ class APIManager extends Model
     return $accueil;
   }
   
+  public function getDBSelected($hotel_id){
+    $req ="SELECT * FROM hotels 
+          WHERE hotel_id = :hotel_id";
+    $stmt= $this->getBdd()->prepare($req);
+    $stmt->bindValue(":hotel_id", $hotel_id, PDO::PARAM_INT);
+    $stmt->execute();
+    $selectedHotel = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $selectedHotel;
+  }
+  
 
 }

@@ -44,5 +44,10 @@ class APIController
     $accueil = $this->apiManager->getDBAccueil();
     Model::sendJSON($accueil);
   }
+  
+  public function getSelectedHotel($hotelId){
+    $selected = $this->apiManager->getDBSelected($hotelId);
+    Model::sendJSON($selected);
+  }
 
 }

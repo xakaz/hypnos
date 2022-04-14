@@ -20,7 +20,14 @@ try{
         switch($url[0]){
             case "front" :
                 switch($url[1]){
-                    case "hotels" : $apiController->getHotels();
+                    case "hotels" : 
+                        if (empty($url[2])) {
+                            $apiController->getHotels();
+                        } else {
+                            $apiController->getSelectedHotel($url[2]);
+                        } 
+                    break;
+                     
                     break;
                     case "suites" : $apiController->getSuites();
                     break;

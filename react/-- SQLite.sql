@@ -225,6 +225,10 @@
     "toulouse.jpg"
     );
 
+    UPDATE hotels 
+    set hotel_plan ="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d722.3358416769215!2d1.4410893881666411!3d43.599391798688856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12aebb7d323e0b13%3A0xbe57d88accb1456f!2s46%20Rue%20des%20Couteliers%2C%2031000%20Toulouse!5e0!3m2!1sfr!2sfr!4v1649939925184!5m2!1sfr!2sfr"
+    where hotel_id = 7
+    
   -- ROLES
   /**
     insert into role (role_name) values ("ADMIN"),("MANAGER"),("USER");
