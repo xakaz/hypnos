@@ -1,4 +1,4 @@
-import React, { useRef, useState, useContext } from "react";
+import React, { useRef, useState, useEffect, useContext } from "react";
 import { connexionContext } from '../context/connexionContext';
 import { NavLink } from "react-router-dom";
 
@@ -6,31 +6,61 @@ import axios from "axios"
 
 export default function Connexion() {
   
-  // const {connected} = useContext(connexionContext)
-
-  const inputs = useRef([])
-
-  const addInputs  = element => {
-    if(element && !inputs.current.includes(element)){
-      inputs.current.push(element)
-    }
-  }  
-    
-  //   const handleSubmit = (e) => {
-  //     e.preventDefault()
-  //     //Inscription
-
-
-  //   }
-  //   // axios.post('http://localhost/server/back/connexion', this.state)
-  //   //   .then(response => {
-  //   //     document.location.href = "http://localhost:3000/mon-compte";
-  //   //     connected();
-  //   //     <NavLink to="/mon-compte"/>
-  //   //   })
-  //   //   .catch(error => {
-  //   //     this.setState({ errorText: "Email ou mot de passe incorrect" })
-  //   //   })
+   ///////////// CONSTANTES
+   const [validation, setValidation] = useState('')
+   const [successMessage, SetSuccessMessage] = useState(false)
+   const [mails, setMails] = useState([]);
+   const inputs = useRef([])
+   const formRef = useRef()
+ 
+   ///////////// RECUPERATION DES INPUTS
+   const addInputs = element => {
+     if (element && !inputs.current.includes(element)) {
+       inputs.current.push(element)
+     }
+   }
+ 
+   //////////////////RECUPERATION DES EMAILS
+   useEffect(() => {
+     axios.get("http://localhost/server/back/email")
+       .then(response => {
+         setMails(response.data.map(mail => { return (mail.user_mail) }))
+       })
+   }, [])
+   console.log(mails)
+   ////////////////////////////////////// SOUMISSION DU FORMULAIRE
+   const handleSubmit = (e) => {
+     e.preventDefault()
+     /////////////////// LONGUEUR PASSWORD
+     if ((inputs.current[3].value.length || inputs.current[4].value.length) < 8) {
+       setValidation("8 caractères minimum !")
+       return;
+     }
+     if ((inputs.current[3].value.length || inputs.current[4].value.length) > 20) {
+       setValidation("20 caractères maximum !")
+       return;
+     }
+     ////////////////// PASSORD MATCH
+     else if ((inputs.current[3].value !== inputs.current[4].value)) {
+       setValidation("Les mots de passe sont différents")
+       return;
+     }
+ 
+     ////////////////VERIF EMAIL
+     if (mails.includes(inputs.current[0].value)) {
+       setValidation('L\'adresse mail existe déjà')
+     } else {
+       const data = {
+         email: inputs.current[0].value,
+         password: inputs.current[1].value
+       }
+       SetSuccessMessage(true)
+       setValidation("")
+       formRef.current.reset()
+       // axios.post('http://localhost/server/back/connexion', data)
+       console.log("connexion validée")
+     }
+   }
 
   return (
     <>

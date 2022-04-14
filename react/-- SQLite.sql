@@ -155,6 +155,8 @@
       7
     );
 
+    
+
   -- HOTELS
   /**
     INSERT INTO hotels (
@@ -273,6 +275,12 @@
     ("Evenements", "events.jpg","Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, quis eius. Vero optio natus deserunt error sint rerum corporis porro.","image evenements"),
     ("Bien-être", "wellness.jpg","Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, quis eius. Vero optio natus deserunt error sint rerum corporis porro.","image massage");
   
+  -- SUITE_SERVICES
+  /**
+    INSERT INTO suite_services VALUES 
+    (2,1),(2,2),(2,3),(2,5),(2,7),(2,7),(2,8),(2,9),(2,10),(2,11),(2,12),(2,13),(2,14),
+    (3,1),(3,2),(3,3),(3,4),(3,5),(3,6),(3,7),(3,8),(3,9),(3,10),(3,11),(3,12),(3,13),(3,14);
+
   
 ----------------------------SUPPRESSIONS DANS TABLES 
 /**

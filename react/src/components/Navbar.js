@@ -81,7 +81,7 @@ export default function Navbar() {
            isConnected ?
             <div>
               <NavLink to='/mon-compte' className="btn btn-outline-dark ms-2" onClick={handleChange}>Mon compte</NavLink>
-              <NavLink to='/' className="btn btn-outline-danger ms-2" onclick={handleChange}>Deconnexion</NavLink>
+              <NavLink to='/' className="btn btn-outline-danger ms-2" onClick={handleChange}>Deconnexion</NavLink>
             </div>
             :
             <div>
