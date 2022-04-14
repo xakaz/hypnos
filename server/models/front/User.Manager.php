@@ -1,6 +1,6 @@
 <?php
 
-require_once 'mode/Model.php';
+require_once 'models/Model.php';
 
 class UserManager extends Model
 {

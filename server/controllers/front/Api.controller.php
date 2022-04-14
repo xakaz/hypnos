@@ -2,7 +2,7 @@
 require_once 'models/front/Api.manager.php';
 require_once 'models/Model.php';
 
-class APIController 
+class APIController
 {
   private $apiManager;
 
@@ -14,6 +14,7 @@ class APIController
   public function getHotels(){
     $hotels = $this->apiManager->getDBHotels();
     Model::sendJSON($hotels);
+    // echo "salut";
   }
   public function getSuites(){
     $suites = $this->apiManager->getDBSuites();

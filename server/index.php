@@ -36,11 +36,11 @@ try{
                     break;
                     case "accueil" : $apiController->getAccueil();
                     break;
-                    case "admin" : $apiController->getAdmin();
+                    case "admin" : $userController->getAdmin();
                     break;    
                     case "user" : $userController->getUser();
                     break;    
-                    case "manager" : $apiController->getManager();
+                    case "manager" : $userController->getManager();
                     break;    
                     default : throw new Exception("La page n'existe pas") ;
                 }

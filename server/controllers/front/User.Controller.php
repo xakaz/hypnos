@@ -1,7 +1,7 @@
 <?php
 
-require_once "../../models/front/User.Manager.php";
-require_once "../../models/Model.php";
+require_once "models/front/User.Manager.php";
+require_once "models/Model.php";
 
 class UserController extends Model
 {
@@ -9,12 +9,22 @@ class UserController extends Model
   private $userManager;
 
   public function __construct(){
-    $user=$this->userManager = new UserManager();
+    $this->userManager = new UserManager();
+  }
+  
+  public function getUser(){
+    $user = $this->userManager->getDBUser();
     Model::sendJSON($user);
   }
-
-  public function getUser(){
+  
+  public function getAdmin(){
     $this->userManager->getDBUser();
   }
+  
+  public function getManager(){
+    $this->userManager->getDBUser();
+  }
+
+  
 
 }
