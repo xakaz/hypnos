@@ -14,7 +14,8 @@ export default function SuiteHotelTemplate(props) {
               <p className="card-text">{props.prix}  € / nuit</p>
               <div className='d-flex justify-content-end'>
 
-              <a href="/" className="btn btn-outline-success">Réserver la suite</a>
+                <div>{props.boutonReservation}</div>
+                <a href="/" className="btn btn-outline-success">Réserver la suite</a>
               </div>
             </div>
             <div className="col-6 bg-danger">

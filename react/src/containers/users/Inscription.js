@@ -21,7 +21,7 @@ export default function Inscription() {
   useEffect(() => {
     axios.get("http://localhost/server/back/email")
       .then(response => {
-        setMails(response.data.map(mail => { return (mail.user_mail) }))
+        setMails(response.data.map(mail => mail.user_mail))
       })
   }, [])
   console.log(mails)

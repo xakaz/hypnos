@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import SuiteHotelTemplate from "./SuiteHotelTemplate";
+import { NavLink } from 'react-router-dom'
+import { v4 as uuid_v4 } from "uuid"
 
 export default function HotelTemplate(props) {
 
@@ -25,7 +27,7 @@ export default function HotelTemplate(props) {
     hotels && hotels.map(hotel => {
       return (
         hotel.hotel_ville === props.ville &&
-        <div className=" container text-white" key={hotel.hotel_id}>
+        <div className=" container text-white" key={uuid_v4()}>
           <div className="row mt-5 p-5 border-bottom">
             {/****************************** IMAGE */}
             <div className="col-12 col-xl-6 d-flex justify-content-center align-items-center">
@@ -70,11 +72,15 @@ export default function HotelTemplate(props) {
                 return (
                   suite.suite_hotel === hotel.hotel_id &&
                   <SuiteHotelTemplate
-                    className="bgdanger"
-                    image={require("../assets/containersAssets/hotels/" + hotel.hotel_ville + "/" + suite.suite_image)}
+                    key={uuid_v4()}
+                    image={require(`../assets/containersAssets/hotels/${hotel.hotel_ville}/${suite.suite_image}`)}
                     nom={suite.suite_name}
                     description={suite.suite_description}
                     prix={suite.suite_prix}
+                    boutonReservation={
+                      <NavLink to={`/hotel/${hotel.hotel_ville.toLowerCase()}/suite/${suite.suite_id}`} className="btn btn-outline-success">
+                        Réserver
+                      </NavLink>}
                   >
 
                   </SuiteHotelTemplate>

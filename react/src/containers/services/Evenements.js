@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Content from '../../components/Content'
 import Event from '../../assets/containersAssets/evenements/wedding.jpg'
 import axios from 'axios' 
+import { v4 as uuid_v4 } from "uuid"
 
 class Evenements extends Component
 {
@@ -37,7 +38,7 @@ class Evenements extends Component
                 alt={evenement.evenements_alt}
                 title={evenement.evenements_title}
                 description={evenement.evenements_description}
-                key={evenement.evenements_id}/>
+                key={uuid_v4()}/>
                 )
               })
           }

@@ -1,6 +1,8 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import axios from 'axios'
+import { v4 as uuid_v4 } from "uuid"
+
 
 export default function Hotels() {
 
@@ -19,7 +21,7 @@ export default function Hotels() {
         hotels &&
         hotels.map(hotel => {
           return (
-            <div className='row my-5 text-light' key={hotel.hotel_id}>
+            <div className='row my-5 text-light' key={uuid_v4()}>
               {/* IMAGE */}
               <div className="col-12 col-xl-6 d-flex justify-content-center align-items-center">
                 <img src={require(`../../assets/containersAssets/hotels/${hotel.hotel_ville}/${hotel.hotel_image}`)} alt={hotel.hotel_name} height="300px" className='rounded' />

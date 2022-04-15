@@ -3,6 +3,7 @@ import axios from 'axios'
 import {connexionContext } from "../../context/connexionContext"
 import { useContext } from 'react';
 import {NavLink} from 'react-router-dom'
+import { v4 as uuid_v4 } from "uuid"
 
 export default function CompteAdmin() {
 
@@ -37,7 +38,7 @@ export default function CompteAdmin() {
               hotels && hotels.map(hotel => {
                 return (
                   <>
-                    <tr>
+                    <tr key={uuid_v4()}>
                       <th scope="row">{hotel.hotel_id}</th>
                       <td>{hotel.hotel_name}</td>
                       <td>{hotel.hotel_ville}</td>
@@ -70,7 +71,7 @@ export default function CompteAdmin() {
               hotels && hotels.map(hotel => {
                 return (
                   <>
-                    <tr>
+                    <tr key={uuid_v4()}>
                       <th scope="row">{hotel.hotel_id}</th>
                       <td>Jean-Louis</td>
                       <td>Aubert</td>

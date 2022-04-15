@@ -3,10 +3,9 @@ import Logo from '../assets/componentsAssets/Navbar/logoHotel.jpg'
 import { NavLink } from 'react-router-dom'
 import {ConnexionContext} from '../context/connexionContext'
 
-
 export default function Navbar() {
-
   const {isConnected } = useContext(ConnexionContext)
+
   
   return (
     <>

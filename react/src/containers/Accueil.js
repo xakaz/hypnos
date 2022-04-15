@@ -3,7 +3,7 @@ import Hypnos from '../assets/containersAssets/accueil/hypnos.jpg'
 import Carousel from '../components/Carousel'
 import Card from "../components/Card";
 import axios from "axios";
-import { NavLink } from "react-router-dom";
+import { v4 as uuid_v4 } from "uuid"
 
 class Accueil extends Component {
 
@@ -35,7 +35,7 @@ class Accueil extends Component {
                   <Card image={require('../assets/containersAssets/accueil/' + accueilCard.accueil_image)}
                     title={accueilCard.accueil_title}
                     description={accueilCard.accueil_description}
-                    key={accueilCard.accueil_id} />
+                    key={uuid_v4()} />
                 )
               })
             } 

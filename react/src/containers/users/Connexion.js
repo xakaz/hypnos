@@ -1,5 +1,4 @@
 import React, { useRef, useState, useEffect, useContext } from "react";
-import { connexionContext } from '../../context/connexionContext';
 import { NavLink } from "react-router-dom";
 import { ConnexionContext } from "../../context/connexionContext";
 
@@ -9,7 +8,6 @@ export default function Connexion() {
 
   ///////////// CONSTANTES
   const [validation, setValidation] = useState('')
-  const [successMessage, SetSuccessMessage] = useState(false)
   const [mails, setMails] = useState([]);
   const inputs = useRef([])
   const { isConnected, setIsConnected, setRole } = useContext(ConnexionContext)
@@ -25,7 +23,7 @@ export default function Connexion() {
   useEffect(() => {
     axios.get("http://localhost/server/back/email")
       .then(response => {
-        setMails(response.data.map(mail => { return (mail.user_mail) }))
+        setMails(response.data.map( mail => mail.user_mail ))
       })
       .catch(err => console.log(err))
   }, [])
@@ -43,7 +41,6 @@ export default function Connexion() {
         email: inputs.current[0].value,
         password: inputs.current[1].value
       }
-      SetSuccessMessage(true)
       setValidation("")
       axios.post('http://localhost/server/back/connexion', data)
         .then(response => {
