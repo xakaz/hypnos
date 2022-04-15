@@ -1,6 +1,5 @@
-import React, { useRef, useState, useEffect, useContext } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import axios from "axios"
-import { NavLink } from 'react-router-dom'
 
 export default function Inscription() {
 
@@ -57,7 +56,7 @@ export default function Inscription() {
       SetSuccessMessage(true)
       setValidation("")
       formRef.current.reset()
-      // axios.post('http://localhost/server/back/inscription', data)
+      axios.post('http://localhost/server/back/inscription', data)
       console.log("inscription validée")
     }
   }

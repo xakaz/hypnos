@@ -12,4 +12,7 @@ class UserManager extends Model
   $stmt->closeCursor();
   return $user;
  }
+
+ 
+
 }

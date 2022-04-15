@@ -14,7 +14,6 @@ class APIController
   public function getHotels(){
     $hotels = $this->apiManager->getDBHotels();
     Model::sendJSON($hotels);
-    // echo "salut";
   }
   public function getSuites(){
     $suites = $this->apiManager->getDBSuites();

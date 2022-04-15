@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import Content from '../components/Content'
-import Event from '../assets/containersAssets/evenements/wedding.jpg'
+import Content from '../../components/Content'
+import Event from '../../assets/containersAssets/evenements/wedding.jpg'
 import axios from 'axios' 
 
 class Evenements extends Component
@@ -33,7 +33,7 @@ class Evenements extends Component
             this.state.evenements.map( evenement => {
               return(
                 <Content
-                vignette={require(`../assets/containersAssets/evenements/${evenement.evenements_image}`)}
+                vignette={require(`../../assets/containersAssets/evenements/${evenement.evenements_image}`)}
                 alt={evenement.evenements_alt}
                 title={evenement.evenements_title}
                 description={evenement.evenements_description}

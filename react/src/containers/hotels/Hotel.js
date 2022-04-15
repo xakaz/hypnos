@@ -22,7 +22,7 @@ export default function Hotels() {
             <div className='row my-5 text-light' key={hotel.hotel_id}>
               {/* IMAGE */}
               <div className="col-12 col-xl-6 d-flex justify-content-center align-items-center">
-                <img src={require(`../assets/containersAssets/hotels/${hotel.hotel_ville}/${hotel.hotel_image}`)} alt={hotel.hotel_name} height="300px" className='rounded' />
+                <img src={require(`../../assets/containersAssets/hotels/${hotel.hotel_ville}/${hotel.hotel_image}`)} alt={hotel.hotel_name} height="300px" className='rounded' />
               </div>
 
               {/* HOTEL */}

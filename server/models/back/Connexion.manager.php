@@ -29,13 +29,14 @@ class ConnexionManager extends Model
 
   private function getpasswordUser($email)
   {
-    $req = 'SELECT * FROM user WHERE email = :email';
+    $req = 'SELECT * FROM user WHERE user_mail = :email';
     $stmt = $this->getBdd()->prepare($req);
     $stmt->bindValue(':email', $email, PDO::PARAM_STR);
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
     $stmt->closeCursor();
     return $user['user_password'];
+    
   }
 
   public function verifConnexion($email, $password)
@@ -46,7 +47,7 @@ class ConnexionManager extends Model
 
   public function getRoleUser($email)
   {
-    $req = 'SELECT * FROM user WHERE email = :email';
+    $req = 'SELECT * FROM user WHERE user_mail = :email';
     $stmt = $this->getBdd()->prepare($req);
     $stmt->bindValue(':email', $email, PDO::PARAM_STR);
     $stmt->execute();
@@ -54,4 +55,35 @@ class ConnexionManager extends Model
     $stmt->closeCursor();
     return $user['user_role'];
   }
+
+  public function getAdmin($email){
+    $req ="SELECT user_id, user_prenom, user_nom, user_mail, user_role 
+            FROM user where user_mail = :email";
+    $stmt= $this->getBdd()->prepare($req);
+    $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    Model::sendJSON($user);
+   }
+   public function getManager($email){
+    $req ="SELECT user_id, user_prenom, user_nom, user_mail, user_role 
+            FROM user where user_mail = :email";
+    $stmt= $this->getBdd()->prepare($req);
+    $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    Model::sendJSON($user);
+   }
+   public function getUser($email){
+    $req ="SELECT user_id, user_prenom, user_nom, user_mail, user_role 
+            FROM user where user_mail = :email";
+    $stmt= $this->getBdd()->prepare($req);
+    $stmt->bindValue(':email', $email, PDO::PARAM_STR);
+    $stmt->execute();
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    Model::sendJSON($user);
+   }
 }

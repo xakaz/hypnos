@@ -6,13 +6,8 @@ import {ConnexionContext} from '../context/connexionContext'
 
 export default function Navbar() {
 
-  const {isConnected, connexion} = useContext(ConnexionContext)
+  const {isConnected } = useContext(ConnexionContext)
   
-  const handleChange = () =>{
-    connexion()
-  }
-
-
   return (
     <>
       <nav className="navbar navbar-light bg-light px-4">
@@ -78,15 +73,15 @@ export default function Navbar() {
         {/* BOUTONS INSCRIPTION - CONNEXION - DECONNEXION - MON COMPTE */}
 
         {
-           isConnected ?
+           isConnected === false ?
             <div>
-              <NavLink to='/mon-compte' className="btn btn-outline-dark ms-2" onClick={handleChange}>Mon compte</NavLink>
-              <NavLink to='/' className="btn btn-outline-danger ms-2" onClick={handleChange}>Deconnexion</NavLink>
+              <NavLink to='/mon-compte' className="btn btn-outline-dark ms-2">Mon compte</NavLink>
+              <NavLink to='/' className="btn btn-outline-danger ms-2" >Deconnexion</NavLink>
             </div>
             :
             <div>
-              <NavLink to='/inscription' className="btn btn-outline-dark ms-2" onClick={handleChange}>Inscription</NavLink>
-              <NavLink to='/connexion' className="btn btn-outline-dark ms-2" onClick={handleChange}>Connexion</NavLink>
+              <NavLink to='/inscription' className="btn btn-outline-dark ms-2">Inscription</NavLink>
+              <NavLink to='/connexion' className="btn btn-outline-dark ms-2">Connexion</NavLink>
             </div>
         }
       </nav>

@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "../components/Card"
+import Card from "../../components/Card"
 import { NavLink } from "react-router-dom";
 
 export default function Manager() {

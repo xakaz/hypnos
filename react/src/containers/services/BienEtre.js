@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import Content from '../components/Content'
-import Wellness from '../assets/containersAssets/bien-etre/spa.jpg'
+import Content from '../../components/Content'
+import Wellness from '../../assets/containersAssets/bien-etre/spa.jpg'
 import axios from 'axios'
 
 class BienEtre extends Component {
@@ -33,7 +33,7 @@ class BienEtre extends Component {
             this.state.bienEtre.map( wellness => {
               return(
                 <Content
-                vignette={require(`../assets/containersAssets/bien-etre/${wellness.bienEtre_image}`)}
+                vignette={require(`../../assets/containersAssets/bien-etre/${wellness.bienEtre_image}`)}
                 alt={wellness.bienEtre_alt}
                 title={wellness.bienEtre_title}
                 description={wellness.bienEtre_description}

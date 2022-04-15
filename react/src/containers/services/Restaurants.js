@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import Content from '../components/Content'
-import Resto from '../assets/containersAssets/restaurants/toulouseRestaurant.jpg'
+import Content from '../../components/Content'
+import Resto from '../../assets/containersAssets/restaurants/toulouseRestaurant.jpg'
 import axios from 'axios'
 
 class Restaurants extends Component {
@@ -32,7 +32,7 @@ class Restaurants extends Component {
             this.state.restaurants.map( restaurant => {
               return(
                 <Content
-                vignette={require(`../assets/containersAssets/restaurants/${restaurant.restaurant_image}`)}
+                vignette={require(`../../assets/containersAssets/restaurants/${restaurant.restaurant_image}`)}
                 alt={restaurant.restaurant_alt}
                 title={restaurant.restaurant_title}
                 description={restaurant.restaurant_description}

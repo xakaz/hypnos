@@ -11,7 +11,8 @@ class ConnexionController extends Model
     $this->connexionManager = new ConnexionManager();
   }
 
-  public function setUser(){
+  public function setUser()
+  {
 
     header("Access-Control-Allow-Origin: *");
     header("Access-Control-Allow-Headers: Accept, Content-type, Content-Length, Accept-Encoding");
@@ -20,45 +21,59 @@ class ConnexionController extends Model
 
     $data = json_decode(file_get_contents('php://input'));
 
-    if(isset($data->prenom) && isset($data->nom) && isset($data->email) && isset($data->password)){
+    if (isset($data->prenom) && isset($data->nom) && isset($data->email) && isset($data->password)) {
 
       $prenom = $data->prenom;
       $nom = $data->nom;
       $email = $data->email;
       $pass = $data->password;
-      $password = password_hash($pass,PASSWORD_BCRYPT);
-      $this->connexionManager->setDBUser($prenom, $nom,$email,$password);
- 
+      $password = password_hash($pass, PASSWORD_BCRYPT);
+      $this->connexionManager->setDBUser($prenom, $nom, $email, $password);
     }
-  } 
+  }
 
-  public function getEmailAddresses(){
+  public function getEmailAddresses()
+  {
     $emails = $this->connexionManager->getDBEmailAddresses();
     Model::sendJSON($emails);
   }
 
-  public function setConnexion(){
-    header("Access-Control-Allow-Origin: *");
-    header("Access-Control-Allow-Headers: Accept, Content-type, Content-Length, Accept-Encoding");
-    header("Access-Control-Allow-Method: POST, GET, OPTIONS, PUT, DELETE");
-    header("Content-Type: application/json");
-    $data = json_decode(file_get_contents('php://input'));
-    if(isset($data->email) && isset($data->password))
-    {
-      $email = $data->email;
-      $password = $data->password;
-      if($this->connexionManager->verifConnexion($email, $password)){
-        $role = $this->connexionManager->getRoleUser($email); 
-        switch($role){
-          case 1 : $this->userManager->getAdmin(); 
-          break;
-          case 2 : $this->userManager->getManager(); 
-          break;
-          case 3 : $this->userManager->getUser(); 
-          break;
-          default : $this->userManager->getUser();  ;
+  public function setConnexion()
+  {
+    try {
+      header("Access-Control-Allow-Origin: *");
+      header("Access-Control-Allow-Headers: Accept, Content-type, Content-Length, Accept-Encoding");
+      header("Access-Control-Allow-Method: POST, GET, OPTIONS, PUT, DELETE");
+      header("Content-Type: application/json");
+      $data = json_decode(file_get_contents('php://input'));
+      if (isset($data->email) && isset($data->password)) {
+        if ($this->connexionManager->verifConnexion($data->email, $data->password)) {
+          $email = $data->email;
+          $password = $data->password;
+
+          $role = $this->connexionManager->getRoleUser($email);
+          switch ($role) {
+            case "1":
+              $this->connexionManager->getAdmin($email);
+              break;
+            case "2":
+              $this->connexionManager->getManager($email);
+              break;
+            case "3":
+              $this->connexionManager->getUser($email);
+              break;
+            default:
+              throw new Exception("L'utilisateur n'a pas de rôle");
+          }
+        } else {
+          throw new Exception('Le mot de passe ne correspond pas');
         }
+      } else {
+        throw new Exception('Les données ne sont pas prises en compte');
       }
+    } catch (Exception $e) {
+      $msg = $e->getMessage();
+      echo $msg;
     }
   }
 }
