@@ -67,6 +67,9 @@ try {
                 break;
             case "back":
                 switch ($url[1]) {
+                    case "envoiMail":
+                        $apiController->sendMail();
+                        break;
                     case "inscription":
                         $userController->setUser();
                         break;

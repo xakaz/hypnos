@@ -85,7 +85,7 @@ const Formulaire = (props) => {
             </div>
 
             {/** BOUTON */}
-            <button type="submit" className="btn btn-outline-light">Envoyer</button>
+            <button type="submit" className="btn btn-outline-light" onClick={props.handleSubmit}>Envoyer</button>
           </form>
         </div>
 

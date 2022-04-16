@@ -1,7 +1,19 @@
 import React from 'react'
 import Formulaire from '../../components/Formulaire'
+import axios from 'axios'
 
 export default function Contact() {
+
+  const handleMail= (message) => {
+    axios.post('http://localhost/server/back/envoiMail', message)
+    .then(response => {
+      console.log(response)
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  }
+
   return (
     <div className="container text-white ">
       <div className="row">
@@ -29,7 +41,7 @@ export default function Contact() {
         </div>
         {/* --------------------- FORMULAIRE ----------------------- */}
         <div className="col-12 col-xl-6">
-          <Formulaire />
+          <Formulaire sendMail={handleMail} />
         </div>
       </div>
     </div>

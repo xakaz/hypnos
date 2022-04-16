@@ -49,4 +49,31 @@ class APIController
     Model::sendJSON($selected);
   }
 
+  public function sendMail(){
+    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Headers: Accept, Content-type, Content-Length, Accept-Encoding");
+    header("Access-Control-Allow-Method: POST, GET, OPTIONS, PUT, DELETE");
+    header("Content-Type: application/json");
+
+    // décodage de l'info récupérée de la partie front
+    $data = json_decode(file_get_contents('php://input'));
+
+    // traitement des infos récupérées
+    // on ne le fait pas maintenant car on est en local
+    $to = "loic.hernandez@sfr.fr";
+    $sujet    = "Message de ".$data->prenom." ".$data->nom;
+    $subject    = $data->objet;
+    $content  = "Message : ".$data->message;
+    $header  = "From : ".$data->email;
+    mail($to, $sujet, $content, $subject, $header);
+
+    $messageRetour = [
+      'from' => $data->email,
+      'to' => 'contact@test.com',
+    ];
+
+    //envoi d'un retour indiquant que l'info a été traitée
+    echo json_encode($messageRetour);
+  }
+
 }
