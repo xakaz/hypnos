@@ -296,7 +296,17 @@
     (2,1),(2,2),(2,3),(2,5),(2,7),(2,7),(2,8),(2,9),(2,10),(2,11),(2,12),(2,13),(2,14),
     (3,1),(3,2),(3,3),(3,4),(3,5),(3,6),(3,7),(3,8),(3,9),(3,10),(3,11),(3,12),(3,13),(3,14);
 
-  
+  -- MANAGER
+  /**
+    INSERT INTO manager (prenom,nom,email,password ) VALUES 
+    ("Jean-Claude","Van Damme","kickboxing@email.fr","$2y$10$G43I8BcL1NkSAXCJyDxjI.4NvYloD/ap5B.slme8.apVa8Tp2fnE2"),
+    ("Takeshi","Kitano","sonatine@email.fr","$2y$10$mmSR1iGjRHUlyu/tv.Iay.ykyE9Vs0s5BxmPTaeyiThoZOgbh1kne"),
+    ("Michelle","Pfeiffer","espritRebelle@email.fr","$2y$10$7ArYfRrPEjDkYQGfgdJ3yeFNhdzJ/yFpvkrrqMKgc7KMYoDOgHb7m"), 
+    ("Uma","Thurman","pulpfiction@email.fr","$2y$10$jgeji98a7.miQyd9QGjCzODqU4jHyk80NDrMbSZorVTQTXgm0POui"),
+    ("Quentin","Tarantino","django@email.fr","$2y$10$R72brEUe2a5EOnTihizha.pIaWT6gvx50RD6Qghbt87HHLZob7U6O"),
+    ("Jean","Reno","leon@email.fr","$2y$10$QeLYuDcEzqQmlG.2grRXJOsh2Ke9fx2fjuEUNeiZ73oojYGeU6IPy"),
+    ("Julia","Roberts","prettyWoman@email.fr","$2y$10$Hr4oWq0ZTxyCtqUhTPhpX.IRWBPIXo8OTXELO3rTmkwn7xF0.hY06");
+
 ----------------------------SUPPRESSIONS DANS TABLES 
 /**
   -- DELETE FROM suites where suite_id = 1;

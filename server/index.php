@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 define("URL", str_replace("index.php", "", (isset($_SERVER['HTTPS']) ? "https" : "http") .
     "://$_SERVER[HTTP_HOST]$_SERVER[PHP_SELF]"));
@@ -8,12 +9,16 @@ require_once "./controllers/back/User.Controller.php";
 require_once "./controllers/back/Connexion.controller.php";
 require_once './controllers/back/Suite.Controller.php';
 require_once './controllers/back/Booking.Controller.php';
+require_once './controllers/back/Admin.Controller.php';
+require_once './controllers/back/Hotel.Controller.php';
 
 $apiController = new APIController();
 $connexionController = new ConnexionController();
 $userController = new UserController();
 $suiteController = new SuiteController();
 $bookingController = new BookingController();
+$adminController = new AdminController();
+$hotelController = new HotelController();
 
 try {
     if (empty($_GET['url'])) {
@@ -70,6 +75,7 @@ try {
                     case "envoiMail":
                         $apiController->sendMail();
                         break;
+                    ///////////////////////////////// UTILISATEURS    
                     case "inscription":
                         $userController->setUser();
                         break;
@@ -85,17 +91,54 @@ try {
                     case "delete-user":
                         $userController->deleteUser();
                         break;
+                    //////////////////////////////////// SUITES    
                     case "modify-suite":
                         $suiteController->modifySuite();
                         break;
                     case "delete-suite":
                         $suiteController->deleteSuite();
                         break;
+                    ///////////////////////////////////// RESERVATIONS    
                     case "modify-booking":
                         $bookingController->modifyBooking();
                         break;
                     case "delete-booking":
                         $bookingController->deleteBooking();
+                        break;
+                    ////////////////////////////////////// HOTELS
+                    case "form-add-hotel":
+                        $hotelController->formHotel();
+                        break;
+                    case "add-hotel":
+                        $hotelController->setHotel();
+                        break;
+                    case "modify-hotel":
+                        $hotelController->modifyHotel();
+                        break;
+                    case "delete-hotel":
+                        $hotelController->deleteHotel();
+                        break;
+                    ////////////////////////////////////// ADMINISTRATEUR
+                    case "login":
+                        $adminController->getPageLogin();
+                        break;
+                    case "adminConnexion":
+                        $adminController->adminConnexion();
+                        break;
+                    case "admin":
+                        $adminController->accueilAdmin();
+                        break;
+                    case "deconnexion":
+                        $adminController->deconnexion();
+                        break;
+                    case "gestionHotel":
+                        $adminController->gestionHotel();
+                        break;
+                    case "gestionManager":
+                        $adminController->gestionManager();
+                        break;
+                    case "ajoutManager":
+                        $adminController->ajoutManager();
                         break;
                     default:
                         throw new Exception("La page n'existe pas");

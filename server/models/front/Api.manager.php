@@ -86,5 +86,14 @@ class APIManager extends Model
     return $selectedHotel;
   }
   
+  public function getDBManagers(){
+    $req ="SELECT * FROM manager";
+    $stmt= $this->getBdd()->prepare($req);
+    $stmt->execute();
+    $managers = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $managers;
+  }
+  
 
 }

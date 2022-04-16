@@ -23,7 +23,7 @@ class HotelManager extends Model
 
   public function modifyDBHotel($id, $nom, $adresse, $cp, $ville, $telephone, $description, $image, $plan)
   {
-    $req = " UPDATE hotels set 
+    $req = " UPDATE hotels SET 
       hotel_name = :nom, 
       hotel_adresse = :adresse, 
       hotel_cp = :cp, 
@@ -32,7 +32,7 @@ class HotelManager extends Model
       hotel_description = :description, 
       hotel_image = :image, 
       hotel_plan = :plan
-      WHERE booking_id = :id";
+      WHERE hotel_id = :id";
 
     $stmt = $this->getBdd()->prepare($req);
 
