@@ -118,6 +118,17 @@
     FOREIGN KEY (historique_user) 
     REFERENCES user (user_id));
 
+  -- BOOKING 
+  /*
+    CREATE TABLE booking (
+    booking_id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    booking_user INTEGER NOT NULL,
+    booking_suite INTEGER NOT NULL,
+    booking_start VARCHAR(250) NOT NULL,
+    booking_end VARCHAR(250) NOT NULL,
+    booking_date VARCHAR5(250) NOT NULL);
+
+    
 ----------------------------INSERTIONS DANS TABLES
 /**
   -- SUITES

@@ -46,6 +46,7 @@ export default function HotelTemplate(props) {
                 <div className='col-12 col-md-6 my-3 ' >
                   <iframe src={hotel.hotel_plan} title={hotel.hotel_id} className="rounded-3" width="auto" height="150" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
                 </div>
+
                 {/****************************** ADRESSE */}
                 <div className="address col-12 col-md-6 text-xl-start d-flex justify-content-start align-items-center my-3">
                   <div className=''>
@@ -66,7 +67,8 @@ export default function HotelTemplate(props) {
           </div>
           <h3 className="text-center mt-5">Les suites de l'établissement</h3>
           <div className="d-flex justify-content-around mt-5 flex-wrap">
-            {/** SUITES */}
+
+            {/** ------------------- SUITES ------------------- */}
             {
               suites && suites.map(suite => {
                 return (
@@ -79,11 +81,9 @@ export default function HotelTemplate(props) {
                     prix={suite.suite_prix}
                     boutonReservation={
                       <NavLink to={`/hotel/${hotel.hotel_ville.toLowerCase()}/suite/${suite.suite_id}`} className="btn btn-outline-success">
-                        Réserver
+                        Voir la suite
                       </NavLink>}
-                  >
-
-                  </SuiteHotelTemplate>
+                  />
                 )
               })
             }

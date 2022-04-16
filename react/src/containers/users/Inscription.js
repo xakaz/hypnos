@@ -24,7 +24,6 @@ export default function Inscription() {
         setMails(response.data.map(mail => mail.user_mail))
       })
   }, [])
-  console.log(mails)
   ////////////////////////////////////// SOUMISSION DU FORMULAIRE
   const handleSubmit = (e) => {
     e.preventDefault()

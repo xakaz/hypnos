@@ -4,8 +4,7 @@ import { NavLink } from 'react-router-dom'
 import {ConnexionContext} from '../context/connexionContext'
 
 export default function Navbar() {
-  const {isConnected } = useContext(ConnexionContext)
-
+  const {connect} = useContext(ConnexionContext)
   
   return (
     <>
@@ -70,19 +69,16 @@ export default function Navbar() {
         </div>
 
         {/* BOUTONS INSCRIPTION - CONNEXION - DECONNEXION - MON COMPTE */}
-
-        {
-           isConnected === false ?
             <div>
               <NavLink to='/mon-compte' className="btn btn-outline-dark ms-2">Mon compte</NavLink>
-              <NavLink to='/' className="btn btn-outline-danger ms-2" >Deconnexion</NavLink>
+              <NavLink to='/' className="btn btn-outline-danger ms-2">Deconnexion</NavLink>
             </div>
-            :
+
             <div>
               <NavLink to='/inscription' className="btn btn-outline-dark ms-2">Inscription</NavLink>
               <NavLink to='/connexion' className="btn btn-outline-dark ms-2">Connexion</NavLink>
             </div>
-        }
+
       </nav>
     </>
   )

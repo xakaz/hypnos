@@ -1,68 +1,37 @@
-import React, { Component } from "react";
+import React from 'react'
+import Formulaire from '../../components/Formulaire'
 
-class Contact extends Component {
+export default function Contact() {
+  return (
+    <div className="container text-white ">
+      <div className="row">
 
-  componentDidMount = () =>{
-    document.title = "Contact";
-  }
+        {/* --------------------- CONTACT ----------------------- */}
+        <div className="col-12 col-xl-6 my-5 p-4">
+          <div className='d-flex flex-column justify-content-center align-items-center border-end'>
 
-  render() {
-    return (
-      <>
-        <div className="container d-flex justify-content-center">
-            
-            {/** FORMULAIRE */}
-            <div className="my-5 text-light w-50">
-              <form className="p-4">
-                <h4 className="text-center border-bottom border-top p-2 mb-3">FORMULAIRE DE CONTACT</h4>
-                <div className="row mb-3">
-                  {/** PRENOM */}
-                  <div className="col-12 col-xl-6">
-                    <label htmlFor="firstname" className="form-label">Prénom</label>
-                    <input type="text" className="form-control" id="firstname" name="firstname" />
-                  </div>
-                                    
-                  {/** NOM */}
-                  <div className="col-12 col-xl-6">
-                    <label htmlFor="name" className="form-label">Nom</label>
-                    <input type="text" className="form-control" id="name" name="name" />
-                  </div>
-                </div>
-
-                {/** MAIL */}
-                  <div className="mb-3 ">
-                    <label htmlFor="email" className="form-label">Adresse mail</label>
-                    <input type="email"
-                      className="form-control" id="email" name="email" />
-                  </div>
-                  
-                {/** OBJET */}
-                <div className="form-group mb-3">
-                  <label htmlFor="object" className="form-label">Objet</label>
-                  <select className="form-control" id="object" name="object" >
-                    <option>Je souhaite poser une réclamation</option>
-                    <option>Je souhaite commander un service supplémentaire</option>
-                    <option>Je souhaite en savoir plus sur une suite</option>
-                    <option>J’ai un souci avec cette application</option>
-                  </select>
-                </div>
-                
-                {/** MESSAGE */}
-                  <div className="mb-3 ">
-                    <label htmlFor="message" className="form-label">Message</label>
-                    <textarea className="form-control" name="message" id="message" cols="30" rows="10"></textarea>
-                  </div>
-                  
-                {/** BOUTON */}
-                <button type="submit" className="btn btn-outline-light">Envoyer</button>
-              </form>
-            </div>
-          
+            <h1>Contact</h1>
+            <hr />
+            <p>Pour nous contacter vous pouvez nous joindre</p>
+            <p>par téléphone</p>
+            <ul>
+              <li>Paris : 01.02.03.04.05</li>
+              <li>Bordeaux : 01.02.03.04.05</li>
+              <li>Marseille : 04.02.03.04.05</li>
+              <li>Champillon : 01.02.03.04.05</li>
+              <li>Lyon : 01.02.03.04.05</li>
+              <li>Toulouse : 05.02.03.04.05</li>
+              <li>Le Conquet : 01.02.03.04.05</li>
+            </ul>
+            <hr />
+            <p>ou à l'aide du formulaire ci-contre :</p>
+          </div>
         </div>
-      </>
-    );
-
-  }
+        {/* --------------------- FORMULAIRE ----------------------- */}
+        <div className="col-12 col-xl-6">
+          <Formulaire />
+        </div>
+      </div>
+    </div>
+  )
 }
-
-export default Contact;

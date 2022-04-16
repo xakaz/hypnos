@@ -100,7 +100,7 @@ export default function Footer() {
 
               {/* PARTENAIRES */}
               <li className="nav-item mb-2">
-                <a href="/partenaires" className="nav-link p-0 text-muted">Nos partenaires</a>
+                <a href="https://www.bookin.com/" className="nav-link p-0 text-muted">Nos partenaires</a>
               </li>
             </ul>
           </div>
