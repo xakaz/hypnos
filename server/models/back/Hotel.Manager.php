@@ -6,11 +6,12 @@ class HotelManager extends Model
 
   public function setDBHotel($nom, $adresse, $cp, $ville, $telephone, $description, $image, $plan)
   {
-    $req = " INSERT INTO hotels (hotel_name, hotel_adresse, hotel_cp, hotel_ville, hotel_telephone, hotel_description, hotel_image, hotel_plan ) Values 
-                VALUES (:nom, :adresse, :cp, :ville, :telephone, :description, :image, :plan)";
+    $req = " INSERT INTO hotels 
+    (hotel_name, hotel_adresse, hotel_cp, hotel_ville, hotel_telephone, hotel_description, hotel_image, hotel_plan ) 
+    VALUES (:nom, :adresse, :cp, :ville, :telephone, :description, :image, :plan)";
     $stmt = $this->getBdd()->prepare($req);
-    $stmt->bindValue(":nom", $nom, PDO::PARAM_INT);
-    $stmt->bindValue(":adresse", $adresse, PDO::PARAM_INT);
+    $stmt->bindValue(":nom", $nom, PDO::PARAM_STR);
+    $stmt->bindValue(":adresse", $adresse, PDO::PARAM_STR);
     $stmt->bindValue(":cp", $cp, PDO::PARAM_STR);
     $stmt->bindValue(":ville", $ville, PDO::PARAM_STR);
     $stmt->bindValue(":telephone", $telephone, PDO::PARAM_STR);

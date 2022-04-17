@@ -1,39 +1,39 @@
 <?php ob_start() ?>
 
-<form class="container mt-5 w-75" method="post", action="<?= URL ?>back/add-hotel">
+<form class="container mt-5 w-75" method="POST", action="<?= URL ?>back/add-hotel">
   <div class="form-group">
     <label for="nom">Nom de l'établissement</label>
-    <input type="text" class="form-control" id="nom">
+    <input type="text" class="form-control" id="nom" name="nom">
   </div>
   <div class="form-group">
     <label for="adresse">Adresse de l'établissement</label>
-    <input type="text" class="form-control" id="adresse">
+    <input type="text" class="form-control" id="adresse" name="adresse">
   </div>
   <div class="form-group row">
     <div class="col-6">
       <label for="cp">Code postal</label>
-      <input type="text" class="form-control" id="cp">
+      <input type="text" class="form-control" id="cp" name="cp">
     </div>
     <div class="col-6">
       <label for="ville">Ville</label>
-      <input type="text" class="form-control" id="ville">
+      <input type="text" class="form-control" id="ville" name="ville">
     </div>
   </div>
   <div class="form-group6">
     <label for="telephone">Numéro de téléphone</label>
-    <input type="text" class="form-control" id="telephone">
+    <input type="text" class="form-control" id="telephone" name="telephone">
   </div>
   <div class="form-group">
     <label for="description">Description de l'établissement</label>
-    <textarea class="form-control" id="description" rows="3"></textarea>
+    <textarea class="form-control" id="description" rows="3" name="description"></textarea>
   </div>
   <div class="form-group">
     <label for="image">Nom de l'image <i>(ex : 'image.jpg')</i></label>
-    <input type="text" class="form-control" id="image">
+    <input type="text" class="form-control" id="image" name="image">
   </div>
   <div class="form-group">
     <label for="plan">Src de l'iframe Google Maps</label>
-    <input type="text" class="form-control" id="plan">
+    <input type="text" class="form-control" id="plan" name="plan">
   </div>
 
   <button type="submit" class="btn btn-primary">Créer</button>

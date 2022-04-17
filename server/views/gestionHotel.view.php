@@ -45,40 +45,36 @@
 
       <?php else : ?>
 
-        <form method="post" action="<?= URL ?>back/modify-hotel">
+        <form method="POST" action="<?= URL ?>back/modify-hotel">
           <tr>
             <td ><?= $hotel['hotel_id']?></td>
             <td>
-              <input type="text" name="hotel_name" value="<?= $hotel["hotel_name"] ?>"class="form-control" >
+              <input type="text" name="nom" value="<?= $hotel["hotel_name"] ?>"class="form-control" >
             </td>
             <td>
-              <input type="text" name="hotel_adresse" value="<?= $hotel["hotel_adresse"] ?>"class="form-control" >
+              <input type="text" name="adresse" value="<?= $hotel["hotel_adresse"] ?>"class="form-control" >
             </td>
             <td>
-              <input type="text" name="hotel_cp" value="<?= $hotel["hotel_cp"] ?>"class="form-control" >
+              <input type="text" name="cp" value="<?= $hotel["hotel_cp"] ?>"class="form-control" >
             </td>
             <td>
-              <input type="text" name="hotel_ville" value="<?= $hotel["hotel_ville"] ?>"class="form-control" >
+              <input type="text" name="ville" value="<?= $hotel["hotel_ville"] ?>"class="form-control" >
             </td>
             <td>
-              <input type="text" name="hotel_telephone" value="<?= $hotel["hotel_telephone"] ?>"class="form-control" >
+              <input type="text" name="telephone" value="<?= $hotel["hotel_telephone"] ?>"class="form-control" >
             </td>
             <td>
-              <textarea name="hotel_description" rows="3"class="form-control">
-                <?= $hotel['hotel_description']?>
-              </textarea>
+              <textarea name="description" rows="3" class="form-control"><?= $hotel['hotel_description']?></textarea>
             </td>
             <td>
-              <input type="text" name="hotel_image" value="<?= $hotel["hotel_image"] ?>"class="form-control" >
+              <input type="text" name="image" value="<?= $hotel["hotel_image"] ?>" class="form-control" >
             </td>
             <td>
-              <textarea name="hotel_plan" rows="3"class="form-control">
-                <?= $hotel['hotel_plan']?>
-              </textarea>
+              <textarea name="plan" rows="3"class="form-control"> <?= $hotel['hotel_plan']?></textarea>
             </td>
             <td colspan="2">
               <input type="hidden" 
-              name="hotel_id" 
+              name="id" 
               value="<?= $hotel['hotel_id']?>">
               <button class="btn btn-primary" type="submit">Valider</button>
             </td>
@@ -93,5 +89,5 @@
 
 <?php
 $content = ob_get_clean();
-$titre = "Gestion des hotels";
+$titre = "Gestion des hôtels";
 require "views/common/template.php";

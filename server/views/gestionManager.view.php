@@ -47,7 +47,7 @@
          
             <td colspan="2">
               <input type="hidden" 
-              name="manager_id" 
+              name="id" 
               value="<?= $manager['id']?>">
               <button class="btn btn-primary" type="submit">Valider</button>
             </td>
