@@ -9,8 +9,10 @@ require_once "./controllers/back/User.Controller.php";
 require_once "./controllers/back/Connexion.controller.php";
 require_once './controllers/back/Suite.Controller.php';
 require_once './controllers/back/Booking.Controller.php';
-require_once './controllers/back/Admin.Controller.php';
 require_once './controllers/back/Hotel.Controller.php';
+require_once './controllers/back/admin/Admin.Controller.php';
+require_once './controllers/back/admin/Manager.Controller.php';
+require_once './controllers/back/manager/ManagerSuite.controller.php';
 
 $apiController = new APIController();
 $connexionController = new ConnexionController();
@@ -19,6 +21,8 @@ $suiteController = new SuiteController();
 $bookingController = new BookingController();
 $adminController = new AdminController();
 $hotelController = new HotelController();
+$managerController = new ManagerController();
+$managerSuiteController = new ManagerSuiteController();
 
 try {
     if (empty($_GET['url'])) {
@@ -75,7 +79,7 @@ try {
                     case "envoiMail":
                         $apiController->sendMail();
                         break;
-                    ///////////////////////////////// UTILISATEURS    
+                        ////////////////////////////////////////// UTILISATEURS    
                     case "inscription":
                         $userController->setUser();
                         break;
@@ -90,22 +94,15 @@ try {
                         break;
                     case "delete-user":
                         $userController->deleteUser();
-                        break;
-                    //////////////////////////////////// SUITES    
-                    case "modify-suite":
-                        $suiteController->modifySuite();
-                        break;
-                    case "delete-suite":
-                        $suiteController->deleteSuite();
-                        break;
-                    ///////////////////////////////////// RESERVATIONS    
+                        break; 
+                        ////////////////////////////////////////// RESERVATIONS    
                     case "modify-booking":
                         $bookingController->modifyBooking();
                         break;
                     case "delete-booking":
                         $bookingController->deleteBooking();
                         break;
-                    ////////////////////////////////////// HOTELS
+                        ////////////////////////////////////////// HOTELS
                     case "form-add-hotel":
                         $hotelController->formHotel();
                         break;
@@ -118,18 +115,19 @@ try {
                     case "delete-hotel":
                         $hotelController->deleteHotel();
                         break;
-                    ////////////////////////////////////// ADMINISTRATEUR
+                        ////////////////////////////////////////// CONNEXION
                     case "login":
                         $adminController->getPageLogin();
                         break;
+                    case "deconnexion":
+                        $adminController->deconnexion();
+                        break;
+                        ////////////////////////////////////////// ADMINISTRATEUR
                     case "adminConnexion":
                         $adminController->adminConnexion();
                         break;
                     case "admin":
                         $adminController->accueilAdmin();
-                        break;
-                    case "deconnexion":
-                        $adminController->deconnexion();
                         break;
                     case "gestionHotel":
                         $adminController->gestionHotel();
@@ -137,8 +135,36 @@ try {
                     case "gestionManager":
                         $adminController->gestionManager();
                         break;
-                    case "ajoutManager":
-                        $adminController->ajoutManager();
+                    case "modifManager":
+                        $managerController->modifyManager();
+                        break;
+                    case "ajoutManagerView":
+                        $adminController->ajoutManagerView();
+                        break;
+                    case "ajoutManagerDB":
+                        $managerController->addManager();
+                        break;
+                    case "deleteManagerDB":
+                        $managerController->deleteManager();
+                        break;
+                        ////////////////////////////////////////// MANAGER
+                    case "manager":
+                        $managerSuiteController->accueilManager();
+                        break;
+                    case "gestionSuite":
+                        $managerSuiteController->gestionSuite();
+                        break;
+                    case "modifSuite":
+                        $managerSuiteController->modifSuite();
+                        break;
+                    case "ajoutSuiteView":
+                        $managerSuiteController->ajoutSuiteView();
+                        break;
+                    case "ajoutSuite":
+                        $managerSuiteController->ajoutSuite();
+                        break;
+                    case "deleteSuite":
+                        $managerSuiteController->deleteDBSuite();
                         break;
                     default:
                         throw new Exception("La page n'existe pas");

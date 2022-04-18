@@ -1,6 +1,6 @@
 <?php ob_start() ?>
 
-<form class="container mt-5 w-75" method="POST", action="<?= URL ?>back/add-hotel">
+<form class="container mt-5 w-75" method="POST" , action="<?= URL ?>back/add-hotel">
   <div class="form-group">
     <label for="nom">Nom de l'établissement</label>
     <input type="text" class="form-control" id="nom" name="nom">
@@ -35,8 +35,9 @@
     <label for="plan">Src de l'iframe Google Maps</label>
     <input type="text" class="form-control" id="plan" name="plan">
   </div>
-
-  <button type="submit" class="btn btn-primary">Créer</button>
+  <div class="row mt-3 px-5">
+    <button type="submit" class="btn btn-primary">Créer</button>
+  </div>
 </form>
 
 <?php

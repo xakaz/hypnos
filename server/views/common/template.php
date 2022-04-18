@@ -10,7 +10,8 @@
 </head>
 
 <body>
-  <?php require_once 'views/common/menu.php' ?>
+  <?php 
+  require_once 'views/common/menu.php' ?>
   <div class="container">
     <h1 class="text-center my-3"><?= $titre ?></h1>
 

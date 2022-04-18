@@ -1,14 +1,29 @@
 import React, { useContext } from 'react'
 import Logo from '../assets/componentsAssets/Navbar/logoHotel.jpg'
 import { NavLink } from 'react-router-dom'
-import {ConnexionContext} from '../context/connexionContext'
+import { UserContext } from '../context/UserContext'
+import { signOut } from 'firebase/auth'
+import { useNavigate } from 'react-router-dom'
+import { auth } from '../firebase-config'
 
 export default function Navbar() {
-  const {connect} = useContext(ConnexionContext)
-  
+
+  const { toggleModals, currentUser } = useContext(UserContext)
+
+  const navigate = useNavigate()
+
+  const logOut = async () => {
+    try {
+      await signOut(auth)
+      navigate("/")
+    } catch (error) {
+      alert("Déconnexion impossible, veuillez réessayer plus tard")
+    }
+  }
+
   return (
     <>
-      <nav className="navbar navbar-light bg-light px-4">
+      <nav className="navbar  navbar-light bg-light px-4" style={{ zIndex: "2" }}>
 
         {/* LOGO */}
         <div>
@@ -20,7 +35,7 @@ export default function Navbar() {
         {/* ONGLETS PAGES */}
         <div>
           <div className="row">
-            <nav className="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-center">
+            <nav className="navbar navbar-expand-lg navbar-light bg-light ">
               <div>
 
                 {/* BOUTON RESPONSIVE*/}
@@ -28,7 +43,7 @@ export default function Navbar() {
                   <span className="navbar-toggler-icon"></span>
                 </button>
 
-                <div className="collapse navbar-collapse" id="navbar">
+                <div className="collapse navbar-collapse " id="navbarSupportedContent">
                   <ul className="navbar-nav mb-2 mb-lg-0 ">
 
                     {/* ACCUEIL */}
@@ -57,6 +72,11 @@ export default function Navbar() {
                       <NavLink to='/evenements' className='nav-link ms-3'>Evènements</NavLink>
                     </li>
 
+                    {/* RESERVATIONS */}
+                    <li className="nav-item">
+                      <NavLink to='/reservation' className='nav-link ms-3'>Réservation</NavLink>
+                    </li>
+
                     {/* CONTACT */}
                     <li className="nav-item">
                       <NavLink to='/contact' className='nav-link ms-3'>Contact</NavLink>
@@ -69,15 +89,30 @@ export default function Navbar() {
         </div>
 
         {/* BOUTONS INSCRIPTION - CONNEXION - DECONNEXION - MON COMPTE */}
-            <div>
-              <NavLink to='/mon-compte' className="btn btn-outline-dark ms-2">Mon compte</NavLink>
-              <NavLink to='/' className="btn btn-outline-danger ms-2">Deconnexion</NavLink>
-            </div>
 
+        {
+          currentUser ?
             <div>
-              <NavLink to='/inscription' className="btn btn-outline-dark ms-2">Inscription</NavLink>
-              <NavLink to='/connexion' className="btn btn-outline-dark ms-2">Connexion</NavLink>
+              <NavLink to='/mon-compte' className="btn btn-outline-dark ms-2">
+                Mon compte
+              </NavLink>
+              <button className="btn btn-outline-danger ms-2"
+                onClick={logOut}>
+                Deconnexion
+              </button>
             </div>
+            :
+            <div>
+              <button className="btn btn-outline-dark ms-2"
+                onClick={() => toggleModals("inscription")}>
+                Inscription
+              </button>
+              <button className="btn btn-outline-dark ms-2"
+                onClick={() => toggleModals("connexion")}>
+                Connexion
+              </button>
+            </div>
+        }
 
       </nav>
     </>

@@ -1,8 +1,20 @@
 import React from 'react'
 import Logo from '../assets/componentsAssets/Navbar/logoHotel.jpg'
 import { NavLink } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
 
 export default function Footer() {
+
+  const [hotels, setHotels] = useState();
+
+  useEffect(() => {
+    axios.get("http://localhost/server/front/hotels")
+      .then(response => {
+        setHotels(response.data);
+      })
+  }, [])
+
   return (
     <div>
       <div className="container text-light">
@@ -59,10 +71,19 @@ export default function Footer() {
           <div className="col">
             <h5>Villes</h5>
             <ul className="nav flex-column">
-              <li className="nav-item mb-2">
+              {
+                hotels && hotels.map(hotel => {
+                  return (
+                    <li className="nav-item mb-2">
+                      <a href={"/hotel/" + hotel.hotel_ville.toLowerCase()} className="nav-link p-0 text-muted">{hotel.hotel_ville}</a>
+                    </li>
+                  )
+                })
+              }
+              {/* <li className="nav-item mb-2">
                 <a href="/toulouse" className="nav-link p-0 text-muted">Toulouse</a>
-              </li>
-              <li className="nav-item mb-2">
+              </li> */}
+              {/* <li className="nav-item mb-2">
                 <a href="/paris" className="nav-link p-0 text-muted">Paris</a>
               </li>
               <li className="nav-item mb-2">
@@ -79,7 +100,7 @@ export default function Footer() {
               </li>
               <li className="nav-item mb-2">
                 <a href="/le-havre" className="nav-link p-0 text-muted">Le Havre</a>
-              </li>
+              </li> */}
             </ul>
           </div>
 

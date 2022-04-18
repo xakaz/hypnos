@@ -1,6 +1,6 @@
 <?php
 
-require_once "./models/back/Manager.Manager.php";
+require_once "./models/back/admin/Manager.Manager.php";
 require_once './controllers/back/Securite.class.php';
 
 class ManagerController
@@ -19,12 +19,14 @@ class ManagerController
       $prenom = Securite::secureHTML($_POST['prenom']);
       $nom = Securite::secureHTML($_POST['nom']);
       $email = Securite::secureHTML($_POST['email']);
-      $password = Securite::secureHTML($_POST['password']);
+      $pass = Securite::secureHTML($_POST['password']);
+      $password = password_hash($pass,PASSWORD_BCRYPT);
       $this->managerManager->createDBManager($prenom,$nom, $email, $password);
       $_SESSION['alert'] = [
         'message' => $prenom." ".$nom." a été ajouté",
         'type' => "alert-success"
       ];
+      header('Location: ' . URL . 'back/gestionManager');
     } else {
       throw new Exception("Vous n'avez pas le droit d'être là");
     }
@@ -36,16 +38,16 @@ class ManagerController
         $nom = Securite::secureHTML($_POST['nom']);
         $prenom = Securite::secureHTML($_POST['prenom']);
         $email = Securite::secureHTML($_POST['email']);
-        $password = Securite::secureHTML($_POST['password']);
-
-        $this->managerManager->modifyDBManager($id, $nom,$prenom,$email,$password);
+        $pass = Securite::secureHTML($_POST['password']);
+        $password = password_hash($pass,PASSWORD_BCRYPT);
+        $this->managerManager->modifyDBManager($id,$prenom, $nom,$email,$password);
         $_SESSION['alert'] = [
           'message' => "L'établissement a été modifié",
           'type' => "alert-success"
         ];
         header('Location: ' . URL . 'back/gestionManager');
       } else {
-        throw new Exception("L'établissement n'a pas pu être modifié.");
+        throw new Exception("Vous n'avez pas le droit d'être là");
       }
   }
 
@@ -59,7 +61,7 @@ class ManagerController
       ];
       header('Location: ' . URL . 'back/gestionManager');
     } else {
-      throw new exception("L'établissement n'a pas pu être supprimé.");
+      throw new exception("Vous n'avez pas le droit d'être là");
     }
   }
 }

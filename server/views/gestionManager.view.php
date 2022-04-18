@@ -28,7 +28,7 @@
 
         </td>
         <td>
-          <form method="post" action="<?= URL ?>back/delete-manager" >
+          <form method="post" action="<?= URL ?>back/deleteManagerDB" >
             <input type="hidden" name="id" value="<?= $manager['id'] ?>">
             <button class="btn btn-danger" type="submit">Supprimer</button>
           </form>
@@ -37,7 +37,7 @@
 
       <?php else : ?>
 
-        <form method="post" action="<?= URL ?>back/gestionManager">
+        <form method="post" action="<?= URL ?>back/modifManager">
           <tr>
             <td ><?= $manager['id']?></td>
             <td><input type="text" name="prenom" value="<?= $manager['prenom'] ?>"class="form-control" ></td>

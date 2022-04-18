@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import SuiteHotelTemplate from "./SuiteHotelTemplate";
 import { NavLink } from 'react-router-dom'
 import { v4 as uuid_v4 } from "uuid"
+import { HotelContext } from "../context/HotelContext";
 
 export default function HotelTemplate(props) {
 
   const [suites, setSuites] = useState()
   const [hotels, setHotels] = useState();
+  const {setCurrentHotel, setCurrentSuite} = useContext(HotelContext);
 
   useEffect(() => {
     axios.get("http://localhost/server/front/hotels")
@@ -21,6 +23,11 @@ export default function HotelTemplate(props) {
       })
 
   }, [])
+
+  const handleSuite = (suite, hotel) => {
+    setCurrentSuite(suite)
+    setCurrentHotel(hotel)
+  }
 
 
   return (
@@ -80,8 +87,8 @@ export default function HotelTemplate(props) {
                     description={suite.suite_description}
                     prix={suite.suite_prix}
                     boutonReservation={
-                      <NavLink to={`/hotel/${hotel.hotel_ville.toLowerCase()}/suite/${suite.suite_id}`} className="btn btn-outline-success">
-                        Voir la suite
+                      <NavLink to="/reservation" className="btn btn-outline-success" onClick={()=>handleSuite(suite.suite_id, hotel.hotel_id)}>
+                        Réserver
                       </NavLink>}
                   />
                 )

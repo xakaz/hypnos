@@ -95,5 +95,15 @@ class APIManager extends Model
     return $managers;
   }
   
+  public function getDBManager($email){
+    $req ="SELECT * FROM manager WHERE email = :email";
+    $stmt= $this->getBdd()->prepare($req);
+    $stmt->bindValue(":email", $email, PDO::PARAM_STR);
+    $stmt->execute();
+    $manager = $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $manager;
+  }
+  
 
 }

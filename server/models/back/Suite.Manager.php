@@ -5,32 +5,45 @@ require_once 'models/Model.php';
 class SuiteManager extends Model
 {
 
-  public function addDBSuite( $nom, $description, $image, $hotel, $prix){
-    $req="INSERT INTO suites ( suite_nom, suite_description, suite_image, suite_hotel, suite_prix ) 
-          VALUES :nom, :description, :image, :hotel, :prix ";
+  public function addDBSuite( $name, $description, $image, $hotel, $prix, $link){
+    $req="INSERT INTO suites ( 
+      suite_name, 
+      suite_description, 
+      suite_image, 
+      suite_hotel, 
+      suite_prix,
+      suite_link ) 
+          VALUES 
+          (:name, 
+          :description, 
+          :image, 
+          :hotel, 
+          :prix,
+          :link )";
     $stmt= $this->getBdd()->prepare($req);
-    $stmt->bindValue(':nom', $nom, PDO::PARAM_STR);
+    $stmt->bindValue(':name', $name, PDO::PARAM_STR);
     $stmt->bindValue(':description', $description, PDO::PARAM_STR);
     $stmt->bindValue(':image', $image, PDO::PARAM_STR);
     $stmt->bindValue(':hotel', $hotel, PDO::PARAM_INT);
     $stmt->bindValue(':prix', $prix, PDO::PARAM_INT);
+    $stmt->bindValue(':link', $link, PDO::PARAM_STR);
     $stmt->execute();
     $stmt->closeCursor();
   }
 
-  public function modifyDBSuite( $nom, $description, $image, $hotel, $prix, $id){
+  public function modifyDBSuite($id, $name, $description, $image, $prix, $link){
     $req ="UPDATE suites SET 
-    suite_nom = :nom, 
+    suite_name = :name, 
     suite_description = :description, 
     suite_image = :image, 
-    suite_hotel = :hotel, 
-    suite_prix = :prix
+    suite_prix = :prix,
+    suite_link = :link
     where suite_id = :id";
     $stmt= $this->getBdd()->prepare($req);
-    $stmt->bindValue(':nom', $nom, PDO::PARAM_STR);
+    $stmt->bindValue(':name', $name, PDO::PARAM_STR);
     $stmt->bindValue(':description', $description, PDO::PARAM_STR);
     $stmt->bindValue(':image', $image, PDO::PARAM_STR);
-    $stmt->bindValue(':hotel', $hotel, PDO::PARAM_INT);
+    $stmt->bindValue(':link', $link, PDO::PARAM_STR);
     $stmt->bindValue(':prix', $prix, PDO::PARAM_INT);
     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
