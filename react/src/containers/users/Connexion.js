@@ -1,111 +1,97 @@
-import React, { useRef, useState, useEffect, useContext } from "react";
-import { ConnexionContext } from "../../context/connexionContext";
-
-import axios from "axios"
+import React, { useContext, useRef, useState } from 'react'
+import { UserContext } from '../../context/UserContext'
+import { useNavigate } from 'react-router-dom'
 
 export default function Connexion() {
 
-  ///////////// CONSTANTES
-  const [validation, setValidation] = useState('')
-  const [user, setUser] = useState({})
-  const [mails, setMails] = useState([]);
+  const { modalState, toggleModals, connexion } = useContext(UserContext)
+
+  const navigate = useNavigate();
+
   const inputs = useRef([])
-  const { setIsConnected, setRole } = useContext(ConnexionContext)
 
-  ///////////// RECUPERATION DES INPUTS
-  const addInputs = element => {
-    if (element && !inputs.current.includes(element)) {
-      inputs.current.push(element)
+  const addInputs = el => {
+    if (el && !inputs.current.includes(el)){
+      inputs.current.push(el)
     }
   }
 
-  //////////////////RECUPERATION DES EMAILS
-  useEffect(() => {
-    axios.get("http://localhost/server/back/email")
-      .then(response => {
-        setMails(response.data.map( mail => mail.user_mail ))
-      })
-      .catch(err => console.log(err))
-  }, [])
+  const formRef = useRef()
 
-  ////////////////////////////////////// SOUMISSION DU FORMULAIRE
-  const handleSubmit = (e) => {
+  const [validation, setValidation] = useState("")
+
+  const handleForm = async (e) =>  {
     e.preventDefault()
-    //////////////// VERIF EMAIL
-    if (!mails.includes(inputs.current[0].value)) {
-      setValidation('L\'adresse mail n\'existe pas')
-    } else if (inputs.current[1].value === "") {
-      setValidation("Le mot de passe est vide")
-    } else {
-      const data = {
-        email: inputs.current[0].value,
-        password: inputs.current[1].value
-      }
+    
+    try {
+      const cred = await connexion(
+        inputs.current[0].value,inputs.current[1].value 
+      )
+      formRef.current.reset()
       setValidation("")
-      axios.post('http://localhost/server/back/connexion', data)
-        .then(response => {
-          if (typeof (response.data) === "object") {
-            setIsConnected(true)
-            switch (response.data.user_role) {
-              case 1: setRole(1);
-                break;
-              case 2: setRole(2);
-                break;
-              case 3: setRole(3);
-                break;
-              default: setIsConnected(false);
-            }
-            axios.get("http://localhost/server/front/user/"+response.data.user_id)
-      .then(response => {setUser(response.data)})
-      .catch(err => console.log(err))
-          } else {
-            setValidation(response.data)
-          }
-        })
-        .catch(err => console.log(err))
+      // console.log(cred)
+      navigate("/mon-compte")
+      toggleModals("close")
+    } catch {
+     setValidation('Email ou mot de passe incorrect')
     }
   }
-  console.log(user)
+
+  const closeModal = () => {
+    setValidation("")
+    toggleModals("close")
+  }
+
+
+
   return (
     <>
-      <div className="container d-flex justify-content-center">
-        {/* // FORMULAIRE  */}
-        <div className="my-5 text-light w-50">
-          <form className="p-4" onSubmit={handleSubmit}>
-            <h4 className="text-center border-bottom border-top p-2 mb-3">CONNEXION</h4>
-            {/** MAIL */}
-            <div className="mb-3 ">
-              <label htmlFor="email" className="form-label">Adresse mail</label>
-              <input
-                type="email"
-                className="form-control"
-                id="email"
-                name="email"
-                ref={addInputs}
-                required
-              />
+      {
+        modalState.Connexion &&
+        <div className="position-fixed top-0 vw-100 vh-100" style={{ zIndex: "1" }}>
+          <div className="w-100 h-100 bg-dark bg-opacity-75" onClick={closeModal}></div>
+          <div className="position-absolute top-50 start-50 translate-middle" style={{ minWidth: "400px" }}>
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title">Inscription</h5>
+                  <button className="btn-close" onClick={closeModal}></button>
+                </div>
+                <div className="modal-body">
+                  <form className="sign-in-form" onSubmit={handleForm} ref={formRef}>
+                    <div className="mb-3">
+                      <label htmlFor="signInEmail" className='form-label'>Adresse mail</label>
+                      <input
+                        name="email"
+                        type="email"
+                        className="form-control"
+                        required
+                        id="signInEmail"
+                        ref={addInputs}
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label htmlFor="pwd" className='form-label'>Mot de passe</label>
+                      <input
+                        name="password"
+                        type="password"
+                        className="form-control"
+                        required
+                        id="pwd"
+                        ref={addInputs}
+                      />
+                      <p className="text-danger mt-1">{validation}</p>
+                    </div>
+                  
+              
+                    <button className="btn btn-primary">Se connecter</button>
+                  </form>
+                </div>
+              </div>
             </div>
-
-            {/** ¨PASSWORD */}
-            <div className="mb-3 ">
-              <label htmlFor="password" className="form-label">Mot de passe</label>
-              <input
-                type="password"
-                className="form-control"
-                id="password"
-                name="password"
-                ref={addInputs}
-                required
-              />
-            </div>
-            <p className="text-danger">{validation}</p>
-
-            {/** BOUTON */}
-            <button type="submit" className="btn btn-outline-light">Se connecter</button>
-          </form>
+          </div>
         </div>
-      </div>
+      }
     </>
-  );
+  )
 }
-

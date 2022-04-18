@@ -1,9 +1,8 @@
-import React, {useState, useEffect} from 'react'
+import React, { useEffect} from 'react'
 import axios from "axios"
 
 export default function MonCompte ()
 {
-  const [user, setUser] = useState();
 
   useEffect(()=>{
     axios.get("http://localhost/server/front/user/")

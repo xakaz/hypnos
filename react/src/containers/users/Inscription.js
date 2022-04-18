@@ -1,144 +1,116 @@
-import React, { useRef, useState, useEffect } from "react";
-import axios from "axios"
+import React, { useContext, useRef, useState } from 'react'
+import { UserContext } from '../../context/UserContext'
+import { useNavigate } from 'react-router-dom'
 
 export default function Inscription() {
 
-  ///////////// CONSTANTES
-  const [validation, setValidation] = useState('')
-  const [successMessage, SetSuccessMessage] = useState(false)
-  const [mails, setMails] = useState([]);
-  const inputs = useRef([])
+  const { modalState, toggleModals, inscription } = useContext(UserContext)
+
+  const navigate = useNavigate();
+
+  const inputs =useRef([])
+
+  const addInputs = el => {
+    if (el && !inputs.current.includes(el)){
+      inputs.current.push(el)
+    }
+  }
   const formRef = useRef()
+  const [validation, setValidation] = useState("")
 
-  ///////////// RECUPERATION DES INPUTS
-  const addInputs = element => {
-    if (element && !inputs.current.includes(element)) {
-      inputs.current.push(element)
-    }
-  }
-
-  //////////////////RECUPERATION DES EMAILS
-  useEffect(() => {
-    axios.get("http://localhost/server/back/email")
-      .then(response => {
-        setMails(response.data.map(mail => mail.user_mail))
-      })
-  }, [])
-  ////////////////////////////////////// SOUMISSION DU FORMULAIRE
-  const handleSubmit = (e) => {
+  const handleForm = async (e) =>  {
     e.preventDefault()
-    /////////////////// LONGUEUR PASSWORD
-    if ((inputs.current[3].value.length || inputs.current[4].value.length) < 8) {
-      setValidation("8 caractères minimum !")
-      return;
+    if((inputs.current[1].value.length || inputs.current[2].value.length)<6){
+      setValidation("6 caractères minimum")
+      return
     }
-    if ((inputs.current[3].value.length || inputs.current[4].value.length) > 20) {
-      setValidation("20 caractères maximum !")
-      return;
+    if(inputs.current[1].value !== inputs.current[2].value){
+      setValidation("Les mots de passes sont différents")
+      return
     }
-    ////////////////// PASSORD MATCH
-    else if ((inputs.current[3].value !== inputs.current[4].value)) {
-      setValidation("Les mots de passe sont différents")
-      return;
-    }
-
-    ////////////////VERIF EMAIL
-    if (mails.includes(inputs.current[2].value)) {
-      setValidation('L\'adresse mail existe déjà')
-    } else {
-      const data = {
-        prenom: inputs.current[0].value,
-        nom: inputs.current[1].value,
-        email: inputs.current[2].value,
-        password: inputs.current[3].value
-      }
-      SetSuccessMessage(true)
-      setValidation("")
+    try {
+      const cred = await inscription(
+        inputs.current[0].value,inputs.current[1].value 
+      )
       formRef.current.reset()
-      axios.post('http://localhost/server/back/inscription', data)
-      console.log("inscription validée")
+      setValidation("")
+      // console.log(cred)
+      navigate("/mon-compte")
+      toggleModals("close")
+    } catch (error) {
+      if( error.code === "auth/invalid-email") {
+        setValidation("Format de l'email non-valide")
+      }
+      if( error.code === "auth/email-already-in-use") {
+        setValidation("Cet email est déjà inscrit")
+      }
     }
   }
+
+  const closeModal = () => {
+    setValidation("")
+    toggleModals("close")
+  }
+
 
 
   return (
     <>
-      <div className="container d-flex justify-content-center">
-        {/** FORMULAIRE */}
-        <div className="my-5 text-light w-50">
-          {
-            successMessage === true && <h1 className="text-success text-center">Inscription réussie !</h1>
-          }
-          <form className="p-4" onSubmit={handleSubmit} ref={formRef}>
-            <h4 className="text-center border-bottom border-top p-2 mb-3">FORMULAIRE D'INSCRIPTION'</h4>
-            <div className="row mb-3">
-              {/** PRENOM */}
-              <div className="col-12 col-xl-6">
-                <label htmlFor="prenom" className="form-label">Prénom</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="prenom"
-                  name="prenom"
-                  ref={addInputs}
-                />
+      {
+        modalState.Inscription &&
+        <div className="position-fixed top-0 vw-100 vh-100" style={{ zIndex: "1" }}>
+          <div className="w-100 h-100 bg-dark bg-opacity-75" onClick={closeModal}></div>
+          <div className="position-absolute top-50 start-50 translate-middle" style={{ minWidth: "400px" }}>
+            <div className="modal-dialog">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title">Inscription</h5>
+                  <button className="btn-close" onClick={closeModal}></button>
+                </div>
+                <div className="modal-body">
+                  <form className="sign-up-form" onSubmit={handleForm} ref={formRef}>
+                    <div className="mb-3">
+                      <label htmlFor="signUpEmail" className='form-label'>Adresse mail</label>
+                      <input
+                        name="email"
+                        type="email"
+                        className="form-control"
+                        required
+                        id="signUpEmail"
+                        ref={addInputs}
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label htmlFor="pwd" className='form-label'>Mot de passe</label>
+                      <input
+                        name="password"
+                        type="password"
+                        className="form-control"
+                        required
+                        id="pwd"
+                        ref={addInputs}
+                      />
+                    </div>
+                    <div className="mb-3">
+                      <label htmlFor="confirmPwd" className='form-label'>Confirmation du mot de passe</label>
+                      <input
+                        name="password"
+                        type="password"
+                        className="form-control"
+                        required
+                        id="confirmPwd"
+                        ref={addInputs}
+                      />
+                      <p className="text-danger mt-1">{validation}</p>
+                    </div>
+                    <button className="btn btn-primary">S'inscrire</button>
+                  </form>
+                </div>
               </div>
-
-              {/** NOM */}
-              <div className="col-12 col-xl-6">
-                <label htmlFor="nom" className="form-label">Nom</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="nom"
-                  name="nom"
-                  ref={addInputs}
-                />
-              </div>
             </div>
-
-            {/** MAIL */}
-            <div className="mb-3 ">
-              <label htmlFor="email" className="form-label">Adresse mail</label>
-              <input
-                type="email"
-                className="form-control"
-                id="email"
-                name="email"
-                ref={addInputs}
-              />
-            </div>
-
-            {/** ¨PASSWORD */}
-            <div className="mb-3 ">
-              <label htmlFor="password" className="form-label">Mot de passe</label>
-              <input
-                type="password"
-                className="form-control"
-                id="password"
-                name="password"
-                ref={addInputs}
-              />
-            </div>
-
-            {/** ¨VERIFICATION PASSWORD */}
-            <div className="mb-3 ">
-              <label htmlFor="password" className="form-label">Confirmez le mot de passe</label>
-              <input
-                type="password"
-                className="form-control"
-                id="confirmPassword"
-                name="confirmPassword"
-                ref={addInputs}
-              />
-            </div>
-            <p className="text-danger">{validation}</p>
-
-            {/** BOUTON */}
-            <button type="submit" className="btn btn-outline-light">S'inscrire</button>
-          </form>
+          </div>
         </div>
-      </div>
+      }
     </>
-  );
+  )
 }
