@@ -1,6 +1,7 @@
 import React, { useEffect, useContext, useState } from 'react'
 import axios from "axios"
 import { UserContext } from '../../context/UserContext'
+import { HotelContext } from '../../context/HotelContext'
 import { useNavigate } from 'react-router-dom'
 import CompteCreation from './compteCreation'
 import { v4 as uuid_v4 } from "uuid"
@@ -10,8 +11,10 @@ export default function MonCompte() {
   const [users, setUsers] = useState()
   const [booking, setBooking] = useState()
   const [suites, setSuites] = useState()
+  const [hotels, setHotels] = useState()
   const [email, setEmail] = useState()
   const today = new Date().getTime()
+  const {setCurrentHotel, setCurrentSuite} = useContext(HotelContext);
 
   const navigate = useNavigate()
 
@@ -28,6 +31,10 @@ export default function MonCompte() {
       .then(response => { setSuites(response.data); })
       .catch(err => { console.error(err) })
 
+    axios.get("http://localhost/server/front/hotels")
+      .then(response => { setHotels(response.data); })
+      .catch(err => { console.error(err) })
+
     axios.get("http://localhost/server/back/email")
       .then(response => {
         response.data.map(mailUser => {
@@ -39,6 +46,12 @@ export default function MonCompte() {
       })
       .catch(err => { console.error(err) })
   }, [])
+
+  const handleImage = (suite_id, hotel_id) => {
+    setCurrentSuite(suite_id)
+    setCurrentHotel(hotel_id)
+    navigate("/reservation")
+  }
 
   const handleCancel = async (id) => {
     await axios.post("http://localhost/server/back/deleteBooking", id)
@@ -75,36 +88,65 @@ export default function MonCompte() {
 
                       <div className="col-12 col-xl-8">
                         {/********************************************************* RESERVATION EN COURS */}
-                        <h3 className='text-primary'>RESERVATION EN COURS</h3>
+                        <h3 className='text-primary'>EN COURS</h3>
                         <hr />
                         {
                           booking && booking.map(book => {
                             return (
-                              user.user_id === book.booking_user &&
-                              today < book.booking_start &&
+                              user.user_id === book.booking_user && today < book.booking_start &&
                               <div key={uuid_v4()} className="mb-5">
                                 {
                                   suites && suites.map(suite => {
                                     return (
                                       suite.suite_id === book.booking_suite &&
                                       <div key={uuid_v4()}>
-                                        <h5 className='mb-3 text-center'>- {suite.suite_name} -</h5>
-                                        <p className='mb-3'>{replaceText(suite.suite_description)}</p>
-                                        <p className='mb-3'>{suite.suite_prix} € / nuit</p>
-                                        <div className="row">
-                                          <div className="col-9 d-flex flex-column justify-content-center align-items-start">
-                                            <p className='mb-3'>Réservé du : {new Date(book.booking_start).toLocaleDateString()} au {new Date(book.booking_end).toLocaleDateString()}</p>
-                                            <div>
-                                              Prix total : {suite.suite_prix * ((book.booking_end - book.booking_start) / 86400000)} € pour {((book.booking_end - book.booking_start) / 86400000)} nuits
-                                            </div>
-                                          </div>
-                                          <div className="col-3 d-flex justify-content-end align-items-center bbg-warning">
-                                            {
-                                              (book.booking_start - today > 259200000) &&
-                                              <button className="btn btn-outline-danger" onClick={() => handleCancel(book.booking_id)}>Annuler</button>
-                                            }
-                                          </div>
-                                        </div>
+                                        {
+                                          hotels && hotels.map(hotel => {
+                                            return (
+                                              hotel.hotel_id === suite.suite_hotel &&
+                                              <div key={uuid_v4()}>
+                                                <h5 className='mb-3 text-center bg-white text-dark border rounded p-2'>{hotel.hotel_name.toUpperCase()} - Suite {suite.suite_name}</h5>
+                                                <div>Réservation n° : {book.booking_id}</div>
+                                                <hr />
+                                                <div className='px-3'>
+                                                  <div className="row mb-3">
+                                                    <div className="col-12 col-lg-4 d-flex flex-column justify-content-center align-content-center  mb-3">
+                                                    
+                                                      <img src={require(`../../assets/containersAssets/hotels/${hotel.hotel_ville}/${suite.suite_image}`)}
+                                                        className="rounded"
+                                                        alt={suite.suite_name}
+                                                        height="150px"
+                                                        width="266px"
+                                                        onClick={()=>handleImage(suite.suite_id, hotel.hotel_id)}
+                                                      />
+                                                    </div>
+                                                    <div className="col-12 col-lg-8 d-flex flex-column justify-content-center align-content-center">
+                                                      <p className=''>{replaceText(suite.suite_description)}</p>
+                                                      <i className='opacity-50'>{hotel.hotel_adresse} -  {hotel.hotel_cp}  {hotel.hotel_ville}</i>
+                                                    </div>
+                                                  </div>
+                                                  <div className="row">
+                                                    <div className="col-6 d-flex flex-column justify-content-center align-items-start">
+                                                      <p className='mb-1'>Réservation du : {new Date(book.booking_start).toLocaleDateString()} au {new Date(book.booking_end).toLocaleDateString()}</p>
+                                                      <p className='mb-1'>Effectuée le : {new Date(book.booking_date).toLocaleDateString()}</p>
+                                                      <div>
+                                                        A régler : {suite.suite_prix * ((book.booking_end - book.booking_start) / 86400000)} € - {((book.booking_end - book.booking_start) / 86400000)} nuits
+                                                      </div>
+                                                    </div>
+                                                    <div className="col-6 d-flex justify-content-end align-items-center bbg-warning">
+                                                      {
+                                                        (book.booking_start - today > 259200000) ?
+                                                          <button className="btn btn-outline-danger" onClick={() => handleCancel(book.booking_id)}>Annuler</button>
+                                                          :
+                                                          <p className='text-warning'>Cette réservation ne peut plus être annulée</p>
+                                                      }
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            )
+                                          })
+                                        }
                                       </div>
                                     )
                                   })
@@ -114,30 +156,53 @@ export default function MonCompte() {
                           })
                         }
                         {/********************************************************* HISTORIQUE */}
-                        <h3 className='text-primary mt-5 pt-5'>HISTORIQUE DES RESERVATIONS</h3>
+                        <h3 className='text-primary mt-5 pt-5'>HISTORIQUE</h3>
+                        <hr />
                         {
                           booking && booking.map(book => {
                             return (
-                              user.user_id === book.booking_user &&
-                              today > book.booking_start &&
+                              user.user_id === book.booking_user && today > book.booking_start &&
                               <div key={uuid_v4()}>
                                 {
                                   suites && suites.map(suite => {
                                     return (
                                       suite.suite_id === book.booking_suite &&
                                       <div key={uuid_v4()}>
-                                        <div>
-                                          <hr />
-                                          <h5 className='mb-3 text-center'>- {suite.suite_name} -</h5>
-                                          <p className='mb-3'>{replaceText(suite.suite_description)}</p>
-                                          <p className='mb-3'>{suite.suite_prix} € / nuit</p>
-                                          <div className="row d-flex justify-content-start">
-                                            <p className='mb-3'>Réservé du : {new Date(book.booking_start).toLocaleDateString()} au {new Date(book.booking_end).toLocaleDateString()}</p>
-                                          </div>
-                                          <div>
-                                            Prix total : {suite.suite_prix * ((book.booking_end - book.booking_start) / 86400000)} € pour {((book.booking_end - book.booking_start) / 86400000)} nuits
-                                          </div>
-                                        </div>
+                                        {
+                                          hotels && hotels.map(hotel => {
+                                            return (
+                                              hotel.hotel_id === suite.suite_hotel &&
+                                              <div key={uuid_v4()}>
+
+                                                <div className='mb-5'>
+                                                  <h5 className='mb-3 text-center bg-white text-dark border-rounded p-2 opacity-50'>{hotel.hotel_name.toUpperCase()} - Suite {suite.suite_name}</h5>
+                                                  <div>Réservation n° : {book.booking_id}</div>
+                                                  <hr />
+                                                  <div className="row">
+                                                    <div className="col-4">
+                                                      <img src={require(`../../assets/containersAssets/hotels/${hotel.hotel_ville}/${suite.suite_image}`)}
+                                                        className="rounded"
+                                                        alt={suite.suite_name}
+                                                        height="150px"
+                                                        width="266px"
+                                                      />
+                                                    </div>
+                                                    <div className="col-8">
+                                                      <p className='mb-3'>{replaceText(suite.suite_description)}</p>
+                                                      <p>{hotel.hotel_adresse} -  {hotel.hotel_cp}  {hotel.hotel_ville}</p>
+                                                      <div className="row d-flex justify-content-start">
+                                                        <p className='mb-3'>Réservé du : {new Date(book.booking_start).toLocaleDateString()} au {new Date(book.booking_end).toLocaleDateString()}</p>
+                                                      </div>
+                                                      <div>
+                                                        Prix payé : {suite.suite_prix * ((book.booking_end - book.booking_start) / 86400000)} € pour {((book.booking_end - book.booking_start) / 86400000)} nuits
+                                                      </div>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div>
+                                            )
+                                          })
+                                        }
                                       </div>
                                     )
                                   })
@@ -153,7 +218,6 @@ export default function MonCompte() {
                 :
                 <CompteCreation />
             }
-
           </div>
           :
           navigate("/")

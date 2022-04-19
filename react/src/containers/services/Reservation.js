@@ -16,37 +16,28 @@ export default function Reservation() {
   const { currentUser, toggleModals } = useContext(UserContext)
 
 
-  ///////////////////////////////////////// HOTELS
+  ///////////////////////////////////////// STATES
   const [hotels, setHotels] = useState()
   const [hotelSelect, setHotelSelect] = useState(parseInt(currentHotel) ? parseInt(currentHotel) : 2)
 
-  ///////////////////////////////////////// SUITES
   const [suites, setSuites] = useState()
   const [suiteSelect, setSuiteSelect] = useState(parseInt(currentSuite) ? parseInt(currentSuite) : 7)
 
-  ///////////////////////////////////////// CALENDRIER
-  const [startDate, setStartDate] = useState();
-  const [endDate, setEndDate] = useState();
+  const [startDate, setStartDate] = useState(0);
+  const [endDate, setEndDate] = useState(0);
   const onChange = (dates) => {
     const [start, end] = dates;
     setStartDate(start);
     setEndDate(end);
   };
+  
+  const today = new Date()
 
-
-  ///////////////////////////////////////// DATA
-  const [data, setData] = useState({
-    user: "",
-    suite: "",
-    start: "",
-    end: "",
-    date: ""
-  })
-
-
+  const [data, setData] = useState({ user: "", suite: "", start: "", end: "", date: ""})
+  const [validation, setValidation] = useState()
   const [userId, setUserId] = useState()
 
-  /////////////////////////////////////////ECOUTEURS D'EVENEMENTS
+  ///////////////////////////////////////// FONCTIONS
   const handleChangeVille = (e) => {
     setHotelSelect(e.target.value)
     suites.map(suite => {
@@ -56,14 +47,14 @@ export default function Reservation() {
       )
     })
   }
-  const today = new Date()
 
   const handleChangeSuite = (e) => {
     setSuiteSelect(e.target.value)
   }
   const navigation = useNavigate()
+
   const validData = () => {
-    currentUser ?
+      currentUser ?
       setData({
         user: parseInt(userId),
         suite: suiteSelect,
@@ -75,10 +66,9 @@ export default function Reservation() {
       navigation("/mon-compte")
   }
 
-
   ///////////////////////////////////////// REQUETES GET AXIOS
   useEffect(() => {
-    axios.get("http://localhost/server/front/hotels")
+    axios.get("http://localhost/server/front/hotels") 
       .then(response => { setHotels(response.data); })
       .catch(err => { console.error(err) })
 
@@ -90,10 +80,6 @@ export default function Reservation() {
       .then(response => {
         setUserId(response.data.map(userDatas => {
           return currentUser.email === userDatas.user_mail && userDatas.user_id
-
-          // if (currentUser.email === userDatas.user_mail) {
-          //   return userDatas.user_id
-          // }
         }));
       })
       .catch(err => { console.error(err) })
@@ -102,11 +88,18 @@ export default function Reservation() {
   //////////////////////////////////////// REQUETES POST AXIOS
   const handleReservation = async (e) => {
     e.preventDefault()
-    console.log(data)
-    await axios.post("http://localhost/server/back/setBooking", data)
-      .then(response => { console.log(response); })
-      .catch(err => { (console.error(err)) })
-    navigation("/mon-compte")
+    if(startDate !== 0){
+      if(endDate !== null){
+        await axios.post("http://localhost/server/back/setBooking", data)
+          .then(response => { console.log(response); })
+          .catch(err => { (console.error(err)) })
+        navigation("/mon-compte")
+      }else{
+        setValidation("Vous devez choisir une date de fin de séjour !")
+      }
+    } else {
+      setValidation("Vous devez choisir une date de début de séjour !")
+    } 
   }
 
   return (
@@ -127,10 +120,8 @@ export default function Reservation() {
                         return <option key={uuid_v4()} value={hotel.hotel_id}>{hotel.hotel_ville.toUpperCase()} - {hotel.hotel_name} </option>
                       })
                     }
-
                   </select>
                 </div>
-
               </div>
               <div className="col-6">
                 {/******************************************************* SUITE */}
@@ -147,10 +138,8 @@ export default function Reservation() {
                     }
                   </select>
                 </div>
-
               </div>
             </div>
-
             <div className="row ">
               <div className="col-12 col-xl-6 d-flex flex-column align-items-center justify-content-evenly">
                 <div>
@@ -170,20 +159,22 @@ export default function Reservation() {
                   />
                 </div>
                 {
-                  startDate &&
+                  startDate && startDate !== 0 ?
                   <>
-                  <p className='my-2'>
-                    Du : {startDate ? startDate.toLocaleDateString() : ""} au : {endDate ? endDate.toLocaleDateString() : ""}
-                  </p>
-                  {suites && suites.map(suite => {
-                    return (
-                      suite.suite_id === suiteSelect && endDate &&
-                      <>
-                      Prix total : {suite.suite_prix * ( (Date.parse(endDate) - Date.parse(startDate)) / 86400000)} € pour {((Date.parse(endDate) - Date.parse(startDate)) / 86400000)} nuits</>
-                    )
-                  })}
+                    <p className='my-2'>
+                      Du : {startDate  ? startDate.toLocaleDateString() : ""} au : {endDate ? endDate.toLocaleDateString() : ""}
+                    </p>
+                    {suites && suites.map(suite => {
+                      return (
+                        suite.suite_id === suiteSelect && endDate && endDate !== 0 &&
+                        <>
+                          Prix total : {suite.suite_prix * ((Date.parse(endDate) - Date.parse(startDate)) / 86400000)} € pour {((Date.parse(endDate) - Date.parse(startDate)) / 86400000)} nuits
+                        </>
+                      )
+                    })}
                   </>
-
+                  :
+                  <></>
                 }
               </div>
               <div className="col-12 col-xl-6 ">
@@ -216,9 +207,8 @@ export default function Reservation() {
                   })
                 }
               </div>
-              <div>
-              </div>
-              <button className='btn btn-primary my-3' onClick={currentUser ? validData : () => toggleModals("connexion")}>Réserver</button>
+              <p className="text-danger text-center my-3">{validation}</p>
+              <button className='btn btn-primary my-3' onClick={currentUser ? validData : () => toggleModals("inscription")}>Réserver</button>
             </div>
           </div>
           <div className="col-2 d-none d-xl-flex"></div>
