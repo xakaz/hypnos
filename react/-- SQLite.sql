@@ -38,38 +38,13 @@
     REFERENCES suites (suite_id)
     );
 
-  -- USERS
+  -- USER
   /**
     Create table user (
     user_id integer not null primary key autoincrement,
     user_prenom varchar(150) not null,
     user_nom varchar(150) not null,
-    user_mail varchar(150) not null,
-    user_password varchar(150) not null,
-    user_role integer not null
-    );
-
-  -- ROLE
-  /**
-    Create table role (
-    role_id integer not null primary key autoincrement,
-    role_name varchar(20) not null
-    );
-
-  -- SERVICES
-  /**
-    Create table services (
-    service_id integer not null primary key autoincrement,
-    service_libelle varchar(50) not null
-    );
-
-  -- SUITE/SERVICES
-  /**
-    Create table suite_services (
-    suite_id integer not null,
-    service_id integer not null,
-    FOREIGN KEY (suite_id) REFERENCES suites (suite_id),
-    FOREIGN KEY (service_id) REFERENCES services (service_id)
+    user_mail varchar(150) not null
     );
 
   -- EVENEMENTS
@@ -107,16 +82,6 @@
     accueil_image varchar(100) not null,
     accueil_description text not null,
     accueil_alt varchar(30) not null);
-
-  -- HISTORIQUE
-  /**
-    CREATE TABLE historique (
-    historique_suite INTEGER NOT NULL,
-    historique_user INTEGER NOT NULL,
-    FOREIGN KEY (historique_suite) 
-    REFERENCES suites (suite_id),
-    FOREIGN KEY (historique_user) 
-    REFERENCES user (user_id));
 
   -- BOOKING 
   /*
@@ -234,24 +199,7 @@
     "Toulouse",
     "0567161999",
     "toulouse.jpg"
-    );
-
-    UPDATE hotels 
-    set hotel_plan ="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d722.3358416769215!2d1.4410893881666411!3d43.599391798688856!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12aebb7d323e0b13%3A0xbe57d88accb1456f!2s46%20Rue%20des%20Couteliers%2C%2031000%20Toulouse!5e0!3m2!1sfr!2sfr!4v1649939925184!5m2!1sfr!2sfr"
-    where hotel_id = 7
-    
-  -- ROLES
-  /**
-    insert into role (role_name) values ("ADMIN"),("MANAGER"),("USER");
-
-  --SERVICES
-  /**
-    INSERT INTO services (service_libelle) VALUES (
-    "Chambre insonorisée"),("Lit King Size"),("Tv"),("Bureau"),
-    ("Salle de bain privée (peignoirs & pantoufles)"),("Terrasse"),
-    ("Mini-bar"),("Machine à expresso"),("Bouteille d'eau gratuite"),
-    ("Ménage quotidien"),("Service d'étage (24h/24)"),("Wifi gratuit"),
-    ("Climatisation"),("Non-fumeurs");
+    );    
 
   --BIEN-ETRE
   /**
@@ -290,12 +238,6 @@
     ("Evenements", "events.jpg","Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, quis eius. Vero optio natus deserunt error sint rerum corporis porro.","image evenements"),
     ("Bien-être", "wellness.jpg","Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, quis eius. Vero optio natus deserunt error sint rerum corporis porro.","image massage");
   
-  -- SUITE_SERVICES
-  /**
-    INSERT INTO suite_services VALUES 
-    (2,1),(2,2),(2,3),(2,5),(2,7),(2,7),(2,8),(2,9),(2,10),(2,11),(2,12),(2,13),(2,14),
-    (3,1),(3,2),(3,3),(3,4),(3,5),(3,6),(3,7),(3,8),(3,9),(3,10),(3,11),(3,12),(3,13),(3,14);
-
   -- MANAGER
   /**
     INSERT INTO manager (prenom,nom,email,password ) VALUES 
@@ -343,9 +285,3 @@
         UPDATE bienEtre set bienEtre_title = "Piscine" where bienEtre_id = 2;
         UPDATE bienEtre set bienEtre_title = "Spa" where bienEtre_id = 3;
         UPDATE bienEtre set bienEtre_title = "Salle de sport" where bienEtre_id = 4;
-    
-  -- AJOUT COLONNE + FOREIG_KEY
-    /**
-    ALTER TABLE user
-    ADD user_role INTEGER NOT NULL  
-    REFERENCES role (role_id);
