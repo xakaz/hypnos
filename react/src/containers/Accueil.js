@@ -24,7 +24,7 @@ class Accueil extends Component {
     return (
       <>
         <div className="container">
-          <h1 className="text-center p-2 text-white display-1">Bienvenue</h1>
+          <h1 className="text-center mb-3 text-white display-3">HYPNOS - Bienvenue chez vous</h1>
           <Carousel />
 
           {/** CARDS */}

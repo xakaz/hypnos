@@ -10,6 +10,7 @@ export default function MonCompte() {
   const [users, setUsers] = useState()
   const [booking, setBooking] = useState()
   const [suites, setSuites] = useState()
+  const [email, setEmail] = useState()
   const today = new Date().getTime()
 
   const navigate = useNavigate()
@@ -26,6 +27,17 @@ export default function MonCompte() {
     axios.get("http://localhost/server/front/suites")
       .then(response => { setSuites(response.data); })
       .catch(err => { console.error(err) })
+
+    axios.get("http://localhost/server/back/email")
+      .then(response => {
+        response.data.map(mailUser => {
+          return (
+            mailUser.user_mail === currentUser.email &&
+            setEmail(mailUser.user_mail)
+          )
+        })
+      })
+      .catch(err => { console.error(err) })
   }, [])
 
   const handleCancel = async (id) => {
@@ -36,25 +48,23 @@ export default function MonCompte() {
   }
 
   const replaceText = (text) => {
-    return text.replace("&ocirc;", 'ô').replaceAll("&eacute;","é").replaceAll("&agrave;","à").replaceAll("&rsquo;","'").replaceAll("&#039;","'")
+    return text.replace("&ocirc;", 'ô').replaceAll("&eacute;", "é").replaceAll("&agrave;", "à").replaceAll("&rsquo;", "'").replaceAll("&#039;", "'")
   }
-
-
   return (
     <>
       {
         currentUser ?
           <div className="container text-white">
-            <h1 className='my-5'>Mon compte</h1>
             {
-              users && users.map(user => {
-                return (
-                  user.user_mail === currentUser.email ?
+              email === currentUser.email ?
+                users.map(user => {
+                  return (
+                    user.user_mail === currentUser.email &&
                     <div key={uuid_v4()} className="row">
-
-
+                      {/******************************************************** IDENTITE UTILISATEUR */}
+                      <h1 className='my-5'>Mon compte</h1>
                       <div className="col-12 col-xl-4 ">
-                        <div className="border rounded mb-3 p-5" style={{ maxWidth: "300px" }}>
+                        <div className="border rounded mb-3 p-5" >
                           <h3 className='mb-3'>Utilisateur - {user.user_id} </h3>
                           <hr />
                           <p>{user.user_prenom}</p>
@@ -70,35 +80,32 @@ export default function MonCompte() {
                         {
                           booking && booking.map(book => {
                             return (
+                              user.user_id === book.booking_user &&
                               today < book.booking_start &&
                               <div key={uuid_v4()} className="mb-5">
                                 {
                                   suites && suites.map(suite => {
                                     return (
                                       suite.suite_id === book.booking_suite &&
-                                      <>
-                                        <div key={uuid_v4()}>
-                                          <div>
-                                            <h5 className='mb-3 text-center'>- {suite.suite_name} -</h5>
-                                            <p className='mb-3'>{replaceText(suite.suite_description)}</p>
-                                            <p className='mb-3'>{suite.suite_prix} € / nuit</p>
-                                            <div className="row">
-                                              <div className="col-9 d-flex flex-column justify-content-center align-items-start">
-                                                <p className='mb-3'>Réservé du : {new Date(book.booking_start).toLocaleDateString()} au {new Date(book.booking_end).toLocaleDateString()}</p>
-                                                <div>
-                                                  Prix total : {suite.suite_prix * ((book.booking_end - book.booking_start) / 86400000)} € pour {((book.booking_end - book.booking_start) / 86400000)} nuits
-                                                </div>
-                                              </div>
-                                              <div className="col-3 d-flex justify-content-end align-items-center bbg-warning">
-                                                {
-                                                  (book.booking_start - today > 259200000) &&
-                                                  <button className="btn btn-outline-danger" onClick={() => handleCancel(book.booking_id)}>Annuler</button>
-                                                }
-                                              </div>
+                                      <div key={uuid_v4()}>
+                                        <h5 className='mb-3 text-center'>- {suite.suite_name} -</h5>
+                                        <p className='mb-3'>{replaceText(suite.suite_description)}</p>
+                                        <p className='mb-3'>{suite.suite_prix} € / nuit</p>
+                                        <div className="row">
+                                          <div className="col-9 d-flex flex-column justify-content-center align-items-start">
+                                            <p className='mb-3'>Réservé du : {new Date(book.booking_start).toLocaleDateString()} au {new Date(book.booking_end).toLocaleDateString()}</p>
+                                            <div>
+                                              Prix total : {suite.suite_prix * ((book.booking_end - book.booking_start) / 86400000)} € pour {((book.booking_end - book.booking_start) / 86400000)} nuits
                                             </div>
                                           </div>
+                                          <div className="col-3 d-flex justify-content-end align-items-center bbg-warning">
+                                            {
+                                              (book.booking_start - today > 259200000) &&
+                                              <button className="btn btn-outline-danger" onClick={() => handleCancel(book.booking_id)}>Annuler</button>
+                                            }
+                                          </div>
                                         </div>
-                                      </>
+                                      </div>
                                     )
                                   })
                                 }
@@ -111,6 +118,7 @@ export default function MonCompte() {
                         {
                           booking && booking.map(book => {
                             return (
+                              user.user_id === book.booking_user &&
                               today > book.booking_start &&
                               <div key={uuid_v4()}>
                                 {
@@ -140,13 +148,12 @@ export default function MonCompte() {
                         }
                       </div>
                     </div>
-                    :
-                    <div>
-                      <CompteCreation />
-                    </div>
-                )
-              })
+                  )
+                })
+                :
+                <CompteCreation />
             }
+
           </div>
           :
           navigate("/")

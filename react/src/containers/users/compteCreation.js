@@ -28,20 +28,22 @@ export default function CompteCreation(props) {
       nom: inputs.current[2].value,
     })
       .then(response => {
-        console.info(response);
+        console.info(response); 
       })
       .catch(err => {
         console.error(err)
       })
     formRef.current.reset()
     setValidation("")
-    
+    window.location.reload()
     navigate("/mon-compte")
   }
 
   return (
     <>
       <div className='container'>
+        <h2 className='mt-5 mb-2'>Création du compte</h2>
+        <p className=' mb-3'>Veuillez créer votre compte pour accéder à votre profil et réserver une suite chez Hypnos</p>
         <form className="creationCompte" onSubmit={handleForm} ref={formRef}>
           <div className="mb-3">
             <label htmlFor="email" className='form-label'>Adresse mail</label>
@@ -56,7 +58,7 @@ export default function CompteCreation(props) {
             <input name="nom" type="text" className="form-control" required id="nom" ref={addInputs} />
             <p className="text-danger mt-1">{validation}</p>
           </div>
-          <button className="btn btn-primary">Créer le compte</button>
+          <button className="btn btn-primary" >Créer le compte</button>
         </form>
       </div>
     </>
