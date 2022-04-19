@@ -29,12 +29,11 @@ export default function Inscription() {
       return
     }
     try {
-      const cred = await inscription(
+      await inscription(
         inputs.current[0].value, inputs.current[1].value
       )
       formRef.current.reset()
       setValidation("")
-      // console.log(cred)
       navigate("/mon-compte")
       toggleModals("close")
     } catch (error) {
@@ -108,7 +107,7 @@ export default function Inscription() {
                         <button className="btn btn-primary ">S'inscrire</button>
                       </div>
                       <div className="col-6 d-flex align-items-center">
-                        <a onClick={() => toggleModals('connexion')} className="">Déjà inscrit ?</a>
+                        <button className="btn text-primary" onClick={() => toggleModals('connexion')} >Déjà inscrit ?</button>
                       </div>
                     </div>
                   </form>

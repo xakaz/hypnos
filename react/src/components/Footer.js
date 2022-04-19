@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import ModalResModalAboutervation from '../components/ModalAbout'
 import ModalTarif from '../components/ModalTarif'
+import { v4 as uuid_v4 } from "uuid"
 
 export default function Footer() {
 
@@ -81,7 +82,7 @@ export default function Footer() {
               {
                 hotels && hotels.map(hotel => {
                   return (
-                    <li className="nav-item mb-2">
+                    <li key={uuid_v4()} className="nav-item mb-2">
                       <a href={"/hotel/" + hotel.hotel_ville.toLowerCase().replace(" ", "")} className="nav-link p-0 text-muted">{hotel.hotel_ville}</a>
                     </li>
                   )
@@ -107,7 +108,7 @@ export default function Footer() {
 
               {/* PARTENAIRES */}
               <li className="nav-item mb-2">
-                <a href="https://www.booking.com/index.fr.html" target="_blank" className="nav-link p-0 text-muted">Notre partenaire Booking</a>
+                <a href="https://www.booking.com/index.fr.html" target="_blank" rel="noopener noreferrer" className="nav-link p-0 text-muted">Notre partenaire Booking</a>
               </li>
             </ul>
           </div>

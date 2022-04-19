@@ -51,11 +51,9 @@ function App() {
         {
           hotels && hotels.map(hotel => {
             return (
-              <>
                 <Route path={"/hotel/" + hotel.hotel_ville.toLowerCase().replace(" ","")}
                   element={<HotelTemplate ville={hotel.hotel_ville} />}
                   key={uuid_v4()} />
-              </>
             )
           })
         }

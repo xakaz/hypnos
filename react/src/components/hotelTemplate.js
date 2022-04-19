@@ -29,6 +29,10 @@ export default function HotelTemplate(props) {
     setCurrentHotel(hotel)
   }
 
+  const replaceText = (text) => {
+    return text.replace("&ocirc;", 'ô').replaceAll("&eacute;","é").replaceAll("&agrave;","à").replaceAll("&rsquo;","'").replaceAll("&#039;","'")
+  }
+
 
   return (
     hotels && hotels.map(hotel => {
@@ -43,10 +47,10 @@ export default function HotelTemplate(props) {
             <div className="col-12 col-xl-6 my-2 d-flex flex-column justify-content-evenly">
               <div className="row">
                 {/****************************** TITRE */}
-                <h3 className="">{hotel.hotel_name}</h3>
+                <h3 className="">{replaceText(hotel.hotel_name)}</h3>
                 <hr />
                 {/****************************** DESCRIPTION */}
-                <div>{hotel.hotel_description}</div>
+                <div>{replaceText(hotel.hotel_description)}</div>
               </div>
               <div className="row mt-3">
                 {/****************************** PLAN */}
@@ -56,7 +60,7 @@ export default function HotelTemplate(props) {
 
                 {/****************************** ADRESSE */}
                 <div className="address col-12 col-md-6 text-xl-start d-flex justify-content-start align-items-center my-3">
-                  <div className=''>
+                  <div className='p-3'>
                     <div>{hotel.hotel_name}</div>
                     <div>{hotel.hotel_adresse}</div>
                     <div>{hotel.hotel_cp} - {hotel.hotel_ville}</div>
@@ -85,8 +89,8 @@ export default function HotelTemplate(props) {
                   <SuiteHotelTemplate
                     
                     image={require(`../assets/containersAssets/hotels/${hotel.hotel_ville}/${suite.suite_image}`)}
-                    nom={suite.suite_name}
-                    description={suite.suite_description}
+                    nom={replaceText(suite.suite_name)}
+                    description={replaceText(suite.suite_description)}
                     prix={suite.suite_prix}
                     boutonReservation={
                       <NavLink to="/reservation" className="btn btn-outline-success" onClick={()=>handleSuite(suite.suite_id, hotel.hotel_id)}>

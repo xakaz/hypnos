@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import axios from 'axios'
 import { v4 as uuid_v4 } from "uuid"
+import { useNavigate } from 'react-router-dom'
 
 
 export default function Hotels() {
@@ -15,6 +16,16 @@ export default function Hotels() {
       })
   }, [])
 
+  const navigation = useNavigate()
+
+  const handleNavigation = (hotel) => {
+    navigation("/hotel/" + hotel.toLowerCase().replace(" ", ""))
+  }
+
+  const replaceText = (text) => {
+    return text.replace("&ocirc;", 'ô').replaceAll("&eacute;","é").replaceAll("&agrave;","à").replaceAll("&rsquo;","'").replaceAll("&#039;","'")
+  }
+
   return (
     <div className="container">
       {
@@ -24,15 +35,16 @@ export default function Hotels() {
             <div className='row my-5 text-light' key={uuid_v4()}>
               {/* IMAGE */}
               <div className="col-12 col-xl-6 d-flex justify-content-center align-items-center">
-                <img src={require(`../../assets/containersAssets/hotels/${hotel.hotel_ville}/${hotel.hotel_image}`)} alt={hotel.hotel_name} height="300px" className='rounded' />
+                <img src={require(`../../assets/containersAssets/hotels/${hotel.hotel_ville}/${hotel.hotel_image}`)} alt={hotel.hotel_name} height="300px" width="450px" className='rounded' />
               </div>
 
               {/* HOTEL */}
               <div className="col-12 col-xl-6 d-flex align-items-center">
                 <div>
-                  <h3>{hotel.hotel_name.toUpperCase()}</h3>
+                  <h3 onClick={()=>handleNavigation(hotel.hotel_ville)} >{replaceText(hotel.hotel_name).toUpperCase()}</h3>
                   <hr />
-                  <p>{hotel.hotel_description}</p>
+                  <p>{replaceText(hotel.hotel_description)}
+                  </p>
                   <hr />
                   <div className="row">
                     <div className='col-8'>
@@ -50,7 +62,7 @@ export default function Hotels() {
                       </div>
                     </div>
                     <div className='d-flex justify-content-center col-4'>
-                      <NavLink to={"/hotel/" + hotel.hotel_ville.toLowerCase().replace(" ", "")} className="btn btn-light mb-3">Visiter</NavLink>
+                      <NavLink to={"/hotel/" + hotel.hotel_ville.toLowerCase().replace(" ", "")} className="btn btn-outline-light mb-3">Visiter</NavLink>
                     </div>
                   </div>
                 </div>

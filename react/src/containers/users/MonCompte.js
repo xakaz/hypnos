@@ -6,7 +6,7 @@ import CompteCreation from './compteCreation'
 import { v4 as uuid_v4 } from "uuid"
 
 export default function MonCompte() {
-  const { currentUser, userConnected, setUserConnected } = useContext(UserContext)
+  const { currentUser } = useContext(UserContext)
   const [users, setUsers] = useState()
   const [booking, setBooking] = useState()
   const [suites, setSuites] = useState()
@@ -32,9 +32,12 @@ export default function MonCompte() {
     await axios.post("http://localhost/server/back/deleteBooking", id)
       .then(response => { console.log(response) })
       .catch(err => { console.error(err) })
-      window.location.reload();
+    window.location.reload();
   }
 
+  const replaceText = (text) => {
+    return text.replace("&ocirc;", 'ô').replaceAll("&eacute;","é").replaceAll("&agrave;","à").replaceAll("&rsquo;","'").replaceAll("&#039;","'")
+  }
 
 
   return (
@@ -77,16 +80,16 @@ export default function MonCompte() {
                                         <div key={uuid_v4()}>
                                           <div>
                                             <h5 className='mb-3 text-center'>- {suite.suite_name} -</h5>
-                                            <p className='mb-3'>{suite.suite_description}</p>
+                                            <p className='mb-3'>{replaceText(suite.suite_description)}</p>
                                             <p className='mb-3'>{suite.suite_prix} € / nuit</p>
                                             <div className="row">
-                                              <div className="col-6 d-flex flex-column justify-content-center align-items-start">
+                                              <div className="col-9 d-flex flex-column justify-content-center align-items-start">
                                                 <p className='mb-3'>Réservé du : {new Date(book.booking_start).toLocaleDateString()} au {new Date(book.booking_end).toLocaleDateString()}</p>
                                                 <div>
                                                   Prix total : {suite.suite_prix * ((book.booking_end - book.booking_start) / 86400000)} € pour {((book.booking_end - book.booking_start) / 86400000)} nuits
                                                 </div>
                                               </div>
-                                              <div className="col-6 d-flex justify-content-end align-items-center bbg-warning">
+                                              <div className="col-3 d-flex justify-content-end align-items-center bbg-warning">
                                                 {
                                                   (book.booking_start - today > 259200000) &&
                                                   <button className="btn btn-outline-danger" onClick={() => handleCancel(book.booking_id)}>Annuler</button>
@@ -105,7 +108,6 @@ export default function MonCompte() {
                         }
                         {/********************************************************* HISTORIQUE */}
                         <h3 className='text-primary mt-5 pt-5'>HISTORIQUE DES RESERVATIONS</h3>
-                        <hr />
                         {
                           booking && booking.map(book => {
                             return (
@@ -115,21 +117,20 @@ export default function MonCompte() {
                                   suites && suites.map(suite => {
                                     return (
                                       suite.suite_id === book.booking_suite &&
-                                      <>
-                                        <div key={uuid_v4()}>
+                                      <div key={uuid_v4()}>
+                                        <div>
+                                          <hr />
+                                          <h5 className='mb-3 text-center'>- {suite.suite_name} -</h5>
+                                          <p className='mb-3'>{replaceText(suite.suite_description)}</p>
+                                          <p className='mb-3'>{suite.suite_prix} € / nuit</p>
+                                          <div className="row d-flex justify-content-start">
+                                            <p className='mb-3'>Réservé du : {new Date(book.booking_start).toLocaleDateString()} au {new Date(book.booking_end).toLocaleDateString()}</p>
+                                          </div>
                                           <div>
-                                            <h5 className='mb-3 text-center'>- {suite.suite_name} -</h5>
-                                            <p className='mb-3'>{suite.suite_description}</p>
-                                            <p className='mb-3'>{suite.suite_prix} € / nuit</p>
-                                            <div className="row d-flex justify-content-start">
-                                              <p className='mb-3'>Réservé du : {new Date(book.booking_start).toLocaleDateString()} au {new Date(book.booking_end).toLocaleDateString()}</p>
-                                            </div>
-                                            <div>
-                                              Prix total : {suite.suite_prix * ((book.booking_end - book.booking_start) / 86400000)} € pour {((book.booking_end - book.booking_start) / 86400000)} nuits
-                                            </div>
+                                            Prix total : {suite.suite_prix * ((book.booking_end - book.booking_start) / 86400000)} € pour {((book.booking_end - book.booking_start) / 86400000)} nuits
                                           </div>
                                         </div>
-                                      </>
+                                      </div>
                                     )
                                   })
                                 }

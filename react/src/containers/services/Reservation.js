@@ -6,7 +6,7 @@ import { v4 as uuid_v4 } from "uuid"
 import DatePicker, { registerLocale } from "react-datepicker";
 import fr from 'date-fns/locale/fr/';
 import "react-datepicker/dist/react-datepicker.css";
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 registerLocale('fr', fr)
 
 export default function Reservation() {
@@ -14,9 +14,6 @@ export default function Reservation() {
   ///////////////////////////////////////// CONTEXTS
   const { currentHotel, currentSuite } = useContext(HotelContext)
   const { currentUser, toggleModals } = useContext(UserContext)
-
-  ///////////////////////////////////////// USERS
-  const [users, setUsers] = useState()
 
 
   ///////////////////////////////////////// HOTELS
@@ -36,8 +33,6 @@ export default function Reservation() {
     setEndDate(end);
   };
 
-  ///////////////////////////////////////// RESERVATIONS
-  const [booking, setBooking] = useState()
 
   ///////////////////////////////////////// DATA
   const [data, setData] = useState({
@@ -60,8 +55,8 @@ export default function Reservation() {
         setSuiteSelect(suite.suite_id)
       )
     })
-  } 
-  const today = new Date() 
+  }
+  const today = new Date()
 
   const handleChangeSuite = (e) => {
     setSuiteSelect(e.target.value)
@@ -69,15 +64,15 @@ export default function Reservation() {
   const navigation = useNavigate()
   const validData = () => {
     currentUser ?
-    setData({
-      user: parseInt(userId),
-      suite: suiteSelect,
-      start: Date.parse(startDate),
-      end: endDate ? Date.parse(endDate) : null,
-      date: Date.parse(today)
-    })
-    :
-    navigation("/mon-compte")
+      setData({
+        user: parseInt(userId),
+        suite: suiteSelect,
+        start: Date.parse(startDate),
+        end: endDate ? Date.parse(endDate) : null,
+        date: Date.parse(today)
+      })
+      :
+      navigation("/mon-compte")
   }
 
 
@@ -90,17 +85,15 @@ export default function Reservation() {
     axios.get("http://localhost/server/front/suites")
       .then(response => { setSuites(response.data); })
       .catch(err => { console.error(err) })
-    
-      axios.get("http://localhost/server/back/getBooking")
-      .then(response => { setBooking(response.data); })
-      .catch(err => { console.error(err) })
 
     axios.get("http://localhost/server/front/user")
       .then(response => {
         setUserId(response.data.map(userDatas => {
-          if (currentUser.email === userDatas.user_mail) {
-            return userDatas.user_id
-          }
+          return currentUser.email === userDatas.user_mail && userDatas.user_id
+
+          // if (currentUser.email === userDatas.user_mail) {
+          //   return userDatas.user_id
+          // }
         }));
       })
       .catch(err => { console.error(err) })
@@ -111,9 +104,9 @@ export default function Reservation() {
     e.preventDefault()
     console.log(data)
     await axios.post("http://localhost/server/back/setBooking", data)
-      .then(response => {console.log(response);})
-      .catch( err => {(console.error(err))})
-      navigation("/mon-compte")
+      .then(response => { console.log(response); })
+      .catch(err => { (console.error(err)) })
+    navigation("/mon-compte")
   }
 
   return (
@@ -148,7 +141,7 @@ export default function Reservation() {
                       suites && suites.map(suite => {
                         return (
                           suite.suite_hotel === parseInt(hotelSelect) &&
-                          <option value={suite.suite_id} key={uuid_v4()} selected> {suite.suite_name} </option>
+                          <option value={suite.suite_id} key={uuid_v4()} > {suite.suite_name} </option>
                         )
                       })
                     }
@@ -159,30 +152,40 @@ export default function Reservation() {
             </div>
 
             <div className="row ">
-              <div className="col-12 col-xl-6 d-flex flex-column align-items-center justify-content-center">
+              <div className="col-12 col-xl-6 d-flex flex-column align-items-center justify-content-evenly">
                 <div>
-                  <h3>CHOISISSEZ VOS DATES </h3>
+                  <h3 className='text-center'>CHOISISSEZ LES DATES DE VOTRE SEJOUR</h3>
                 </div>
                 {/******************************************************* CALENDRIER */}
                 <div className='my-2'>
                   <DatePicker locale="fr"
-                    selected={startDate}
+                    // selected={startDate}
                     onChange={onChange}
                     startDate={startDate}
                     endDate={endDate}
                     selectsRange
                     inline
                     showWeekNumbers
-                    excludeDateIntervals={[{start: new Date(0), end: new Date()}]}
+                    excludeDateIntervals={[{ start: new Date(0), end: new Date() }]}
                   />
-
                 </div>
-                <p className='my-2'>
-                  Du : {startDate ? startDate.toLocaleDateString() : ""} au : {endDate ? endDate.toLocaleDateString() : ""}
-                </p>
+                {
+                  startDate &&
+                  <>
+                  <p className='my-2'>
+                    Du : {startDate ? startDate.toLocaleDateString() : ""} au : {endDate ? endDate.toLocaleDateString() : ""}
+                  </p>
+                  {suites && suites.map(suite => {
+                    return (
+                      suite.suite_id === suiteSelect && endDate &&
+                      <>
+                      Prix total : {suite.suite_prix * ( (Date.parse(endDate) - Date.parse(startDate)) / 86400000)} € pour {((Date.parse(endDate) - Date.parse(startDate)) / 86400000)} nuits</>
+                    )
+                  })}
+                  </>
+
+                }
               </div>
-
-
               <div className="col-12 col-xl-6 ">
                 {
                   suites && suites.map(suite => {
@@ -196,9 +199,7 @@ export default function Reservation() {
                               <div key={uuid_v4()} className="d-flex flex-column align-items-center">
                                 <div>
                                   <img src={require("../../assets/containersAssets/hotels/" + hotel.hotel_ville + "/" + suite.suite_image)}
-                                    alt={suite.suite_name}
-                                    style={{ height: "200px" }}
-                                    className="rounded-3 mb-3" />
+                                    alt={suite.suite_name} style={{ height: "200px" }} className="rounded-3 mb-3" />
                                 </div>
                                 <div>
                                   <h5 className='text-center'> {suite.suite_name} </h5>
@@ -218,13 +219,10 @@ export default function Reservation() {
               <div>
               </div>
               <button className='btn btn-primary my-3' onClick={currentUser ? validData : () => toggleModals("connexion")}>Réserver</button>
-             
             </div>
-
           </div>
           <div className="col-2 d-none d-xl-flex"></div>
         </div>
-
       </form>
     </div>
   )

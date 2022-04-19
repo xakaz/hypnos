@@ -1,12 +1,11 @@
-import React, { useContext, useRef, useState, useEffect } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import { UserContext } from '../../context/UserContext'
 import { useNavigate } from 'react-router-dom'
-import { updateCurrentUser } from 'firebase/auth'
-import axios from 'axios'
+// import { updateCurrentUser } from 'firebase/auth'
 
 export default function Connexion() {
 
-  const { modalState, toggleModals, connexion, currentUser } = useContext(UserContext)
+  const { modalState, toggleModals, connexion } = useContext(UserContext)
   const inputs = useRef([])
   const formRef = useRef()
   const navigate = useNavigate();
@@ -14,40 +13,29 @@ export default function Connexion() {
 
 
   const addInputs = el => {
-    if (el && !inputs.current.includes(el)){
+    if (el && !inputs.current.includes(el)) {
       inputs.current.push(el)
     }
   }
-  
 
-  const handleForm = async (e) =>  {
+
+  const handleForm = async (e) => {
     e.preventDefault()
-    
     try {
-      const cred = await connexion(
-        inputs.current[0].value,inputs.current[1].value 
-      )
-
-       
-
+      await connexion(inputs.current[0].value, inputs.current[1].value)
       formRef.current.reset()
       setValidation("")
-      // console.log(cred)
       navigate("/mon-compte")
       toggleModals("close")
     } catch {
-     setValidation('Email ou mot de passe incorrect')
+      setValidation('Email ou mot de passe incorrect')
     }
-
-    
   }
 
   const closeModal = () => {
     setValidation("")
     toggleModals("close")
   }
-
-
 
   return (
     <>
@@ -87,14 +75,13 @@ export default function Connexion() {
                       />
                       <p className="text-danger mt-1">{validation}</p>
                     </div>
-                  
-              
+
                     <div className='row'>
                       <div className="col-6">
                         <button className="btn btn-primary ">Se connecter</button>
                       </div>
                       <div className="col-6 d-flex align-items-center">
-                        <a onClick={() => toggleModals('inscription')} className="">S'inscrire ?</a>
+                        <button className="btn text-primary" onClick={() => toggleModals('inscription')} >S'inscrire ?</button>
                       </div>
                     </div>
                   </form>

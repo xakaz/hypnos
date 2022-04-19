@@ -40,12 +40,11 @@ class Accueil extends Component {
               })
             } 
           </div>
-
           {/** TEXTE */}
           <p className="text-light">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia nihil perferendis dicta eius omnis totam sint atque harum ad ratione quos blanditiis facere quam, delectus repellendus autem culpa sequi vel qui voluptates fugit? Iusto magni culpa explicabo, cum molestiae est consequuntur ullam a illo omnis natus provident iure. Magni quam voluptate iste tempora voluptas quia illo maxime alias delectus asperiores exercitationem ipsum, mollitia quasi tenetur cum consequuntur beatae, necessitatibus molestiae rerum nobis laudantium aperiam. Voluptate doloribus necessitatibus veritatis placeat laboriosam perferendis nulla ab saepe labore laudantium sunt minus tempore atque error, quia doloremque mollitia. Minima nemo ipsa eius consequatur velit!
           </p>
-          <div className="my-5 border p-3 border-light rounded row d-flex justify-content-start">
+          <div className="my-5  p-5 row d-flex border-top justify-content-start">
             <div className="col-2 ">
               <img src={Hypnos} alt="Hypnos dieu du sommeil" className="rounded-circle img-fluid" />
             </div>
