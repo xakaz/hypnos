@@ -8,29 +8,29 @@ export default function Inscription() {
 
   const navigate = useNavigate();
 
-  const inputs =useRef([])
+  const inputs = useRef([])
 
   const addInputs = el => {
-    if (el && !inputs.current.includes(el)){
+    if (el && !inputs.current.includes(el)) {
       inputs.current.push(el)
     }
   }
   const formRef = useRef()
   const [validation, setValidation] = useState("")
 
-  const handleForm = async (e) =>  {
+  const handleForm = async (e) => {
     e.preventDefault()
-    if((inputs.current[1].value.length || inputs.current[2].value.length)<6){
+    if ((inputs.current[1].value.length || inputs.current[2].value.length) < 6) {
       setValidation("6 caractères minimum")
       return
     }
-    if(inputs.current[1].value !== inputs.current[2].value){
+    if (inputs.current[1].value !== inputs.current[2].value) {
       setValidation("Les mots de passes sont différents")
       return
     }
     try {
       const cred = await inscription(
-        inputs.current[0].value,inputs.current[1].value 
+        inputs.current[0].value, inputs.current[1].value
       )
       formRef.current.reset()
       setValidation("")
@@ -38,10 +38,10 @@ export default function Inscription() {
       navigate("/mon-compte")
       toggleModals("close")
     } catch (error) {
-      if( error.code === "auth/invalid-email") {
+      if (error.code === "auth/invalid-email") {
         setValidation("Format de l'email non-valide")
       }
-      if( error.code === "auth/email-already-in-use") {
+      if (error.code === "auth/email-already-in-use") {
         setValidation("Cet email est déjà inscrit")
       }
     }
@@ -58,7 +58,7 @@ export default function Inscription() {
     <>
       {
         modalState.Inscription &&
-        <div className="position-fixed top-0 vw-100 vh-100" style={{ zIndex: "1" }}>
+        <div className="position-fixed top-0 vw-100 vh-100" style={{ zIndex: "100" }}>
           <div className="w-100 h-100 bg-dark bg-opacity-75" onClick={closeModal}></div>
           <div className="position-absolute top-50 start-50 translate-middle" style={{ minWidth: "400px" }}>
             <div className="modal-dialog">
@@ -103,7 +103,14 @@ export default function Inscription() {
                       />
                       <p className="text-danger mt-1">{validation}</p>
                     </div>
-                    <button className="btn btn-primary">S'inscrire</button>
+                    <div className='row'>
+                      <div className="col-6">
+                        <button className="btn btn-primary ">S'inscrire</button>
+                      </div>
+                      <div className="col-6 d-flex align-items-center">
+                        <a onClick={() => toggleModals('connexion')} className="">Déjà inscrit ?</a>
+                      </div>
+                    </div>
                   </form>
                 </div>
               </div>

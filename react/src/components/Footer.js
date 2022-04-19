@@ -3,6 +3,8 @@ import Logo from '../assets/componentsAssets/Navbar/logoHotel.jpg'
 import { NavLink } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import ModalResModalAboutervation from '../components/ModalAbout'
+import ModalTarif from '../components/ModalTarif'
 
 export default function Footer() {
 
@@ -64,6 +66,11 @@ export default function Footer() {
                   Contact
                 </NavLink>
               </li>
+              <li className="nav-item mb-2">
+                <NavLink to='/reservation' className='d-flex align-items-center text-decoration-none text-secondary'>
+                  Réservation
+                </NavLink>
+              </li>
             </ul>
           </div>
 
@@ -75,32 +82,11 @@ export default function Footer() {
                 hotels && hotels.map(hotel => {
                   return (
                     <li className="nav-item mb-2">
-                      <a href={"/hotel/" + hotel.hotel_ville.toLowerCase()} className="nav-link p-0 text-muted">{hotel.hotel_ville}</a>
+                      <a href={"/hotel/" + hotel.hotel_ville.toLowerCase().replace(" ", "")} className="nav-link p-0 text-muted">{hotel.hotel_ville}</a>
                     </li>
                   )
                 })
               }
-              {/* <li className="nav-item mb-2">
-                <a href="/toulouse" className="nav-link p-0 text-muted">Toulouse</a>
-              </li> */}
-              {/* <li className="nav-item mb-2">
-                <a href="/paris" className="nav-link p-0 text-muted">Paris</a>
-              </li>
-              <li className="nav-item mb-2">
-                <a href="/bordeaux" className="nav-link p-0 text-muted">Bordeaux</a>
-              </li>
-              <li className="nav-item mb-2">
-                <a href="/marseille" className="nav-link p-0 text-muted">Marseille</a>
-              </li>
-              <li className="nav-item mb-2">
-                <a href="/lyon" className="nav-link p-0 text-muted">Lyon</a>
-              </li>
-              <li className="nav-item mb-2">
-                <a href="/monaco" className="nav-link p-0 text-muted">Monaco</a>
-              </li>
-              <li className="nav-item mb-2">
-                <a href="/le-havre" className="nav-link p-0 text-muted">Le Havre</a>
-              </li> */}
             </ul>
           </div>
 
@@ -111,17 +97,17 @@ export default function Footer() {
 
               {/* A PROPOS */}
               <li className="nav-item mb-2">
-                <a href="/about" className="nav-link p-0 text-muted">A propos de Hypnos</a>
+                <ModalResModalAboutervation className="p-0 text-muted" >A propos d'Hypnos</ModalResModalAboutervation>
               </li>
 
               {/* TARIFS */}
               <li className="nav-item mb-2">
-                <a href="/tarifs" className="nav-link p-0 text-muted">Tarifs</a>
+                <ModalTarif className="p-0 text-muted">Tarifs</ModalTarif>
               </li>
 
               {/* PARTENAIRES */}
               <li className="nav-item mb-2">
-                <a href="https://www.bookin.com/" className="nav-link p-0 text-muted">Nos partenaires</a>
+                <a href="https://www.booking.com/index.fr.html" target="_blank" className="nav-link p-0 text-muted">Notre partenaire Booking</a>
               </li>
             </ul>
           </div>

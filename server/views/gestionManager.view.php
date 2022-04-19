@@ -8,6 +8,7 @@
       <th scope="col">Nom</th>
       <th scope="col">Email</th>
       <th scope="col">Mot de passe</th>
+      <th scope="col">Id hotel</th>
       <th scope="col" colspan="2">Actions</th>
     </tr>
   </thead>
@@ -20,6 +21,7 @@
         <td><?= $manager["nom"] ?></td>
         <td><?= $manager["email"] ?></td>
         <td><?= $manager["password"] ?></td>
+        <td><?= $manager["manager_hotel"] ?></td>
         <td>
         <form method="post" action="" >
         <input type="hidden" name="id" value="<?= $manager['id'] ?>">
@@ -44,6 +46,7 @@
             <td><input type="text" name="nom" value="<?= $manager['nom'] ?>"class="form-control" ></td>
             <td><input type="text" name="email" value="<?= $manager['email'] ?>"class="form-control" ></td>
             <td><input type="text" name="password" value="<?= $manager['password'] ?>"class="form-control" ></td>
+            <td><input type="text" name="manager_hotel" value="<?= $manager['manager_hotel'] ?>"class="form-control" ></td>
          
             <td colspan="2">
               <input type="hidden" 

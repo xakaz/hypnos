@@ -65,7 +65,7 @@ try {
                         break;
                     case "user":
                         if (empty($url[3])) {
-                            throw new Exception("La page n'existe pas");
+                            $userController->getUsers();
                         } else {
                             $userController->getUser($url[3]);
                         }
@@ -96,10 +96,16 @@ try {
                         $userController->deleteUser();
                         break; 
                         ////////////////////////////////////////// RESERVATIONS    
-                    case "modify-booking":
+                    case "setBooking":
+                        $bookingController->setBooking();
+                        break;
+                    case "getBooking":
+                        $bookingController->getBooking();
+                        break;
+                    case "modifyBooking":
                         $bookingController->modifyBooking();
                         break;
-                    case "delete-booking":
+                    case "deleteBooking":
                         $bookingController->deleteBooking();
                         break;
                         ////////////////////////////////////////// HOTELS

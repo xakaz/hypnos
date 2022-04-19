@@ -38,11 +38,12 @@ class ManagerController
         $nom = Securite::secureHTML($_POST['nom']);
         $prenom = Securite::secureHTML($_POST['prenom']);
         $email = Securite::secureHTML($_POST['email']);
+        $managerHotel = Securite::secureHTML($_POST['manager_hotel']);
         $pass = Securite::secureHTML($_POST['password']);
         $password = password_hash($pass,PASSWORD_BCRYPT);
-        $this->managerManager->modifyDBManager($id,$prenom, $nom,$email,$password);
+        $this->managerManager->modifyDBManager($id,$prenom, $nom,$email,$password, $managerHotel);
         $_SESSION['alert'] = [
-          'message' => "L'établissement a été modifié",
+          'message' => $prenom." ".$nom." a été modifié",
           'type' => "alert-success"
         ];
         header('Location: ' . URL . 'back/gestionManager');

@@ -80,8 +80,10 @@ export default function HotelTemplate(props) {
               suites && suites.map(suite => {
                 return (
                   suite.suite_hotel === hotel.hotel_id &&
+                  <div key={uuid_v4()}>
+
                   <SuiteHotelTemplate
-                    key={uuid_v4()}
+                    
                     image={require(`../assets/containersAssets/hotels/${hotel.hotel_ville}/${suite.suite_image}`)}
                     nom={suite.suite_name}
                     description={suite.suite_description}
@@ -91,6 +93,7 @@ export default function HotelTemplate(props) {
                         Réserver
                       </NavLink>}
                   />
+                  </div>
                 )
               })
             }

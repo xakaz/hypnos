@@ -21,7 +21,11 @@ class BookingController extends Model
 
     $data = json_decode(file_get_contents('php://input'));
 
-    if (isset($data->user) && isset($data->suite) && isset($data->start) && isset($data->end) && isset($data->date)) {
+    if (isset($data->user) 
+    && isset($data->suite) 
+    && isset($data->start) 
+    && isset($data->end) 
+    && isset($data->date)) {
 
       $user = $data->user;
       $suite = $data->suite;
@@ -30,6 +34,11 @@ class BookingController extends Model
       $date = $data->date;
       $this->bookingManager->setDBBooking($user, $suite, $start, $end, $date);
     }
+  }
+  
+  public function getBooking(){
+    $booking = $this->bookingManager->getDBBooking();
+    Model::sendJSON($booking);
   }
   
   public function modifyBooking()
@@ -61,10 +70,9 @@ class BookingController extends Model
     header("Access-Control-Allow-Method: POST, GET, OPTIONS, PUT, DELETE");
     header("Content-Type: application/json");
 
-    $data = json_decode(file_get_contents('php://input'));
+    $id = json_decode(file_get_contents('php://input'));
 
-    if (isset($data->id)) {
-      $id = $data->id;
+    if (isset($id)) {
       $this->bookingManager->deleteDBbooking($id);
     }
   }

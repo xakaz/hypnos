@@ -1,24 +1,24 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useRef, useState, useEffect } from 'react'
 import { UserContext } from '../../context/UserContext'
 import { useNavigate } from 'react-router-dom'
+import { updateCurrentUser } from 'firebase/auth'
+import axios from 'axios'
 
 export default function Connexion() {
 
-  const { modalState, toggleModals, connexion } = useContext(UserContext)
-
-  const navigate = useNavigate();
-
+  const { modalState, toggleModals, connexion, currentUser } = useContext(UserContext)
   const inputs = useRef([])
+  const formRef = useRef()
+  const navigate = useNavigate();
+  const [validation, setValidation] = useState("")
+
 
   const addInputs = el => {
     if (el && !inputs.current.includes(el)){
       inputs.current.push(el)
     }
   }
-
-  const formRef = useRef()
-
-  const [validation, setValidation] = useState("")
+  
 
   const handleForm = async (e) =>  {
     e.preventDefault()
@@ -27,6 +27,9 @@ export default function Connexion() {
       const cred = await connexion(
         inputs.current[0].value,inputs.current[1].value 
       )
+
+       
+
       formRef.current.reset()
       setValidation("")
       // console.log(cred)
@@ -35,6 +38,8 @@ export default function Connexion() {
     } catch {
      setValidation('Email ou mot de passe incorrect')
     }
+
+    
   }
 
   const closeModal = () => {
@@ -48,13 +53,13 @@ export default function Connexion() {
     <>
       {
         modalState.Connexion &&
-        <div className="position-fixed top-0 vw-100 vh-100" style={{ zIndex: "1" }}>
+        <div className="position-fixed top-0 vw-100 vh-100" style={{ zIndex: "100" }}>
           <div className="w-100 h-100 bg-dark bg-opacity-75" onClick={closeModal}></div>
           <div className="position-absolute top-50 start-50 translate-middle" style={{ minWidth: "400px" }}>
             <div className="modal-dialog">
               <div className="modal-content">
                 <div className="modal-header">
-                  <h5 className="modal-title">Inscription</h5>
+                  <h5 className="modal-title">Connexion</h5>
                   <button className="btn-close" onClick={closeModal}></button>
                 </div>
                 <div className="modal-body">
@@ -84,7 +89,14 @@ export default function Connexion() {
                     </div>
                   
               
-                    <button className="btn btn-primary">Se connecter</button>
+                    <div className='row'>
+                      <div className="col-6">
+                        <button className="btn btn-primary ">Se connecter</button>
+                      </div>
+                      <div className="col-6 d-flex align-items-center">
+                        <a onClick={() => toggleModals('inscription')} className="">S'inscrire ?</a>
+                      </div>
+                    </div>
                   </form>
                 </div>
               </div>

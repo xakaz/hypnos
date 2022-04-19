@@ -16,16 +16,17 @@ class ManagerManager extends Model
     $stmt->closeCursor();
   }
   
-  public function modifyDBManager($id, $prenom,$nom, $email, $password){
+  public function modifyDBManager($id,$prenom, $nom,$email,$password, $managerHotel){
     $req="UPDATE manager 
-      SET  prenom = :prenom, nom = :nom, email = :email, password = :password
+      SET  prenom = :prenom, nom = :nom, email = :email, password = :password, manager_hotel = :managerHotel
       WHERE id =:id";
     $stmt = $this->getBdd()->prepare($req);
-    $stmt->bindValue(":id", $id,PDO::PARAM_STR);
+    $stmt->bindValue(":id", $id,PDO::PARAM_INT);
     $stmt->bindValue(":prenom", $prenom,PDO::PARAM_STR);
     $stmt->bindValue(":nom", $nom,PDO::PARAM_STR);
     $stmt->bindValue(":email", $email,PDO::PARAM_STR);
     $stmt->bindValue(":password", $password,PDO::PARAM_STR);
+    $stmt->bindValue(":managerHotel", $managerHotel,PDO::PARAM_STR);
     $stmt->execute();
     $stmt->closeCursor();
   }

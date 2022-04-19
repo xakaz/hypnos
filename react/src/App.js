@@ -30,9 +30,7 @@ import axios from 'axios';
 function App() {
 
   const [hotels, setHotels] = useState();
-
-
-
+  
   useEffect(() => {
     axios.get("http://localhost/server/front/hotels")
       .then(response => {
@@ -54,7 +52,7 @@ function App() {
           hotels && hotels.map(hotel => {
             return (
               <>
-                <Route path={"/hotel/" + hotel.hotel_ville.toLowerCase()}
+                <Route path={"/hotel/" + hotel.hotel_ville.toLowerCase().replace(" ","")}
                   element={<HotelTemplate ville={hotel.hotel_ville} />}
                   key={uuid_v4()} />
               </>
@@ -67,7 +65,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/reservation" element={<Reservation />} />
           <Route path="mon-compte" element={<MonCompte />} />
-        <Route path="*" element={<h1>Erreur 404</h1>} />
+        <Route path="*" element={<h1 className="text-center text-white m-5 p-5">Erreur 404 - Page non trouvée</h1>} />
       </Routes>
       <Footer />
     </div>

@@ -30,7 +30,7 @@ export default function Hotels() {
               {/* HOTEL */}
               <div className="col-12 col-xl-6 d-flex align-items-center">
                 <div>
-                  <h3>{hotel.hotel_name}</h3>
+                  <h3>{hotel.hotel_name.toUpperCase()}</h3>
                   <hr />
                   <p>{hotel.hotel_description}</p>
                   <hr />
@@ -50,7 +50,7 @@ export default function Hotels() {
                       </div>
                     </div>
                     <div className='d-flex justify-content-center col-4'>
-                      <NavLink to={"/hotel/" + hotel.hotel_ville.toLowerCase()} className="btn btn-light mb-3">Visiter</NavLink>
+                      <NavLink to={"/hotel/" + hotel.hotel_ville.toLowerCase().replace(" ", "")} className="btn btn-light mb-3">Visiter</NavLink>
                     </div>
                   </div>
                 </div>

@@ -13,19 +13,16 @@ class UserController extends Model
     $this->userManager = new UserManager();
   }
 
-  public function getUser($id)
+  public function getUser($email)
   {
-    try {
-      if (isset($id)){
-        $user = $this->userManager->getDBUser($id);
+        $user = $this->userManager->getDBUser($email);
         Model::sendJSON($user);
-      } else {
-        throw new Exception("La récupération du profil a échoué");
-      }
-    } catch (Exception $e) {
-      $msg = $e->getMessage();
-      echo $msg;
-    }
+  }
+  
+  public function getUsers()
+  {
+        $users = $this->userManager->getDBUsers();
+        Model::sendJSON($users);
   }
 
   public function getAdmin($id)
@@ -41,7 +38,7 @@ class UserController extends Model
   ///////////////////////////////////////// INSCRIPTION
   public function setUser()
   {
-    // try {
+    try {
       header("Access-Control-Allow-Origin: *");
       header("Access-Control-Allow-Headers: Accept, Content-type, Content-Length, Accept-Encoding");
       header("Access-Control-Allow-Method: POST, GET, OPTIONS, PUT, DELETE");
@@ -49,22 +46,21 @@ class UserController extends Model
 
       $data = json_decode(file_get_contents('php://input'));
 
-      if (isset($data->prenom) && isset($data->nom) && isset($data->email) && isset($data->password)) {
+      if (isset($data->prenom) && isset($data->nom) && isset($data->email)) {
 
         $prenom = $data->prenom;
         $nom = $data->nom;
         $email = $data->email;
-        $pass = $data->password;
-        $password = password_hash($pass, PASSWORD_BCRYPT);
-        $this->userManager->setDBUser($prenom, $nom, $email, $password);
+        
+        $this->userManager->setDBUser($prenom, $nom, $email);
       } 
-    //   else {
-    //     throw new Exception("La création de profil a échoué");
-    //   }
-    // } catch (Exception $e) {
-    //   $msg = $e->getMessage();
-    //   echo $msg;
-    // }
+      else {
+        throw new Exception("La création de profil a échoué");
+      }
+    } catch (Exception $e) {
+      $msg = $e->getMessage();
+      echo $msg;
+    }
   }
 
   ///////////////////////////////////////// MODIFICATION
