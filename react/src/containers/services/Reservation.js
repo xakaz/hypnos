@@ -30,10 +30,10 @@ export default function Reservation() {
     setStartDate(start);
     setEndDate(end);
   };
-  
+
   const today = new Date()
 
-  const [data, setData] = useState({ user: "", suite: "", start: "", end: "", date: ""})
+  const [data, setData] = useState({ user: "", suite: "", start: "", end: "", date: "" })
   const [validation, setValidation] = useState()
   const [userId, setUserId] = useState()
 
@@ -54,7 +54,7 @@ export default function Reservation() {
   const navigation = useNavigate()
 
   const validData = () => {
-      currentUser ?
+    currentUser ?
       setData({
         user: parseInt(userId),
         suite: suiteSelect,
@@ -68,7 +68,7 @@ export default function Reservation() {
 
   ///////////////////////////////////////// REQUETES GET AXIOS
   useEffect(() => {
-    axios.get("http://localhost/server/front/hotels") 
+    axios.get("http://localhost/server/front/hotels")
       .then(response => { setHotels(response.data); })
       .catch(err => { console.error(err) })
 
@@ -84,46 +84,57 @@ export default function Reservation() {
       })
       .catch(err => { console.error(err) })
   }, [])
-
+console.log(data.start)
+console.log(data.end)
+console.log(data.start === data.end)
   //////////////////////////////////////// REQUETES POST AXIOS
   const handleReservation = async (e) => {
     e.preventDefault()
-    if(startDate !== 0){
-      if(endDate !== null){
-        await axios.post("http://localhost/server/back/setBooking", data)
-          .then(response => { console.log(response); })
-          .catch(err => { (console.error(err)) })
-        navigation("/mon-compte")
-      }else{
+    if (startDate !== 0) {
+      if (endDate !== null) {
+        if(data.end !== data.start){
+
+          await axios.post("http://localhost/server/back/setBooking", data)
+            .then(response => { console.log(response); })
+            .catch(err => { (console.error(err)) })
+          navigation("/mon-compte")
+        } else {
+          setValidation("La date de fin de séjour doit être différente de celle du début !")
+        }
+        
+      } else {
         setValidation("Vous devez choisir une date de fin de séjour !")
       }
     } else {
       setValidation("Vous devez choisir une date de début de séjour !")
-    } 
+    }
+  }
+
+  const replaceText = (text) => {
+    return text.replace("&ocirc;", 'ô').replaceAll("&eacute;","é").replaceAll("&agrave;","à").replaceAll("&rsquo;","'").replaceAll("&#039;","'")
   }
 
   return (
     <div className='container my-5 text-white'>
       <form onSubmit={handleReservation}>
-        <div className="row">
-          <div className="col-2  d-none d-xl-flex"></div>
-          <div className='col-8 d-flex flex-column align-items-start p-5 border rounded-3'>
+
+          <div className='d-flex flex-column align-items-start p-5 border rounded-3'>
 
             <div className="row w-100 mb-3">
-              <div className="col-6">
+              <div className="col-12 col-lg-6">
                 {/******************************************************* HOTEL */}
                 <div className="form-group mb-3">
                   <label htmlFor="hotel_id" className="form-label">Hôtels</label>
                   <select className="form-control" id="hotel_id" name="hotel_id" value={hotelSelect} onChange={handleChangeVille}>
                     {
                       hotels && hotels.map(hotel => {
-                        return <option key={uuid_v4()} value={hotel.hotel_id}>{hotel.hotel_ville.toUpperCase()} - {hotel.hotel_name} </option>
+                        return <option key={uuid_v4()} value={hotel.hotel_id}>{replaceText(hotel.hotel_ville).toUpperCase()} - {replaceText(hotel.hotel_name)} </option>
                       })
                     }
                   </select>
                 </div>
               </div>
-              <div className="col-6">
+              <div className="col-12 col-lg-6">
                 {/******************************************************* SUITE */}
                 <div className="form-group mb-3">
                   <label htmlFor="suite_id" className="form-label">Suites</label>
@@ -132,7 +143,7 @@ export default function Reservation() {
                       suites && suites.map(suite => {
                         return (
                           suite.suite_hotel === parseInt(hotelSelect) &&
-                          <option value={suite.suite_id} key={uuid_v4()} > {suite.suite_name} </option>
+                          <option value={suite.suite_id} key={uuid_v4()} > {replaceText(suite.suite_name)} </option>
                         )
                       })
                     }
@@ -160,21 +171,21 @@ export default function Reservation() {
                 </div>
                 {
                   startDate && startDate !== 0 ?
-                  <>
-                    <p className='my-2'>
-                      Du : {startDate  ? startDate.toLocaleDateString() : ""} au : {endDate ? endDate.toLocaleDateString() : ""}
-                    </p>
-                    {suites && suites.map(suite => {
-                      return (
-                        suite.suite_id === suiteSelect && endDate && endDate !== 0 &&
-                        <>
-                          Prix total : {suite.suite_prix * ((Date.parse(endDate) - Date.parse(startDate)) / 86400000)} € pour {((Date.parse(endDate) - Date.parse(startDate)) / 86400000)} nuits
-                        </>
-                      )
-                    })}
-                  </>
-                  :
-                  <></>
+                    <>
+                      <p className='my-2'>
+                        Du : {startDate ? startDate.toLocaleDateString() : ""} au : {endDate ? endDate.toLocaleDateString() : ""}
+                      </p>
+                      {suites && suites.map(suite => {
+                        return (
+                          suite.suite_id === suiteSelect && endDate && endDate !== 0 &&
+                          <>
+                            Prix total : {suite.suite_prix * ((Date.parse(endDate) - Date.parse(startDate)) / 86400000)} € pour {((Date.parse(endDate) - Date.parse(startDate)) / 86400000)} nuits
+                          </>
+                        )
+                      })}
+                    </>
+                    :
+                    <></>
                 }
               </div>
               <div className="col-12 col-xl-6 ">
@@ -193,9 +204,9 @@ export default function Reservation() {
                                     alt={suite.suite_name} style={{ height: "200px" }} className="rounded-3 mb-3" />
                                 </div>
                                 <div>
-                                  <h5 className='text-center'> {suite.suite_name} </h5>
+                                  <h5 className='text-center'> {replaceText(suite.suite_name)} </h5>
                                   <hr />
-                                  <p>{suite.suite_description}</p>
+                                  <p>{replaceText(suite.suite_description)}</p>
                                   <p className='text-end'>{suite.suite_prix} € / Nuit</p>
                                 </div>
                               </div>
@@ -208,11 +219,13 @@ export default function Reservation() {
                 }
               </div>
               <p className="text-danger text-center my-3">{validation}</p>
-              <button className='btn btn-primary my-3' onClick={currentUser ? validData : () => toggleModals("inscription")}>Réserver</button>
+              <div className='row px-5'>
+                <button className='btn btn-primary ' onClick={currentUser ? validData : () => toggleModals("inscription")}>Réserver</button>
+              </div>
             </div>
           </div>
           <div className="col-2 d-none d-xl-flex"></div>
-        </div>
+      
       </form>
     </div>
   )

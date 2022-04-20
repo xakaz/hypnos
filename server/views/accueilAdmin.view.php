@@ -1,7 +1,7 @@
 <?php ob_start() ?>
 
 <div class="row text-center">
-  <div class="col-6">
+  <div class="col-12 col-lg-6">
     <h2 class="mt-5">Gestion des établissements</h2>
     <hr>
     <div class="my-3">
@@ -11,7 +11,7 @@
       <a href="<?= URL ?>back/form-add-hotel">Ajouter un établissement</a>
     </div>
   </div>
-  <div class="col-6">
+  <div class="col-12 col-lg-6">
   <h2 class="mt-5">Gestion des gérants</h2>
     <hr>
     <div class="my-3">

@@ -70,12 +70,12 @@ export default function MonCompte() {
           <div className="container text-white">
             {
               email === currentUser.email ?
-                users.map(user => {
-                  return (
-                    user.user_mail === currentUser.email &&
-                    <div key={uuid_v4()} className="row">
+              users.map(user => {
+                return (
+                  user.user_mail === currentUser.email &&
+                  <div key={uuid_v4()} className="row">
                       {/******************************************************** IDENTITE UTILISATEUR */}
-                      <h1 className='my-5'>Mon compte</h1>
+                      <h2 className='my-5 text-center'>Bienvenue dans votre espace personnel</h2>
                       <div className="col-12 col-xl-4 ">
                         <div className="border rounded mb-3 p-5" >
                           <h3 className='mb-3'>Utilisateur - {user.user_id} </h3>
@@ -88,10 +88,11 @@ export default function MonCompte() {
 
                       <div className="col-12 col-xl-8">
                         {/********************************************************* RESERVATION EN COURS */}
-                        <h3 className='text-primary'>EN COURS</h3>
+                        <h3 className='text-primary'>RESERVATIONS EN COURS</h3>
                         <hr />
                         {
-                          booking && booking.map(book => {
+                          booking ? 
+                          booking.map(book => {
                             return (
                               user.user_id === book.booking_user && today < book.booking_start &&
                               <div key={uuid_v4()} className="mb-5">
@@ -154,9 +155,11 @@ export default function MonCompte() {
                               </div>
                             )
                           })
+                          :
+                          <p className='text-center my-5 opacity-50'>Vous n'avez aucune réservation en cours...</p>
                         }
                         {/********************************************************* HISTORIQUE */}
-                        <h3 className='text-primary mt-5 pt-5'>HISTORIQUE</h3>
+                        <h3 className='text-primary mt-5 pt-5'>HISTORIQUE DES RESERVATIONS</h3>
                         <hr />
                         {
                           booking && booking.map(book => {
@@ -175,7 +178,7 @@ export default function MonCompte() {
                                               <div key={uuid_v4()}>
 
                                                 <div className='mb-5'>
-                                                  <h5 className='mb-3 text-center bg-white text-dark border-rounded p-2 opacity-50'>{hotel.hotel_name.toUpperCase()} - Suite {suite.suite_name}</h5>
+                                                  <h5 className='mb-3 text-center bg-white text-dark border-rounded p-2 opacity-50'>{replaceText(hotel.hotel_name).toUpperCase()} - Suite {suite.suite_name}</h5>
                                                   <div>Réservation n° : {book.booking_id}</div>
                                                   <hr />
                                                   <div className="row">
@@ -189,8 +192,8 @@ export default function MonCompte() {
                                                     </div>
                                                     <div className="col-8">
                                                       <p className='mb-3'>{replaceText(suite.suite_description)}</p>
-                                                      <p>{hotel.hotel_adresse} -  {hotel.hotel_cp}  {hotel.hotel_ville}</p>
-                                                      <div className="row d-flex justify-content-start">
+                                                      <i className='opacity-50 mb-3'>{replaceText(hotel.hotel_adresse)} -  {hotel.hotel_cp}  {replaceText(hotel.hotel_ville)}</i>
+                                                      <div className="row mt-3 d-flex justify-content-start">
                                                         <p className='mb-3'>Réservé du : {new Date(book.booking_start).toLocaleDateString()} au {new Date(book.booking_end).toLocaleDateString()}</p>
                                                       </div>
                                                       <div>

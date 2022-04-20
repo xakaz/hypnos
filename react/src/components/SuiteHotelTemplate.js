@@ -3,7 +3,7 @@ import React from 'react'
 export default function SuiteHotelTemplate(props) {
   return (
     <>
-      <div className="card text-dark m-3" style={{ width: "35rem" }}>
+      <div className="card text-dark m-3" style={{ widthMax: "35rem" }}>
         <img className="card-img-top" src={props.image} alt={props.nom} />
         <div className="card-body">
 
