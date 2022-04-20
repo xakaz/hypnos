@@ -95,9 +95,9 @@ console.log(data.start === data.end)
         if(data.end !== data.start){
 
           await axios.post("http://localhost/server/back/setBooking", data)
-            .then(response => { console.log(response); })
+            .then(navigation("/mon-compte"))
             .catch(err => { (console.error(err)) })
-          navigation("/mon-compte")
+         
         } else {
           setValidation("La date de fin de séjour doit être différente de celle du début !")
         }
