@@ -9,7 +9,7 @@ export default function HotelTemplate(props) {
 
   const [suites, setSuites] = useState()
   const [hotels, setHotels] = useState();
-  const {setCurrentHotel, setCurrentSuite} = useContext(HotelContext);
+  const { setCurrentHotel, setCurrentSuite } = useContext(HotelContext);
 
   useEffect(() => {
     axios.get("http://localhost/server/front/hotels")
@@ -30,7 +30,7 @@ export default function HotelTemplate(props) {
   }
 
   const replaceText = (text) => {
-    return text.replace("&ocirc;", 'ô').replaceAll("&eacute;","é").replaceAll("&agrave;","à").replaceAll("&rsquo;","'").replaceAll("&#039;","'")
+    return text.replace("&ocirc;", 'ô').replaceAll("&eacute;", "é").replaceAll("&agrave;", "à").replaceAll("&rsquo;", "'").replaceAll("&#039;", "'")
   }
 
 
@@ -44,23 +44,19 @@ export default function HotelTemplate(props) {
             <div className="col-12 col-xl-6 d-flex justify-content-center align-items-center">
               <img src={require("../assets/containersAssets/hotels/" + hotel.hotel_ville + "/" + hotel.hotel_image)} alt="hotel de luxe" className="img-fluid rounded-3 " />
             </div>
-            <div className="col-12 col-xl-6 my-2 d-flex flex-column justify-content-evenly">
+            <div className="col-12 col-xl-6 my-2 d-flex flex-column justify-content-center">
               <div className="row">
                 {/****************************** TITRE */}
-                <h3 className="">{replaceText(hotel.hotel_name)}</h3>
-                <hr />
+                <h3 className="mb-3">{replaceText(hotel.hotel_name).toUpperCase()}</h3>
+               
                 {/****************************** DESCRIPTION */}
-                <div>{replaceText(hotel.hotel_description)}</div>
+                <div className="border-top border-bottom p-3 mx-2">{replaceText(hotel.hotel_description)}</div>
               </div>
-              <div className="row mt-3">
-                {/****************************** PLAN */}
-                <div className='col-12 col-md-6 my-3 ' >
-                  <iframe src={hotel.hotel_plan} title={hotel.hotel_id} className="rounded-3" width="auto" height="150" allowFullScreen="" loading="lazy" referrerPolicy="no-referrer-when-downgrade"></iframe>
-                </div>
-
+             
+              <div className="d-flex align-items-center justify-content-start ">
                 {/****************************** ADRESSE */}
-                <div className="address col-12 col-md-6 text-xl-start d-flex justify-content-start align-items-center my-3">
-                  <div className='p-3'>
+                  <div>
+                <div className="opacity-50 text-xl-start d-flex flex-column align-items-start my-3">
                     <div>{hotel.hotel_name}</div>
                     <div>{hotel.hotel_adresse}</div>
                     <div>{hotel.hotel_cp} - {hotel.hotel_ville}</div>
@@ -86,17 +82,17 @@ export default function HotelTemplate(props) {
                   suite.suite_hotel === hotel.hotel_id &&
                   <div key={uuid_v4()}>
 
-                  <SuiteHotelTemplate
-                    
-                    image={require(`../assets/containersAssets/hotels/${hotel.hotel_ville}/${suite.suite_image}`)}
-                    nom={replaceText(suite.suite_name)}
-                    description={replaceText(suite.suite_description)}
-                    prix={suite.suite_prix}
-                    boutonReservation={
-                      <NavLink to="/reservation" className="btn btn-outline-success" onClick={()=>handleSuite(suite.suite_id, hotel.hotel_id)}>
-                        Réserver
-                      </NavLink>}
-                  />
+                    <SuiteHotelTemplate
+
+                      image={require(`../assets/containersAssets/hotels/${hotel.hotel_ville}/${suite.suite_image}`)}
+                      nom={replaceText(suite.suite_name)}
+                      description={replaceText(suite.suite_description)}
+                      prix={suite.suite_prix}
+                      boutonReservation={
+                        <NavLink to="/reservation" className="btn btn-outline-primary" onClick={() => handleSuite(suite.suite_id, hotel.hotel_id)}>
+                          Réserver
+                        </NavLink>}
+                    />
                   </div>
                 )
               })

@@ -15,7 +15,7 @@ export default function Hotels() {
         setHotels(response.data);
       })
   }, [])
-
+  
   const navigation = useNavigate()
 
   const handleNavigation = (hotel) => {

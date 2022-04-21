@@ -27,3 +27,8 @@ yarn-error.log*
 sqldiff.exe
 sqlite3_analyzer.exe
 sqlite3.exe
+--SQLite.sql
+
+
+# sqlite file
+db.sqlite

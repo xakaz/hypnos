@@ -25,7 +25,7 @@ export default function Footer() {
           {/* LOGO */}
           <div className="col ">
             <a href="/" className="d-flex align-items-center mb-3 text-decoration-none">
-              <img src={Logo} alt="hypnosLogo" style={{ heightMax: "100px" }} className='img-fluid rounded' />
+              <img src={Logo} alt="hypnosLogo" style={{ maxHeight: "100px" }} className='img-fluid rounded' />
             </a>
             <p className="text-muted">© 2022</p>
           </div>

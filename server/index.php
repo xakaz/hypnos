@@ -1,5 +1,4 @@
-<?php
-session_start();
+<?php session_start(); 
 
 define("URL", str_replace("index.php", "", (isset($_SERVER['HTTPS']) ? "https" : "http") .
     "://$_SERVER[HTTP_HOST]$_SERVER[PHP_SELF]"));
@@ -26,7 +25,7 @@ $managerSuiteController = new ManagerSuiteController();
 
 try {
     if (empty($_GET['url'])) {
-        throw new Exception("La page n'existe pas");
+        $adminController->getPageLogin();
     } else {
         $url = explode("/", filter_var($_GET['url'], FILTER_SANITIZE_URL));
         if (empty($url[0]) || empty($url[1])) throw new Exception("La page n'existe pas");
@@ -39,8 +38,6 @@ try {
                         } else {
                             $apiController->getSelectedHotel($url[2]);
                         }
-                        break;
-
                         break;
                     case "suites":
                         $apiController->getSuites();
@@ -122,9 +119,6 @@ try {
                         $hotelController->deleteHotel();
                         break;
                         ////////////////////////////////////////// CONNEXION
-                    case "login":
-                        $adminController->getPageLogin();
-                        break;
                     case "deconnexion":
                         $adminController->deconnexion();
                         break;
@@ -184,3 +178,4 @@ try {
     $msg = $e->getMessage();
     echo $msg;
 }
+
