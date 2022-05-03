@@ -32,7 +32,7 @@ function App() {
   const [hotels, setHotels] = useState();
   
   useEffect(() => {
-    axios.get("http://localhost/server/front/hotels")
+    axios.get("https://hypnoshernandez.alwaysdata.net/front/hotels")
       .then(response => {
         setHotels(response.data);
       })
@@ -51,9 +51,9 @@ function App() {
         {
           hotels && hotels.map(hotel => {
             return (
-                <Route path={"/hotel/" + hotel.hotel_ville.toLowerCase().replace(" ","")}
-                  element={<HotelTemplate ville={hotel.hotel_ville} />}
-                  key={uuid_v4()} />
+                <Route  path={"/hotel/" + hotel.hotel_ville.toLowerCase().replace(" ","")}
+                        element={<HotelTemplate ville={hotel.hotel_ville} />}
+                        key={uuid_v4()} />
             )
           })
         }

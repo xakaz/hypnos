@@ -12,7 +12,7 @@ export default function Footer() {
   const [hotels, setHotels] = useState();
 
   useEffect(() => {
-    axios.get("http://localhost/server/front/hotels")
+    axios.get("https://hypnoshernandez.alwaysdata.net/front/hotels")
       .then(response => {
         setHotels(response.data);
       })

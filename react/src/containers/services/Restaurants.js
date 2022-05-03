@@ -13,7 +13,7 @@ class Restaurants extends Component {
   componentDidMount = () =>{
     document.title = "Restaurants";
 
-    axios.get("http://localhost/server/front/restaurants")
+    axios.get("https://hypnoshernandez.alwaysdata.net/front/restaurants")
       .then(response => {
         this.setState({ restaurants: response.data });
       })

@@ -13,7 +13,7 @@ class Evenements extends Component
   componentDidMount =()=>{
     document.title="Evènements"
 
-    axios.get("http://localhost/server/front/evenements")
+    axios.get("https://hypnoshernandez.alwaysdata.net/front/evenements")
       .then(response => {
         this.setState({ evenements: response.data });
       })

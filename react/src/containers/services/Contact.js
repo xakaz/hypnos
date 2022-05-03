@@ -2,19 +2,20 @@ import React from 'react'
 import Formulaire from '../../components/Formulaire'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+import { v4 as uuid_v4 } from "uuid"
 
 export default function Contact() {
 
   const [hotels, setHotels] = useState()
 
   useEffect(()=> {
-    axios.get("http://localhost/server/front/hotels")
+    axios.get("https://hypnoshernandez.alwaysdata.net/front/hotels")
     .then(response => setHotels(response.data))
     .catch(err => console.error(err))
   },[])
 
   const handleMail = (message) => {
-    axios.post('http://localhost/server/back/envoiMail', message)
+    axios.post('https://hypnoshernandez.alwaysdata.net/back/envoiMail', message)
       .then(response => {
         console.log(response)
       })
@@ -39,7 +40,7 @@ export default function Contact() {
                   {
                     hotels && hotels.map(hotel => {
                       return(
-                        <li>{hotel.hotel_ville} : {hotel.hotel_telephone}</li>
+                        <li key={uuid_v4()}>{hotel.hotel_ville} : {hotel.hotel_telephone}</li>
                       )
                     })
                   }

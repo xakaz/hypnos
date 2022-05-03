@@ -13,7 +13,7 @@ class BienEtre extends Component {
   componentDidMount = () => {
     document.title = "Bien-être";
 
-    axios.get("http://localhost/server/front/bien-etre")
+    axios.get("https://hypnoshernandez.alwaysdata.net/front/bien-etre")
       .then(response => {
         this.setState({ bienEtre: response.data });
       })

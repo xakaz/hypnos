@@ -1,6 +1,6 @@
 <?php
 
-require_once "./models/back/admin/Manager.Manager.php";
+require_once "models/back/admin/Manager.manager.php";
 require_once './controllers/back/Securite.class.php';
 
 class ManagerController

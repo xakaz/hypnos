@@ -22,7 +22,7 @@ export default function CompteCreation(props) {
 
   const handleForm = async (e) => {
     e.preventDefault()
-    await axios.post("http://localhost/server/back/inscription", {
+    await axios.post("https://hypnoshernandez.alwaysdata.net/back/inscription", {
       email: inputs.current[0].value,
       prenom: inputs.current[1].value,
       nom: inputs.current[2].value,

@@ -1,9 +1,5 @@
 import React, { useState, createContext, useEffect } from "react";
-import {
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  onAuthStateChanged
-} from 'firebase/auth'
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth'
 import {auth} from '../firebase-config'
 
 export const UserContext = createContext()
@@ -25,7 +21,7 @@ useEffect(()=>{
 },[])
 
 
-///////////////////MODALE INSCRIPTION / CONNEXION
+/////////////////// MODALS INSCRIPTION / CONNEXION
 const [modalState, setModalState] = useState({
   Inscription : false,
   Connexion : false

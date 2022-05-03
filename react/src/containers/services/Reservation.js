@@ -31,6 +31,7 @@ export default function Reservation() {
     setEndDate(end);
   };
 
+
   const today = new Date()
 
   const [data, setData] = useState({ user: "", suite: "", start: "", end: "", date: "" })
@@ -58,9 +59,9 @@ export default function Reservation() {
       setData({
         user: parseInt(userId),
         suite: suiteSelect,
-        start: Date.parse(startDate),
-        end: endDate ? Date.parse(endDate) : null,
-        date: Date.parse(today)
+        start: Date.parse(startDate)/1000,
+        end: endDate ? Date.parse(endDate)/1000 : null,
+        date: Date.parse(today)/1000
       })
       :
       navigation("/mon-compte")
@@ -68,15 +69,15 @@ export default function Reservation() {
 
   ///////////////////////////////////////// REQUETES GET AXIOS
   useEffect(() => {
-    axios.get("http://localhost/server/front/hotels")
+    axios.get("https://hypnoshernandez.alwaysdata.net/front/hotels")
       .then(response => { setHotels(response.data); })
       .catch(err => { console.error(err) })
 
-    axios.get("http://localhost/server/front/suites")
-      .then(response => { setSuites(response.data); })
+    axios.get("https://hypnoshernandez.alwaysdata.net/front/suites")
+      .then(response => { setSuites(response.data) })
       .catch(err => { console.error(err) })
 
-    axios.get("http://localhost/server/front/user")
+    axios.get("https://hypnoshernandez.alwaysdata.net/front/user")
       .then(response => {
         setUserId(response.data.map(userDatas => {
           return currentUser.email === userDatas.user_mail && userDatas.user_id
@@ -84,9 +85,7 @@ export default function Reservation() {
       })
       .catch(err => { console.error(err) })
   }, [])
-console.log(data.start)
-console.log(data.end)
-console.log(data.start === data.end)
+  
   //////////////////////////////////////// REQUETES POST AXIOS
   const handleReservation = async (e) => {
     e.preventDefault()
@@ -94,7 +93,7 @@ console.log(data.start === data.end)
       if (endDate !== null) {
         if(data.end !== data.start){
 
-          await axios.post("http://localhost/server/back/setBooking", data)
+          await axios.post("https://hypnoshernandez.alwaysdata.net/back/setBooking", data)
             .then(navigation("/mon-compte"))
             .catch(err => { (console.error(err)) })
          
@@ -105,7 +104,7 @@ console.log(data.start === data.end)
       } else {
         setValidation("Vous devez choisir une date de fin de séjour !")
       }
-    } else {
+    } else {  
       setValidation("Vous devez choisir une date de début de séjour !")
     }
   }
@@ -113,6 +112,8 @@ console.log(data.start === data.end)
   const replaceText = (text) => {
     return text.replace("&ocirc;", 'ô').replaceAll("&eacute;","é").replaceAll("&agrave;","à").replaceAll("&rsquo;","'").replaceAll("&#039;","'")
   }
+
+///////////////////////////////////////////////////////////////////////////////////////// console.log((Date.parse(startDate)/1000));
 
   return (
     <div className='container my-5 text-white'>
@@ -142,7 +143,7 @@ console.log(data.start === data.end)
                     {
                       suites && suites.map(suite => {
                         return (
-                          suite.suite_hotel === parseInt(hotelSelect) &&
+                          parseInt(suite.suite_hotel) === parseInt(hotelSelect) &&
                           <option value={suite.suite_id} key={uuid_v4()} > {replaceText(suite.suite_name)} </option>
                         )
                       })
@@ -166,7 +167,7 @@ console.log(data.start === data.end)
                     selectsRange
                     inline
                     showWeekNumbers
-                    excludeDateIntervals={[{ start: new Date(0), end: new Date() }]}
+                    excludeDateIntervals={[{ start: new Date(0), end: (new Date() - 86400000) }]}
                   />
                 </div>
                 {
@@ -177,10 +178,10 @@ console.log(data.start === data.end)
                       </p>
                       {suites && suites.map(suite => {
                         return (
-                          suite.suite_id === suiteSelect && endDate && endDate !== 0 &&
-                          <>
-                            Prix total : {suite.suite_prix * ((Date.parse(endDate) - Date.parse(startDate)) / 86400000)} € pour {((Date.parse(endDate) - Date.parse(startDate)) / 86400000)} nuits
-                          </>
+                          parseInt(suite.suite_id) === parseInt(suiteSelect) && endDate && endDate !== 0 &&
+                          <div key={uuid_v4()} >
+                            Prix total : {parseInt(suite.suite_prix) * ((Date.parse(endDate) - Date.parse(startDate)) / 86400000)} € pour {((Date.parse(endDate) - Date.parse(startDate)) / 86400000)} nuits
+                          </div>
                         )
                       })}
                     </>
@@ -192,12 +193,12 @@ console.log(data.start === data.end)
                 {
                   suites && suites.map(suite => {
                     return (
-                      suite.suite_id === parseInt(suiteSelect) &&
+                      parseInt(suite.suite_id) === parseInt(suiteSelect) &&
                       <div key={uuid_v4()}>
                         {
                           hotels && hotels.map(hotel => {
                             return (
-                              suite.suite_hotel === hotel.hotel_id &&
+                              parseInt(suite.suite_hotel) === parseInt(hotel.hotel_id) &&
                               <div key={uuid_v4()} className="d-flex flex-column align-items-center">
                                 <div>
                                   <img src={require("../../assets/containersAssets/hotels/" + hotel.hotel_ville + "/" + suite.suite_image)}

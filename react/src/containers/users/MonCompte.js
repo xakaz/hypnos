@@ -13,29 +13,29 @@ export default function MonCompte() {
   const [suites, setSuites] = useState()
   const [hotels, setHotels] = useState()
   const [email, setEmail] = useState()
-  const today = new Date().getTime()
+  const today = Math.floor((new Date().getTime())/1000)
   const {setCurrentHotel, setCurrentSuite} = useContext(HotelContext);
 
   const navigate = useNavigate()
 
   useEffect(() => {
-    axios.get("http://localhost/server/front/user")
+    axios.get("https://hypnoshernandez.alwaysdata.net/front/user")
       .then(response => { setUsers(response.data) })
       .catch(err => { console.error(err) })
 
-    axios.get("http://localhost/server/back/getBooking")
+    axios.get("https://hypnoshernandez.alwaysdata.net/back/getBooking")
       .then(response => { setBooking(response.data) })
       .catch(err => { console.error(err) })
 
-    axios.get("http://localhost/server/front/suites")
+    axios.get("https://hypnoshernandez.alwaysdata.net/front/suites")
       .then(response => { setSuites(response.data); })
       .catch(err => { console.error(err) })
 
-    axios.get("http://localhost/server/front/hotels")
+    axios.get("https://hypnoshernandez.alwaysdata.net/front/hotels")
       .then(response => { setHotels(response.data); })
       .catch(err => { console.error(err) })
 
-    axios.get("http://localhost/server/back/email")
+    axios.get("https://hypnoshernandez.alwaysdata.net/back/email")
       .then(response => {
         response.data.map(mailUser => {
           return (
@@ -54,7 +54,7 @@ export default function MonCompte() {
   }
 
   const handleCancel = async (id) => {
-    await axios.post("http://localhost/server/back/deleteBooking", id)
+    await axios.post("https://hypnoshernandez.alwaysdata.net/back/deleteBooking", id)
       .then(response => { console.log(response) })
       .catch(err => { console.error(err) })
     window.location.reload();
@@ -63,6 +63,14 @@ export default function MonCompte() {
   const replaceText = (text) => {
     return text.replace("&ocirc;", 'ô').replaceAll("&eacute;", "é").replaceAll("&agrave;", "à").replaceAll("&rsquo;", "'").replaceAll("&#039;", "'")
   }
+  
+
+
+console.log(today);
+console.log(booking);
+
+
+
   return (
     <>
       {
@@ -106,7 +114,7 @@ export default function MonCompte() {
                                             return (
                                               hotel.hotel_id === suite.suite_hotel &&
                                               <div key={uuid_v4()}>
-                                                <h5 className='mb-3 text-center bg-white text-dark border rounded p-2'>{hotel.hotel_name.toUpperCase()} - Suite {suite.suite_name}</h5>
+                                                <h5 className='mb-3 text-center bg-white text-dark border rounded p-2'>{(replaceText(hotel.hotel_name)).toUpperCase()} - Suite {replaceText(suite.suite_name)}</h5>
                                                 <div>Réservation n° : {book.booking_id}</div>
                                                 <hr />
                                                 <div className='px-3'>
@@ -123,20 +131,20 @@ export default function MonCompte() {
                                                     </div>
                                                     <div className="col-12 col-lg-8 d-flex flex-column justify-content-center align-content-center">
                                                       <p className=''>{replaceText(suite.suite_description)}</p>
-                                                      <i className='opacity-50'>{hotel.hotel_adresse} -  {hotel.hotel_cp}  {hotel.hotel_ville}</i>
+                                                      <i className='opacity-50'>{replaceText(hotel.hotel_adresse)} -  {hotel.hotel_cp}  {replaceText(hotel.hotel_ville)}</i>
                                                     </div>
                                                   </div>
                                                   <div className="row">
                                                     <div className="col-6 d-flex flex-column justify-content-center align-items-start">
-                                                      <p className='mb-1'>Réservation du : {new Date(book.booking_start).toLocaleDateString()} au {new Date(book.booking_end).toLocaleDateString()}</p>
-                                                      <p className='mb-1'>Effectuée le : {new Date(book.booking_date).toLocaleDateString()}</p>
+                                                      <p className='mb-1'>Réservation du : {new Date(book.booking_start*1000).toLocaleDateString()} au {new Date(book.booking_end*1000).toLocaleDateString()}</p>
+                                                      <p className='mb-1'>Effectuée le : {new Date(book.booking_date*1000).toLocaleDateString()}</p>
                                                       <div>
-                                                        A régler : {suite.suite_prix * ((book.booking_end - book.booking_start) / 86400000)} € - {((book.booking_end - book.booking_start) / 86400000)} nuits
+                                                        A régler : {suite.suite_prix * ((book.booking_end - book.booking_start) / 86400)} € - {((book.booking_end - book.booking_start) / 86400)} nuits
                                                       </div>
                                                     </div>
                                                     <div className="col-6 d-flex justify-content-end align-items-center bbg-warning">
                                                       {
-                                                        (book.booking_start - today > 259200000) ?
+                                                        (book.booking_start - today > 259200) ?
                                                           <button className="btn btn-outline-danger" onClick={() => handleCancel(book.booking_id)}>Annuler</button>
                                                           :
                                                           <p className='text-warning'>Cette réservation ne peut plus être annulée</p>
@@ -194,10 +202,10 @@ export default function MonCompte() {
                                                       <p className='mb-3'>{replaceText(suite.suite_description)}</p>
                                                       <i className='opacity-50 mb-3'>{replaceText(hotel.hotel_adresse)} -  {hotel.hotel_cp}  {replaceText(hotel.hotel_ville)}</i>
                                                       <div className="row mt-3 d-flex justify-content-start">
-                                                        <p className='mb-3'>Réservé du : {new Date(book.booking_start).toLocaleDateString()} au {new Date(book.booking_end).toLocaleDateString()}</p>
+                                                        <p className='mb-3'>Réservé du : {new Date(book.booking_start*1000).toLocaleDateString()} au {new Date(book.booking_end*1000).toLocaleDateString()}</p>
                                                       </div>
                                                       <div>
-                                                        Prix payé : {suite.suite_prix * ((book.booking_end - book.booking_start) / 86400000)} € pour {((book.booking_end - book.booking_start) / 86400000)} nuits
+                                                        Prix payé : {suite.suite_prix * ((book.booking_end - book.booking_start) / 86400)} € pour {((book.booking_end - book.booking_start) / 86400)} nuits
                                                       </div>
                                                     </div>
                                                   </div>

@@ -12,12 +12,12 @@ export default function HotelTemplate(props) {
   const { setCurrentHotel, setCurrentSuite } = useContext(HotelContext);
 
   useEffect(() => {
-    axios.get("http://localhost/server/front/hotels")
+    axios.get("https://hypnoshernandez.alwaysdata.net/front/hotels")
       .then(response => {
         setHotels(response.data);
       })
 
-    axios.get("http://localhost/server/front/suites")
+    axios.get("https://hypnoshernandez.alwaysdata.net/front/suites")
       .then(response => {
         setSuites(response.data);
       })

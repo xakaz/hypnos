@@ -14,7 +14,7 @@ class Accueil extends Component {
   componentDidMount = () =>{
     document.title = "Accueil";
 
-    axios.get("http://localhost/server/front/accueil")
+    axios.get("https://hypnoshernandez.alwaysdata.net/front/accueil")
       .then(response => {
         this.setState({ accueilCards: response.data });
       })

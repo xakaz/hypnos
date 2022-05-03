@@ -56,8 +56,7 @@ class HotelController
         $telephone = Securite::secureHTML($_POST['telephone']);
         $description = Securite::secureHTML($_POST['description']);
         $image = Securite::secureHTML($_POST['image']);
-        $plan = Securite::secureHTML($_POST['plan']);
-        $this->hotelManager->modifyDBhotel($id, $nom, $adresse, $cp, $ville, $telephone, $description, $image, $plan);
+        $this->hotelManager->modifyDBhotel($id, $nom, $adresse, $cp, $ville, $telephone, $description, $image);
         $_SESSION['alert'] = [
           'message' => "L'établissement a été modifié",
           'type' => "alert-success"

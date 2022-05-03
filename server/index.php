@@ -26,6 +26,7 @@ $managerSuiteController = new ManagerSuiteController();
 try {
     if (empty($_GET['url'])) {
         $adminController->getPageLogin();
+        // throw new Exception("La page n'existe pas");
     } else {
         $url = explode("/", filter_var($_GET['url'], FILTER_SANITIZE_URL));
         if (empty($url[0]) || empty($url[1])) throw new Exception("La page n'existe pas");
@@ -121,6 +122,9 @@ try {
                         ////////////////////////////////////////// CONNEXION
                     case "deconnexion":
                         $adminController->deconnexion();
+                        break;
+                    case "login":
+                        $adminController->getPageLogin();
                         break;
                         ////////////////////////////////////////// ADMINISTRATEUR
                     case "adminConnexion":

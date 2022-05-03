@@ -1,5 +1,5 @@
 <?php
-require_once 'models/back/Booking.manager.php';
+require_once 'models/back/Booking.Manager.php';
 require_once 'models/Model.php';
 
 class BookingController extends Model
