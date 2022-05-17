@@ -4,7 +4,7 @@ require_once 'models/Model.php';
 class HotelManager extends Model
 {
 
-  public function setDBHotel($nom, $adresse, $cp, $ville, $telephone, $description, $image, $plan)
+  public function setDBHotel($nom, $adresse, $cp, $ville, $telephone, $description, $image)
   {
     $req = " INSERT INTO hotels 
     (hotel_name, hotel_adresse, hotel_cp, hotel_ville, hotel_telephone, hotel_description, hotel_image ) 

@@ -25,6 +25,8 @@ class Accueil extends Component {
       <>
         <div className="container">
           <h1 className="text-center mb-3 text-white display-3">HYPNOS - Bienvenue chez vous</h1>
+          
+          {/** CAROUSEL */}
           <Carousel />
 
           {/** CARDS */}
@@ -40,6 +42,7 @@ class Accueil extends Component {
               })
             } 
           </div>
+          
           {/** TEXTE */}
           <p className="text-light p-5 p-lg-0">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia nihil perferendis dicta eius omnis totam sint atque harum ad ratione quos blanditiis facere quam, delectus repellendus autem culpa sequi vel qui voluptates fugit? Iusto magni culpa explicabo, cum molestiae est consequuntur ullam a illo omnis natus provident iure. Magni quam voluptate iste tempora voluptas quia illo maxime alias delectus asperiores exercitationem ipsum, mollitia quasi tenetur cum consequuntur beatae, necessitatibus molestiae rerum nobis laudantium aperiam. Voluptate doloribus necessitatibus veritatis placeat laboriosam perferendis nulla ab saepe labore laudantium sunt minus tempore atque error, quia doloremque mollitia. Minima nemo ipsa eius consequatur velit!

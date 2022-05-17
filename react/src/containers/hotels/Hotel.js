@@ -15,7 +15,7 @@ export default function Hotels() {
         setHotels(response.data);
       })
   }, [])
-  
+
   const navigation = useNavigate()
 
   const handleNavigation = (hotel) => {
@@ -23,7 +23,7 @@ export default function Hotels() {
   }
 
   const replaceText = (text) => {
-    return text.replace("&ocirc;", 'ô').replaceAll("&eacute;","é").replaceAll("&agrave;","à").replaceAll("&rsquo;","'").replaceAll("&#039;","'")
+    return text.replace("&ocirc;", 'ô').replaceAll("&eacute;", "é").replaceAll("&agrave;", "à").replaceAll("&rsquo;", "'").replaceAll("&#039;", "'")
   }
 
   return (
@@ -41,7 +41,7 @@ export default function Hotels() {
               {/* HOTEL */}
               <div className="col-12 col-xl-6 d-flex align-items-center">
                 <div>
-                  <h3 onClick={()=>handleNavigation(hotel.hotel_ville)} >{replaceText(hotel.hotel_name).toUpperCase()}</h3>
+                  <h3 onClick={() => handleNavigation(hotel.hotel_ville)} >{replaceText(hotel.hotel_name).toUpperCase()}</h3>
                   <hr />
                   <p>{replaceText(hotel.hotel_description)}
                   </p>
@@ -56,13 +56,15 @@ export default function Hotels() {
                           </svg>
                         </div>
                         <div className="col-10">
-                          <div>{hotel.hotel_adresse}</div>
-                          <div>{hotel.hotel_cp} - {hotel.hotel_ville}</div>
+                          <div>{replaceText(hotel.hotel_adresse)}</div>
+                          <div>{hotel.hotel_cp} - {replaceText(hotel.hotel_ville)}</div>
                         </div>
                       </div>
                     </div>
                     <div className='d-flex justify-content-center col-4'>
-                      <NavLink to={"/hotel/" + hotel.hotel_ville.toLowerCase().replace(" ", "")} className="btn btn-outline-light mb-3">Visiter</NavLink>
+                      <div>
+                        <NavLink to={"/hotel/" + hotel.hotel_ville.toLowerCase().replace(" ", "")} className="btn btn-outline-light mb-3">Visiter</NavLink>
+                      </div>
                     </div>
                   </div>
                 </div>

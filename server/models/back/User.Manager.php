@@ -1,5 +1,7 @@
 <?php
 
+use function PHPSTORM_META\sql_injection_subst;
+
 require_once 'models/Model.php';
 
 class UserManager extends Model
@@ -8,6 +10,9 @@ class UserManager extends Model
    {
       $req = "INSERT INTO user (user_prenom, user_nom, user_mail)
                 VALUES (:prenom, :nom, :email)";
+      $prenom = addslashes($prenom);
+      $nom = addslashes($nom);
+      $email = addslashes($email);
       $stmt = $this->getBdd()->prepare($req);
       $stmt->bindValue(":prenom", $prenom, PDO::PARAM_STR);
       $stmt->bindValue(":nom", $nom, PDO::PARAM_STR);

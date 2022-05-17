@@ -30,18 +30,16 @@ import axios from 'axios';
 function App() {
 
   const [hotels, setHotels] = useState();
-  
+
   useEffect(() => {
     axios.get("https://hypnoshernandez.alwaysdata.net/front/hotels")
       .then(response => {
         setHotels(response.data);
       })
-
   }, [])
 
   return (
     <div className="bg-dark">
-      {/* <Connexion /> */}
       <Navbar />
       <Inscription />
       <Connexion />
@@ -51,9 +49,9 @@ function App() {
         {
           hotels && hotels.map(hotel => {
             return (
-                <Route  path={"/hotel/" + hotel.hotel_ville.toLowerCase().replace(" ","")}
-                        element={<HotelTemplate ville={hotel.hotel_ville} />}
-                        key={uuid_v4()} />
+              <Route path={"/hotel/" + hotel.hotel_ville.toLowerCase().replace(" ", "")}
+                element={<HotelTemplate ville={hotel.hotel_ville} />}
+                key={uuid_v4()} />
             )
           })
         }
@@ -62,7 +60,7 @@ function App() {
         <Route path="/evenements" element={<Evenements />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/reservation" element={<Reservation />} />
-          <Route path="mon-compte" element={<MonCompte />} />
+        <Route path="mon-compte" element={<MonCompte />} />
         <Route path="*" element={<h1 className="text-center text-white m-5 p-5">Erreur 404 - Page non trouvée</h1>} />
       </Routes>
       <Footer />

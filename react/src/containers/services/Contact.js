@@ -3,10 +3,12 @@ import Formulaire from '../../components/Formulaire'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import { v4 as uuid_v4 } from "uuid"
+import { useNavigate } from 'react-router-dom'
 
 export default function Contact() {
 
   const [hotels, setHotels] = useState()
+  const navigate = useNavigate()
 
   useEffect(()=> {
     axios.get("https://hypnoshernandez.alwaysdata.net/front/hotels")
@@ -22,6 +24,8 @@ export default function Contact() {
       .catch(error => {
         console.log(error)
       })
+    alert("Votre message a bien été envoyé !\n Nous vous répondrons dans les plus brefs délais.\n Merci d'avoir contacter le groupe Hypnos.")
+    navigate("/")
   }
 
   return (

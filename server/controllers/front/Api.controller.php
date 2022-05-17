@@ -2,7 +2,7 @@
 require_once 'models/front/Api.manager.php';
 require_once 'models/Model.php';
 
-class APIController
+class APIController extends Model
 {
   private $apiManager;
 

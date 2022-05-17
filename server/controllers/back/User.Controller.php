@@ -48,9 +48,9 @@ class UserController extends Model
 
       if (isset($data->prenom) && isset($data->nom) && isset($data->email)) {
 
-        $prenom = $data->prenom;
-        $nom = $data->nom;
-        $email = $data->email;
+        $prenom = htmlspecialchars($data->prenom);
+        $nom = htmlspecialchars($data->nom);
+        $email = htmlspecialchars($data->email);
         
         $this->userManager->setDBUser($prenom, $nom, $email);
       } 
@@ -78,9 +78,9 @@ class UserController extends Model
 
       if (isset($data->prenom) && isset($data->nom) && isset($data->email) && isset($data->password) && isset($data->id)) {
         $id = $data->id;
-        $prenom = $data->prenom;
-        $nom = $data->nom;
-        $email = $data->email;
+        $prenom = htmlspecialchars($data->prenom);
+        $nom = htmlspecialchars($data->nom);
+        $email = htmlspecialchars($data->email);
         $pass = $data->password;
         $password = password_hash($pass, PASSWORD_BCRYPT);
         $this->userManager->modifyDBUser($prenom, $nom, $email, $password, $id);

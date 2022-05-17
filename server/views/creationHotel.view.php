@@ -31,10 +31,6 @@
     <label for="image">Nom de l'image <i>(ex : 'image.jpg')</i></label>
     <input type="text" class="form-control" id="image" name="image">
   </div>
-  <div class="form-group">
-    <label for="plan">Src de l'iframe Google Maps</label>
-    <input type="text" class="form-control" id="plan" name="plan">
-  </div>
   <div class="row mt-3 px-5">
     <button type="submit" class="btn btn-primary">Créer</button>
   </div>

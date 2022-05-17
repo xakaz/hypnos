@@ -25,7 +25,6 @@ class AdminController
 
   public function adminConnexion()
   {
-    //     echo password_hash('root', PASSWORD_DEFAULT);
     if (!empty($_POST['login']) && !empty($_POST['password'])) {
 
       $login = Securite::secureHTML($_POST['login']);
@@ -34,14 +33,14 @@ class AdminController
       try {
         if ($this->adminManager->isConnexionValid($login, $password) === true) {
           $_SESSION['access'] = "admin";
-          header('location: ' . URL . '/back/admin');
+          header('location: ' . URL . 'back/admin');
         } else if ($this->managerSuite->isConnexionValid($login, $password) === true) {
           $_SESSION['access'] = "manager";
           $_SESSION['login'] = $login;
-          header('location: ' . URL . '/back/manager');
+          header('location: ' . URL . 'back/manager');
         } else {
           throw new Exception('Login ou mot de passe incorrect');
-          header('location: ' . URL . '/');
+          header('location: ' . URL );
         }
       } catch (Exception $e) {
         $msg = $e->getMessage();
@@ -55,14 +54,14 @@ class AdminController
     if (Securite::verifAccessSession()) {
       require_once("views/accueilAdmin.view.php");
     } else {
-      header('location:' . URL . 'back/login');
+      header('location:' . URL );
     }
   }
 
   public function deconnexion()
   {
     session_destroy();
-    header('location:' . URL . '/back/login');
+    header('location:' . URL );
   }
 
   public function gestionHotel()

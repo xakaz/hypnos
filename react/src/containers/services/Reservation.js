@@ -79,9 +79,9 @@ export default function Reservation() {
 
     axios.get("https://hypnoshernandez.alwaysdata.net/front/user")
       .then(response => {
-        setUserId(response.data.map(userDatas => {
-          return currentUser.email === userDatas.user_mail && userDatas.user_id
-        }));
+        response.data.map(userDatas => {
+          return currentUser.email === userDatas.user_mail && setUserId(userDatas.user_id)
+        });
       })
       .catch(err => { console.error(err) })
   }, [])
@@ -113,7 +113,7 @@ export default function Reservation() {
     return text.replace("&ocirc;", 'ô').replaceAll("&eacute;","é").replaceAll("&agrave;","à").replaceAll("&rsquo;","'").replaceAll("&#039;","'")
   }
 
-///////////////////////////////////////////////////////////////////////////////////////// console.log((Date.parse(startDate)/1000));
+///////////////////////////////////////////////////////////////////////////////////////// 
 
   return (
     <div className='container my-5 text-white'>

@@ -4,7 +4,6 @@ import * as Yup from "yup";
 
 const Formulaire = (props) => {
 
-
   return (
     <>
       <div className="container d-flex justify-content-center">

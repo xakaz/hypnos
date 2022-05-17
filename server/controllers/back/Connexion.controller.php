@@ -27,8 +27,8 @@ class ConnexionController extends Model
       $data = json_decode(file_get_contents('php://input'));
       if (isset($data->email) && isset($data->password)) {
         if ($this->connexionManager->verifConnexion($data->email, $data->password)) {
-          $email = $data->email;
-          $password = $data->password;
+          $email = htmlspecialchars($data->email);
+          $password = htmlspecialchars($data->password);
 
           $role = $this->connexionManager->getRoleUser($email);
           switch ($role) {

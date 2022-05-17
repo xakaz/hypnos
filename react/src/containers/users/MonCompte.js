@@ -64,12 +64,7 @@ export default function MonCompte() {
     return text.replace("&ocirc;", 'ô').replaceAll("&eacute;", "é").replaceAll("&agrave;", "à").replaceAll("&rsquo;", "'").replaceAll("&#039;", "'")
   }
   
-
-
-console.log(today);
-console.log(booking);
-
-
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   return (
     <>

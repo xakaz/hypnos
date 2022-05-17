@@ -3,7 +3,7 @@ import React, { useState, useContext, useRef } from 'react'
 import { UserContext } from '../../context/UserContext'
 import { useNavigate } from 'react-router-dom'
 
-export default function CompteCreation(props) {
+export default function CompteCreation() {
 
   const { currentUser } = useContext(UserContext)
 
