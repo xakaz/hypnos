@@ -12,9 +12,9 @@ class Evenements extends Component
   }
   componentDidMount =()=>{
     document.title="Evènements"
-
-    // axios.get("https://hypnoshernandez.alwaysdata.net/front/evenements")
-    axios.get(process.env.REACT_APP_AXIOS_URL+"/front/services")
+    
+    const fetchEvents = async () => {
+      await axios.get(process.env.REACT_APP_AXIOS_URL+"/front/services")
       .then(response => {
         console.log(response.data)
         let eventsArr = [] 
@@ -25,7 +25,8 @@ class Evenements extends Component
           }
         }
       })
-
+    }
+    fetchEvents();
   }
   render(){
     return (

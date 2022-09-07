@@ -22,6 +22,7 @@ useEffect(()=>{
 
 
 /////////////////// MODALS INSCRIPTION / CONNEXION
+
 const [modalState, setModalState] = useState({
   Inscription : false,
   Connexion : false
@@ -47,6 +48,8 @@ const toggleModals = modal => {
     })
   }
 }
+
+
 
  return (
    <UserContext.Provider value ={{modalState, toggleModals, inscription, connexion, currentUser}}>

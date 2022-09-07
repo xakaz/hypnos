@@ -22,7 +22,6 @@ export default function CompteCreation() {
 
   const handleForm = async (e) => {
     e.preventDefault()
-    // await axios.post("https://hypnoshernandez.alwaysdata.net/back/inscription", {
     await axios.post(process.env.REACT_APP_AXIOS_URL+"/back/inscription", {
       email: inputs.current[0].value,
       prenom: inputs.current[1].value,

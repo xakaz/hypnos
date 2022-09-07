@@ -1,7 +1,7 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import { UserContext } from '../../context/UserContext'
 import { useNavigate } from 'react-router-dom'
-// import { updateCurrentUser } from 'firebase/auth'
+
 
 export default function Connexion() {
 
@@ -11,25 +11,22 @@ export default function Connexion() {
   const navigate = useNavigate();
   const [validation, setValidation] = useState("")
 
-
   const addInputs = el => {
     if (el && !inputs.current.includes(el)) {
       inputs.current.push(el)
     }
   }
 
-
-  const handleForm = async (e) => {
+  const handleForm = (e) => {
     e.preventDefault()
     try {
-      await connexion(inputs.current[0].value, inputs.current[1].value)
+      connexion(inputs.current[0].value, inputs.current[1].value)
       formRef.current.reset()
       setValidation("")
       navigate("/mon-compte")
       toggleModals("close")
     } catch {
       document.querySelector('form').reset();
-      // document.inputs.current[1].value.reset();
       setValidation('Email ou mot de passe incorrect')
     }
   }
@@ -45,7 +42,7 @@ export default function Connexion() {
       {
         modalState.Connexion &&
         <div className="position-fixed top-0 vw-100 vh-100" style={{ zIndex: "100" }}>
-          <div className="w-100 h-100 bg-dark bg-opacity-75" onClick={closeModal}></div>
+          <div className="w-100 h-100" onClick={closeModal} style={{ background: 'rgba(0,0,0,0.7)' }}></div>
           <div className="position-absolute top-50 start-50 translate-middle" style={{ minWidth: "400px" }}>
             <div className="modal-dialog">
               <div className="modal-content">
@@ -55,7 +52,8 @@ export default function Connexion() {
                 </div>
                 <div className="modal-body">
                   <form className="sign-in-form" onSubmit={handleForm} ref={formRef}>
-                    <div className="mb-3">
+
+                    < div className="mb-3">
                       <label htmlFor="signInEmail" className='form-label'>Adresse mail</label>
                       <input
                         name="email"
@@ -66,6 +64,7 @@ export default function Connexion() {
                         ref={addInputs}
                       />
                     </div>
+
                     <div className="mb-3">
                       <label htmlFor="pwd" className='form-label'>Mot de passe</label>
                       <input
@@ -92,7 +91,8 @@ export default function Connexion() {
               </div>
             </div>
           </div>
-        </div>
+        </div >
+
       }
     </>
   )

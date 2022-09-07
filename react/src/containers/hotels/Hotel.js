@@ -12,11 +12,13 @@ export default function Hotels() {
   const [hotels, setHotels] = useState();
 
   useEffect(() => {
-    // axios.get("https://hypnoshernandez.alwaysdata.net/front/hotels")
-    axios.get(process.env.REACT_APP_AXIOS_URL+"/front/hotels")
+    const fetchHotels = async () => {
+      await axios.get(process.env.REACT_APP_AXIOS_URL+"/front/hotels")
       .then(response => {
         setHotels(response.data);
       })
+    }
+    fetchHotels();
 
     }, [])
     

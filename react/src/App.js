@@ -31,11 +31,14 @@ function App() {
   const [hotels, setHotels] = useState();
 
   useEffect(() => {
-    axios.get(process.env.REACT_APP_AXIOS_URL+"/front/hotels")
+    const fetchHotels = async () => {
+      await axios.get(process.env.REACT_APP_AXIOS_URL+"/front/hotels")
       .then(response => {
         setHotels(response.data);
       })
       .catch(err => console.error(err))
+    }
+    fetchHotels();
   }, [])
 
   return (

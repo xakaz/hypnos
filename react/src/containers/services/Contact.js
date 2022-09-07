@@ -11,14 +11,15 @@ export default function Contact() {
   const navigate = useNavigate()
 
   useEffect(()=> {
-    // axios.get("https://hypnoshernandez.alwaysdata.net/front/hotels")
-    axios.get(process.env.REACT_APP_AXIOS_URL+"/front/hotels")
-    .then(response => setHotels(response.data))
-    .catch(err => console.error(err))
+    const fetchHotels = async () => {
+      await axios.get(process.env.REACT_APP_AXIOS_URL+"/front/hotels")
+      .then(response => setHotels(response.data))
+      .catch(err => console.error(err))
+    }
+    fetchHotels();
   },[])
 
   const handleMail = (message) => {
-    // axios.post('https://hypnoshernandez.alwaysdata.net/back/envoiMail', message)
     axios.post(process.env.REACT_APP_AXIOS_URL+"/back/envoiMail", message)
       .then(response => {
         console.log(response)

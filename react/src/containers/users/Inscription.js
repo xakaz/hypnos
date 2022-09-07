@@ -24,6 +24,18 @@ export default function Inscription() {
       setValidation("6 caractères minimum")
       return
     }
+    if(!inputs.current[1].value.match(/[0-9]/g)){
+      setValidation("1 chiffre minimum")
+      return
+    }
+    if(!inputs.current[1].value.match(/[A-Z]/g)){
+      setValidation("1 majuscule minimum")
+      return
+    }
+    if(!inputs.current[1].value.match(/\W+/g)){
+      setValidation("1 caractère spécial minimum")
+      return
+    }
     if (inputs.current[1].value !== inputs.current[2].value) {
       setValidation("Les mots de passes sont différents")
       return
@@ -32,6 +44,7 @@ export default function Inscription() {
       await inscription(
         inputs.current[0].value, inputs.current[1].value
       )
+      
       formRef.current.reset()
       setValidation("")
       navigate("/mon-compte")
@@ -58,7 +71,7 @@ export default function Inscription() {
       {
         modalState.Inscription &&
         <div className="position-fixed top-0 vw-100 vh-100" style={{ zIndex: "100" }}>
-          <div className="w-100 h-100 bg-dark bg-opacity-75" onClick={closeModal}></div>
+          <div className="w-100 h-100" onClick={closeModal} style={{background :'rgba(0,0,0,0.7)'}}></div>
           <div className="position-absolute top-50 start-50 translate-middle" style={{ minWidth: "400px" }}>
             <div className="modal-dialog">
               <div className="modal-content">

@@ -1,5 +1,6 @@
 <?php
 
+
 abstract class Model
 {
   private static $pdo;
@@ -7,9 +8,12 @@ abstract class Model
   protected function getBdd()
   {
     try {
-      // self::$pdo = new PDO('sqlite:C:\Users\xakaz\Desktop\EvalStudi\hypnos\react\db.sqlite', '', '', array(
-      // self::$pdo = new PDO('mysql:host=mysql-hypnoshernandez.alwaysdata.net;dbname=hypnoshernandez_mysql', '266471', 'Maelys030609', array(
-      self::$pdo = new PDO("mysql:host=localhost;dbname=hypnos;charset=utf8", 'root', 'root', [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+      if( $_SERVER['HTTP_HOST'] === "localhost"){
+        self::$pdo = new PDO(PDO_LOCALHOST_CONNEXION, USER_LOCALHOST, PASSWORD_LOCALHOST, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+      } else {
+        self::$pdo = new PDO(PDO_SERVER_CONNEXION, USER_SERVER, PASSWORD_SERVER, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+      }
+
       return self::$pdo;
     } catch (Exception $e) {
       echo "Impossible d'accéder à la base de données : " . $e->getMessage();

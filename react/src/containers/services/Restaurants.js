@@ -12,9 +12,8 @@ class Restaurants extends Component {
 
   componentDidMount = () => {
     document.title = "Restaurants";
-
-    // axios.get("https://hypnoshernandez.alwaysdata.net/front/restaurants")
-    axios.get(process.env.REACT_APP_AXIOS_URL+"/server/front/services")
+    const fetchRestaurants = async () => {
+      await axios.get(process.env.REACT_APP_AXIOS_URL+"/server/front/services")
       .then(response => {
         console.log(response.data)
         let restaurantArr = []
@@ -25,6 +24,8 @@ class Restaurants extends Component {
           }
         }
       })
+    }
+    fetchRestaurants();
   }
   render() {
     return (

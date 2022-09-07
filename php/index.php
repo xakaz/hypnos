@@ -11,8 +11,7 @@ require_once './controllers/back/HotelController.php';
 require_once './controllers/back/admin/AdminController.php';
 require_once './controllers/back/admin/ManagerController.php';
 require_once './controllers/back/manager/ManagerSuiteController.php';
-
-
+require_once './credentials.php';
 
 try {
     if (empty($_GET['url'])) {

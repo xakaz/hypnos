@@ -12,17 +12,21 @@ export default function HotelTemplate(props) {
   const { setCurrentHotel, setCurrentSuite } = useContext(HotelContext);
 
   useEffect(() => {
-    // axios.get("https://hypnoshernandez.alwaysdata.net/front/hotels")
-    axios.get(process.env.REACT_APP_AXIOS_URL+"/front/hotels")
+    const fetchHotels = async () => {
+      await axios.get(process.env.REACT_APP_AXIOS_URL+"/front/hotels")
       .then(response => {
         setHotels(response.data);
       })
+    }
+    fetchHotels();
 
-    // axios.get("https://hypnoshernandez.alwaysdata.net/front/suites")
-    axios.get(process.env.REACT_APP_AXIOS_URL+"/front/suites")
+    const fetchSuites = async () => {
+      await axios.get(process.env.REACT_APP_AXIOS_URL+"/front/suites")
       .then(response => {
         setSuites(response.data);
       })
+    }
+    fetchSuites();
 
   }, [])
 
