@@ -15,7 +15,7 @@ export default function SuiteHotelTemplate(props) {
               <p className="card-text">{props.description}</p>
             </div>
 
-            <div className="d-flex justify-content-end align-items-center">
+            <div className="d-flex justify-content-end align-items-center ">
               <div>
                 <div>{props.boutonReservation}</div>
               </div>

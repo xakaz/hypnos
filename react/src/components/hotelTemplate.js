@@ -5,11 +5,11 @@ import { NavLink } from 'react-router-dom'
 import { v4 as uuid_v4 } from "uuid"
 import { HotelContext } from "../context/HotelContext";
 
-export default function HotelTemplate(props) {
+export default function HotelTemplate() {
 
   const [suites, setSuites] = useState()
   const [hotels, setHotels] = useState();
-  const { setCurrentHotel, setCurrentSuite } = useContext(HotelContext);
+  const { setCurrentHotel, setCurrentSuite, currentHotel } = useContext(HotelContext);
 
   useEffect(() => {
     const fetchHotels = async () => {
@@ -28,6 +28,8 @@ export default function HotelTemplate(props) {
     }
     fetchSuites();
 
+    localStorage.getItem('ville')
+
   }, [])
 
   const handleSuite = (suite, hotel) => {
@@ -39,10 +41,12 @@ export default function HotelTemplate(props) {
     return text.replace("&ocirc;", 'ô').replaceAll("&eacute;", "é").replaceAll("&agrave;", "à").replaceAll("&rsquo;", "'").replaceAll("&#039;", "'")
   }
 
+  console.log(localStorage.getItem('ville'))
+
   return (
     hotels && hotels.map(hotel => {
       return (
-        hotel.hotel_ville === props.ville &&
+        hotel.hotel_ville.toLowerCase().replace(" ", "") === localStorage.getItem('ville') &&
         <div className=" container text-white" key={uuid_v4()}>
           <div className="row mt-5 p-5 border-bottom">
             {/****************************** IMAGE */}

@@ -1,28 +1,31 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import axios from 'axios'
 import { v4 as uuid_v4 } from "uuid"
 import { useNavigate } from 'react-router-dom'
+import { HotelContext } from '../../context/HotelContext'
 
 
 export default function Hotels() {
 
 
+  const { setCurrentHotel, currentHotel } = useContext(HotelContext);
 
   const [hotels, setHotels] = useState();
 
   useEffect(() => {
     const fetchHotels = async () => {
-      await axios.get(process.env.REACT_APP_AXIOS_URL+"/front/hotels")
-      .then(response => {
-        setHotels(response.data);
-      })
+      await axios.get(process.env.REACT_APP_AXIOS_URL + "/front/hotels")
+        .then(response => {
+          setHotels(response.data);
+        })
     }
     fetchHotels();
 
-    }, [])
-    
-    const navigation = useNavigate()
+  }, [])
+
+
+  const navigation = useNavigate()
 
   const handleNavigation = (hotel) => {
     navigation("/hotel/" + hotel.toLowerCase().replace(" ", ""))
@@ -32,6 +35,11 @@ export default function Hotels() {
     return text.replace("&ocirc;", 'ô').replaceAll("&eacute;", "é").replaceAll("&agrave;", "à").replaceAll("&rsquo;", "'").replaceAll("&#039;", "'")
   }
 
+  // const handleHotel = (hotel) => {
+  //   setCurrentHotel(hotel)
+  // }
+
+  console.log(localStorage.getItem('ville'))
 
 
   return (
@@ -71,7 +79,7 @@ export default function Hotels() {
                     </div>
                     <div className='d-flex justify-content-center col-4'>
                       <div>
-                        <NavLink to={"/hotel/" + hotel.hotel_ville.toLowerCase().replace(" ", "")} className="btn btn-outline-light mb-3">Visiter</NavLink>
+                        <NavLink to={"/hotel/" + hotel.hotel_ville.toLowerCase().replace(" ", "")} onClick={() =>localStorage.setItem('ville', hotel.hotel_ville.toLowerCase().replace(" ", ""))} className="btn btn-outline-light mb-3">Visiter</NavLink>
                       </div>
                     </div>
                   </div>

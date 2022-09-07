@@ -29,7 +29,7 @@ class AdminController
 
       $login = Securite::secureHTML($_POST['login']);
       $password = Securite::secureHTML($_POST['password']);
-      
+
       try {
         if ($this->adminManager->isConnexionValid($login, $password) === true) {
           $_SESSION['access'] = "admin";
@@ -39,13 +39,16 @@ class AdminController
           $_SESSION['login'] = $login;
           header('location: ' . URL . 'back/manager');
         } else {
-          throw new Exception('Login ou mot de passe incorrect');
-          header('location: ' . URL );
+          $_SESSION['access'] = "error";
+          header('location: ' . URL);
         }
-      } catch (Exception $e) {
+      } catch (Error $e) {
         $msg = $e->getMessage();
         echo $msg;
       }
+    } else {
+      $_SESSION['access'] = "empty";
+      header('location: ' . URL);
     }
   }
 
@@ -54,14 +57,14 @@ class AdminController
     if (Securite::verifAccessSession()) {
       require_once("views/accueilAdmin.php");
     } else {
-      header('location:' . URL );
+      header('location:' . URL);
     }
   }
 
   public function deconnexion()
   {
     session_destroy();
-    header('location:' . URL );
+    header('location:' . URL);
   }
 
   public function gestionHotel()

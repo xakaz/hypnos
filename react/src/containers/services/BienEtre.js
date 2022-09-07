@@ -28,7 +28,6 @@ class BienEtre extends Component {
     fetchWellness();
   }
 
-
   render() {
     return (
       <>

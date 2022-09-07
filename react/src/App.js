@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Routes, Route } from 'react-router-dom';
-import { v4 as uuid_v4 } from "uuid"
 
 // IMPORTS COMPONENTS
 import Navbar from "./components/Navbar";
@@ -23,24 +22,7 @@ import Inscription from './containers/users/Inscription'
 import Connexion from './containers/users/Connexion'
 import MonCompte from "./containers/users/MonCompte";
 
-//IMPORT AXIOS
-import axios from 'axios';
-
 function App() {
-
-  const [hotels, setHotels] = useState();
-
-  useEffect(() => {
-    const fetchHotels = async () => {
-      await axios.get(process.env.REACT_APP_AXIOS_URL+"/front/hotels")
-      .then(response => {
-        setHotels(response.data);
-      })
-      .catch(err => console.error(err))
-    }
-    fetchHotels();
-  }, [])
-
   return (
     <div className="bg-dark">
       <Navbar />
@@ -49,15 +31,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Accueil />} />
         <Route path="/hotels" element={<Hotel />} />
-        {
-          hotels && hotels.map(hotel => {
-            return (
-              <Route path={"/hotel/" + hotel.hotel_ville.toLowerCase().replace(" ", "")}
-                element={<HotelTemplate ville={hotel.hotel_ville} />}
-                key={uuid_v4()} />
-            )
-          })
-        }
+        <Route path={`/hotel/:slug`} element={<HotelTemplate  />}/>
         <Route path="/bien-etre" element={<BienEtre />} />
         <Route path="/restaurants" element={<Restaurants />} />
         <Route path="/evenements" element={<Evenements />} />
