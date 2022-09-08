@@ -14,44 +14,42 @@
   </thead>
   <tbody>
     <?php foreach ($managers as $manager) : ?>
-      <?php if(empty($_POST['id']) || $_POST['id'] != $manager['id']) : ?>
-      <tr>
-        <th scope="row"><?= $manager['id'] ?></th>
-        <td><?= $manager["prenom"] ?></td>
-        <td><?= $manager["nom"] ?></td>
-        <td><?= $manager["email"] ?></td>
-        <td><?= $manager["password"] ?></td>
-        <td><?= $manager["manager_hotel"] ?></td>
-        <td>
-        <form method="post" action="" >
-        <input type="hidden" name="id" value="<?= $manager['id'] ?>">
-          <button class="btn btn-warning" type="submit">Modifier</button>
-          </form>
+      <?php if (empty($_POST['id']) || $_POST['id'] != $manager['id']) : ?>
+        <tr>
+          <th scope="row"><?= $manager['id'] ?></th>
+          <td><?= $manager["prenom"] ?></td>
+          <td><?= $manager["nom"] ?></td>
+          <td><?= $manager["email"] ?></td>
+          <td><?= $manager["password"] ?></td>
+          <td><?= $manager["manager_hotel"] ?></td>
+          <td>
+            <form method="post" action="">
+              <input type="hidden" name="id" value="<?= $manager['id'] ?>">
+              <button class="btn btn-warning" type="submit">Modifier</button>
+            </form>
 
-        </td>
-        <td>
-          <form method="post" action="<?= URL ?>back/deleteManagerDB" >
-            <input type="hidden" name="id" value="<?= $manager['id'] ?>">
-            <button class="btn btn-danger" type="submit">Supprimer</button>
-          </form>
-        </td>
-      </tr>
+          </td>
+          <td>
+            <form method="post" action="<?= URL ?>back/deleteManagerDB">
+              <input type="hidden" name="id" value="<?= $manager['id'] ?>">
+              <button class="btn btn-danger" type="submit">Supprimer</button>
+            </form>
+          </td>
+        </tr>
 
       <?php else : ?>
 
         <form method="post" action="<?= URL ?>back/modifManager">
           <tr>
-            <td ><?= $manager['id']?></td>
-            <td><input type="text" name="prenom" value="<?= $manager['prenom'] ?>"class="form-control" ></td>
-            <td><input type="text" name="nom" value="<?= $manager['nom'] ?>"class="form-control" ></td>
-            <td><input type="text" name="email" value="<?= $manager['email'] ?>"class="form-control" ></td>
-            <td><input type="text" name="password" value="<?= $manager['password'] ?>"class="form-control" ></td>
-            <td><input type="text" name="manager_hotel" value="<?= $manager['manager_hotel'] ?>"class="form-control" ></td>
-         
+            <td><?= $manager['id'] ?></td>
+            <td><input type="text" name="prenom" value="<?= $manager['prenom'] ?>" class="form-control"></td>
+            <td><input type="text" name="nom" value="<?= $manager['nom'] ?>" class="form-control"></td>
+            <td><input type="text" name="email" value="<?= $manager['email'] ?>" class="form-control"></td>
+            <td><input type="text" name="password" value="<?= $manager['password'] ?>" class="form-control"></td>
+            <td><input type="text" name="manager_hotel" value="<?= $manager['manager_hotel'] ?>" class="form-control"></td>
+
             <td colspan="2">
-              <input type="hidden" 
-              name="id" 
-              value="<?= $manager['id']?>">
+              <input type="hidden" name="id" value="<?= $manager['id'] ?>">
               <button class="btn btn-primary" type="submit">Valider</button>
             </td>
           </tr>

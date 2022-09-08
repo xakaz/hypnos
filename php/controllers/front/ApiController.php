@@ -1,7 +1,7 @@
 <?php
 require_once 'models/front/ApiManager.php';
 
-class APIController 
+class APIController
 {
   private $apiManager;
 
@@ -10,29 +10,35 @@ class APIController
     $this->apiManager = new APIManager();
   }
 
-  public function getHotels(){
+  public function getHotels()
+  {
     $hotels = $this->apiManager->getDBHotels();
     Model::sendJSON($hotels);
   }
-  public function getSuites(){
+  public function getSuites()
+  {
     $suites = $this->apiManager->getDBSuites();
     Model::sendJSON($suites);
   }
-  public function getContact(){
+  public function getContact()
+  {
     $contact = $this->apiManager->getDBContact();
     Model::sendJSON($contact);
   }
-  public function getServices(){
+  public function getServices()
+  {
     $services = $this->apiManager->getDBServices();
     Model::sendJSON($services);
   }
-  
-  public function getSelectedHotel($hotelId){
+
+  public function getSelectedHotel($hotelId)
+  {
     $selected = $this->apiManager->getDBSelected($hotelId);
     Model::sendJSON($selected);
   }
 
-  public function sendMail(){
+  public function sendMail()
+  {
     header("Access-Control-Allow-Origin: *");
     header("Access-Control-Allow-Headers: Accept, Content-type, Content-Length, Accept-Encoding");
     header("Access-Control-Allow-Method: POST, GET, OPTIONS, PUT, DELETE");
@@ -49,10 +55,10 @@ class APIController
 
     // traitement des infos récupérées
     $to = "loic.hernandez@sfr.fr";
-    $sujet    = "Message de ".$prenom." ".$nom;
+    $sujet    = "Message de " . $prenom . " " . $nom;
     $subject    = $objet;
-    $content  = "Message : ".$message;
-    $header  = "From : ".$email;
+    $content  = "Message : " . $message;
+    $header  = "From : " . $email;
     mail($to, $sujet, $content, $subject, $header);
 
     $messageRetour = [

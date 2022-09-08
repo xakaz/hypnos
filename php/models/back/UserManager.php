@@ -6,7 +6,7 @@ require_once 'models/Model.php';
 
 class UserManager extends Model
 {
-   public function setDBUser($prenom, $nom, $email)
+   public function setDBUser(string $prenom, string $nom, string $email): void
    {
       $req = "INSERT INTO user (user_prenom, user_nom, user_mail)
                 VALUES (:prenom, :nom, :email)";
@@ -21,7 +21,7 @@ class UserManager extends Model
       $stmt->closeCursor();
    }
 
-   public function getDBUser($email)
+   public function getDBUser(string $email): array|false
    {
       $req = "SELECT * FROM user where user_mail = :email";
       $stmt = $this->getBdd()->prepare($req);
@@ -31,8 +31,8 @@ class UserManager extends Model
       $stmt->closeCursor();
       return $user;
    }
-   
-   public function getDBUsers()
+
+   public function getDBUsers(): array|false
    {
       $req = "SELECT * FROM user";
       $stmt = $this->getBdd()->prepare($req);
@@ -42,7 +42,7 @@ class UserManager extends Model
       return $users;
    }
 
-   public function modifyDBUser($id, $prenom, $nom, $email, $password)
+   public function modifyDBUser(int $id, string $prenom, string $nom, string $email, string $password): void
    {
       $req = "UPDATE user SET 
             user_nom = :nom, 
@@ -60,7 +60,7 @@ class UserManager extends Model
       $stmt->closeCursor();
    }
 
-   public function deleteDBUser($id)
+   public function deleteDBUser(int $id): void
    {
       $req = "DELETE FROM user where user_id = :id";
       $stmt = $this->getBdd()->prepare($req);

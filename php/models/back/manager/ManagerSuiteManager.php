@@ -11,10 +11,10 @@ class ManagerSuite extends Model
     $stmt->execute();
     $manager = $stmt->fetch(PDO::FETCH_ASSOC);
     $stmt->closeCursor();
-    return $manager['password'] ?? null ;
+    return $manager['password'] ?? null;
   }
 
-  public function isConnexionValid($login, $password) : bool
+  public function isConnexionValid($login, $password): bool
   {
     if (!$this->getPasswordUser($login)) {
       $passwordBD = $this->getPasswordUser($login);

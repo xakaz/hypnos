@@ -1,15 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import { NavLink } from 'react-router-dom'
 import axios from 'axios'
 import { v4 as uuid_v4 } from "uuid"
 import { useNavigate } from 'react-router-dom'
-import { HotelContext } from '../../context/HotelContext'
 
 
 export default function Hotels() {
 
-
-  const { setCurrentHotel, currentHotel } = useContext(HotelContext);
 
   const [hotels, setHotels] = useState();
 

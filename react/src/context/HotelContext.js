@@ -1,5 +1,4 @@
-import React, { useState, createContext } from "react";
-import { useEffect } from "react";
+import React, { useState, createContext } from "react";;
 
 export const HotelContext = createContext()
 export function HotelContextProvider(props) {

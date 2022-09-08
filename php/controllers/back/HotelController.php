@@ -13,8 +13,9 @@ class HotelController
     $this->hotelManager = new HotelManager();
   }
 
-  public function formHotel(){
-    if(Securite::verifAccessSession()){
+  public function formHotel()
+  {
+    if (Securite::verifAccessSession()) {
       require_once 'views/creationHotel.php';
     } else {
       throw new Exception("Vous n'avez pas le droit d'être là");
@@ -25,45 +26,44 @@ class HotelController
   public function setHotel()
   {
     if (Securite::verifAccessSession()) {
-        $nom = Securite::secureHTML($_POST['nom']);
-        $adresse = Securite::secureHTML($_POST['adresse']);
-        $cp = Securite::secureHTML($_POST['cp']);
-        $ville = Securite::secureHTML($_POST['ville']);
-        $telephone = Securite::secureHTML($_POST['telephone']);
-        $description = Securite::secureHTML($_POST['description']);
-        $image = Securite::secureHTML($_POST['image']);
-        $this->hotelManager->setDBHotel($nom, $adresse, $cp, $ville, $telephone, $description, $image);
-        $_SESSION['alert'] = [
-          'message' => "L'établissement ".$nom." a été créé.",
-          'type' => "alert-success"
-        ];
-        header('Location: ' . URL . 'back/gestionHotel');
-      } else {
-        throw new Exception("L'établissement n'a pas pu être créé.");
-      }
-    
+      $nom = Securite::secureHTML($_POST['nom']);
+      $adresse = Securite::secureHTML($_POST['adresse']);
+      $cp = Securite::secureHTML($_POST['cp']);
+      $ville = Securite::secureHTML($_POST['ville']);
+      $telephone = Securite::secureHTML($_POST['telephone']);
+      $description = Securite::secureHTML($_POST['description']);
+      $image = Securite::secureHTML($_POST['image']);
+      $this->hotelManager->setDBHotel($nom, $adresse, $cp, $ville, $telephone, $description, $image);
+      $_SESSION['alert'] = [
+        'message' => "L'établissement " . $nom . " a été créé.",
+        'type' => "alert-success"
+      ];
+      header('Location: ' . URL . 'back/gestionHotel');
+    } else {
+      throw new Exception("L'établissement n'a pas pu être créé.");
+    }
   }
 
   public function modifyHotel()
   {
-      if (Securite::verifAccessSession()) {
-        $id = (int)Securite::secureHTML($_POST['id']);
-        $nom = Securite::secureHTML($_POST['nom']);
-        $adresse = Securite::secureHTML($_POST['adresse']);
-        $cp = Securite::secureHTML($_POST['cp']);
-        $ville = Securite::secureHTML($_POST['ville']);
-        $telephone = Securite::secureHTML($_POST['telephone']);
-        $description = Securite::secureHTML($_POST['description']);
-        $image = Securite::secureHTML($_POST['image']);
-        $this->hotelManager->modifyDBhotel($id, $nom, $adresse, $cp, $ville, $telephone, $description, $image);
-        $_SESSION['alert'] = [
-          'message' => "L'établissement a été modifié",
-          'type' => "alert-success"
-        ];
-        header('Location: ' . URL . 'back/gestionHotel');
-      } else {
-        throw new Exception("L'établissement n'a pas pu être modifié.");
-      }
+    if (Securite::verifAccessSession()) {
+      $id = (int)Securite::secureHTML($_POST['id']);
+      $nom = Securite::secureHTML($_POST['nom']);
+      $adresse = Securite::secureHTML($_POST['adresse']);
+      $cp = Securite::secureHTML($_POST['cp']);
+      $ville = Securite::secureHTML($_POST['ville']);
+      $telephone = Securite::secureHTML($_POST['telephone']);
+      $description = Securite::secureHTML($_POST['description']);
+      $image = Securite::secureHTML($_POST['image']);
+      $this->hotelManager->modifyDBhotel($id, $nom, $adresse, $cp, $ville, $telephone, $description, $image);
+      $_SESSION['alert'] = [
+        'message' => "L'établissement a été modifié",
+        'type' => "alert-success"
+      ];
+      header('Location: ' . URL . 'back/gestionHotel');
+    } else {
+      throw new Exception("L'établissement n'a pas pu être modifié.");
+    }
   }
 
   public function deleteHotel()

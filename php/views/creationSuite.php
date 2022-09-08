@@ -11,7 +11,7 @@
   </div>
   <div class="form-group my-4">
     <label class="mb-2" for="suite_description">Description</label>
-    <textarea class="form-control"  name="suite_description"></textarea>
+    <textarea class="form-control" name="suite_description"></textarea>
   </div>
   <div class="form-group my-4">
     <label class="mb-2" for="suite_image">Nom de l'image <i>(ex : 'image.jpg')</i></label>
@@ -21,7 +21,7 @@
     <label class="mb-2" for="suite_prix">Prix par nuit</label>
     <input type="text" class="form-control" id="suite_prix" name="suite_prix">
   </div>
-  
+
   <div class="form-group my-4">
     <label class="mb-2" for="suite_link" class="suite_link">Lien Booking</label>
     <textarea class="form-control" id="suite_link" name="suite_link"></textarea>

@@ -12,7 +12,7 @@
     </div>
   </div>
   <div class="col-12 col-lg-6">
-  <h2 class="mt-5">Gestion des gérants</h2>
+    <h2 class="mt-5">Gestion des gérants</h2>
     <hr>
     <div class="my-3">
       <a href="<?= URL ?>back/gestionManager">Modifier ou Supprimer un gérant</a>

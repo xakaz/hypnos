@@ -70,26 +70,29 @@ export default function Reservation() {
 
     const fetchHotels = async () => {
       await axios.get(process.env.REACT_APP_AXIOS_URL + "/front/hotels")
-      .then(response => { setHotels(response.data); })
-      .catch(err => { console.error(err) })
+        .then(response => { setHotels(response.data); })
+        .catch(err => { console.error(err) })
     }
     fetchHotels();
 
     const fetchSuites = async () => {
       await axios.get(process.env.REACT_APP_AXIOS_URL + "/front/suites")
-      .then(response => { setSuites(response.data) })
-      .catch(err => { console.error(err) })
+        .then(response => { setSuites(response.data) })
+        .catch(err => { console.error(err) })
     }
     fetchSuites();
 
     const fetchUsers = async () => {
       await axios.get(process.env.REACT_APP_AXIOS_URL + "/front/user")
-      .then(response => {
-        response.data.map(userDatas => {
-          return currentUser.email === userDatas.user_mail && setUserId(userDatas.user_id)
-        });
-      })
-      .catch(err => { console.error(err) })
+        .then(response => {
+          response.data.map(userDatas => {
+            if (currentUser) {
+              return currentUser.email === userDatas.user_mail && setUserId(userDatas.user_id)
+            }
+            return null;
+          });
+        })
+        .catch(err => { console.error(err) })
     }
     fetchUsers();
   }, [])

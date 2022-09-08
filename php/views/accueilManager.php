@@ -12,7 +12,7 @@
       <a href="<?= URL ?>back/ajoutSuiteView">Ajouter une suite</a>
     </div>
   </div>
- 
+
 </div>
 
 

@@ -15,14 +15,14 @@ class UserController extends Model
 
   public function getUser($email)
   {
-        $user = $this->userManager->getDBUser($email);
-        Model::sendJSON($user);
+    $user = $this->userManager->getDBUser($email);
+    Model::sendJSON($user);
   }
-  
+
   public function getUsers()
   {
-        $users = $this->userManager->getDBUsers();
-        Model::sendJSON($users);
+    $users = $this->userManager->getDBUsers();
+    Model::sendJSON($users);
   }
 
   public function getAdmin($id)
@@ -51,10 +51,9 @@ class UserController extends Model
         $prenom = Securite::secureHTML($data->prenom);
         $nom = Securite::secureHTML($data->nom);
         $email = Securite::secureHTML($data->email);
-        
+
         $this->userManager->setDBUser($prenom, $nom, $email);
-      } 
-      else {
+      } else {
         throw new Exception("La création de profil a échoué");
       }
     } catch (Exception $e) {

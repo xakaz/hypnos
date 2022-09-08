@@ -9,7 +9,7 @@ export default function HotelTemplate() {
 
   const [suites, setSuites] = useState()
   const [hotels, setHotels] = useState();
-  const { setCurrentHotel, setCurrentSuite, currentHotel } = useContext(HotelContext);
+  const { setCurrentHotel, setCurrentSuite } = useContext(HotelContext);
 
   useEffect(() => {
     const fetchHotels = async () => {

@@ -14,7 +14,7 @@ class AdminManager extends Model
     return $admin['password'] ?? null;
   }
 
-  public function isConnexionValid($login, $password) : bool
+  public function isConnexionValid($login, $password): bool
   {
     if ($this->getPasswordUser($login) === null) {
       return false;

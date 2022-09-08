@@ -5,10 +5,10 @@ abstract class Model
 {
   private static $pdo;
 
-  protected function getBdd()
+  protected function getBdd(): mixed
   {
     try {
-      if( $_SERVER['HTTP_HOST'] === "localhost"){
+      if ($_SERVER['HTTP_HOST'] === "localhost") {
         self::$pdo = new PDO(PDO_LOCALHOST_CONNEXION, USER_LOCALHOST, PASSWORD_LOCALHOST, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
       } else {
         self::$pdo = new PDO(PDO_SERVER_CONNEXION, USER_SERVER, PASSWORD_SERVER, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
@@ -21,7 +21,7 @@ abstract class Model
     }
   }
 
-  public static function sendJSON($info)
+  public static function sendJSON(array $info): void
   {
     header("Access-Control-Allow-Origin: *");
     header("Content-Type: application/json");

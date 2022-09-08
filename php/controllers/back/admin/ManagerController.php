@@ -9,21 +9,22 @@ class ManagerController
 
   public function __construct()
   {
-    $this-> managerManager = new ManagerManager();
+    $this->managerManager = new ManagerManager();
   }
 
 
-  public function addManager(){
+  public function addManager()
+  {
 
-    if(Securite::verifAccessSession()){
+    if (Securite::verifAccessSession()) {
       $prenom = Securite::secureHTML($_POST['prenom']);
       $nom = Securite::secureHTML($_POST['nom']);
       $email = Securite::secureHTML($_POST['email']);
       $pass = Securite::secureHTML($_POST['password']);
-      $password = password_hash($pass,PASSWORD_BCRYPT);
-      $this->managerManager->createDBManager($prenom,$nom, $email, $password);
+      $password = password_hash($pass, PASSWORD_BCRYPT);
+      $this->managerManager->createDBManager($prenom, $nom, $email, $password);
       $_SESSION['alert'] = [
-        'message' => $prenom." ".$nom." a été ajouté",
+        'message' => $prenom . " " . $nom . " a été ajouté",
         'type' => "alert-success"
       ];
       header('Location: ' . URL . 'back/gestionManager');
@@ -33,23 +34,23 @@ class ManagerController
   }
   public function modifyManager()
   {
-      if (Securite::verifAccessSession()) {
-        $id = Securite::secureHTML($_POST['id']);
-        $nom = Securite::secureHTML($_POST['nom']);
-        $prenom = Securite::secureHTML($_POST['prenom']);
-        $email = Securite::secureHTML($_POST['email']);
-        $managerHotel = Securite::secureHTML($_POST['manager_hotel']);
-        $pass = Securite::secureHTML($_POST['password']);
-        $password = password_hash($pass,PASSWORD_BCRYPT);
-        $this->managerManager->modifyDBManager($id,$prenom, $nom,$email,$password, $managerHotel);
-        $_SESSION['alert'] = [
-          'message' => $prenom." ".$nom." a été modifié",
-          'type' => "alert-success"
-        ];
-        header('Location: ' . URL . 'back/gestionManager');
-      } else {
-        throw new Exception("Vous n'avez pas le droit d'être là");
-      }
+    if (Securite::verifAccessSession()) {
+      $id = Securite::secureHTML($_POST['id']);
+      $nom = Securite::secureHTML($_POST['nom']);
+      $prenom = Securite::secureHTML($_POST['prenom']);
+      $email = Securite::secureHTML($_POST['email']);
+      $managerHotel = Securite::secureHTML($_POST['manager_hotel']);
+      $pass = Securite::secureHTML($_POST['password']);
+      $password = password_hash($pass, PASSWORD_BCRYPT);
+      $this->managerManager->modifyDBManager($id, $prenom, $nom, $email, $password, $managerHotel);
+      $_SESSION['alert'] = [
+        'message' => $prenom . " " . $nom . " a été modifié",
+        'type' => "alert-success"
+      ];
+      header('Location: ' . URL . 'back/gestionManager');
+    } else {
+      throw new Exception("Vous n'avez pas le droit d'être là");
+    }
   }
 
   public function deleteManager()
@@ -66,16 +67,3 @@ class ManagerController
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

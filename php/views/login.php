@@ -1,4 +1,4 @@
-<?php ob_start() ; ?>
+<?php ob_start(); ?>
 
 <form method="POST" action="<?= URL ?>/back/adminConnexion">
   <div class="form-group">

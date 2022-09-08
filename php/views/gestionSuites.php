@@ -50,7 +50,7 @@
               <td><input type="text" name="suite_image" value="<?= $suite['suite_image'] ?>" class="form-control"></td>
               <td><input type="text" name="suite_prix" value="<?= $suite['suite_prix'] ?>" class="form-control"></td>
               <td><input type="text" name="suite_link" value="<?= $suite['suite_link'] ?>" class="form-control"></td>
-             
+
               <td colspan="2">
                 <input type="hidden" name="suite_id" value="<?= $suite['suite_id'] ?>">
                 <button class="btn btn-primary" type="submit">Valider</button>

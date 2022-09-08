@@ -22,14 +22,14 @@ class ManagerSuiteController
     if (Securite::verifAccessSessionManager()) {
       require_once("views/accueilManager.php");
     } else {
-      header('location:' . URL );
+      header('location:' . URL);
     }
   }
 
   public function deconnexion()
   {
     session_destroy();
-    header('location:' . URL );
+    header('location:' . URL);
   }
 
   public function gestionSuite()

@@ -3,7 +3,7 @@ require_once 'models/Model.php';
 
 class ConnexionManager extends Model
 {
-  public function getDBEmailAddresses()
+  public function getDBEmailAddresses(): array|false
   {
     $req = 'SELECT user_mail FROM user';
     $stmt = $this->getBdd()->prepare($req);
@@ -13,7 +13,7 @@ class ConnexionManager extends Model
     return $mails;
   }
 
-  private function getpasswordUser($email)
+  private function getpasswordUser(string $email): string|null
   {
     $req = 'SELECT * FROM user WHERE user_mail = :email';
     $stmt = $this->getBdd()->prepare($req);
@@ -22,16 +22,15 @@ class ConnexionManager extends Model
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
     $stmt->closeCursor();
     return $user['user_password'];
-    
   }
 
-  public function verifConnexion($email, $password)
+  public function verifConnexion(string $email, string $password): bool
   {
     $passwordBD = $this->getPasswordUser($email);
     return password_verify($password, $passwordBD);
   }
 
-  public function getRoleUser($email)
+  public function getRoleUser(string $email): string|null
   {
     $req = 'SELECT * FROM user WHERE user_mail = :email';
     $stmt = $this->getBdd()->prepare($req);
@@ -42,34 +41,37 @@ class ConnexionManager extends Model
     return $user['user_role'];
   }
 
-  public function getAdmin($email){
-    $req ="SELECT user_id, user_prenom, user_nom, user_mail, user_role 
+  public function getAdmin(string $email)
+  {
+    $req = "SELECT user_id, user_prenom, user_nom, user_mail, user_role 
             FROM user where user_mail = :email";
-    $stmt= $this->getBdd()->prepare($req);
+    $stmt = $this->getBdd()->prepare($req);
     $stmt->bindValue(':email', $email, PDO::PARAM_STR);
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
     $stmt->closeCursor();
     Model::sendJSON($user);
-   }
-   public function getManager($email){
-    $req ="SELECT user_id, user_prenom, user_nom, user_mail, user_role 
+  }
+  public function getManager(string $email)
+  {
+    $req = "SELECT user_id, user_prenom, user_nom, user_mail, user_role 
             FROM user where user_mail = :email";
-    $stmt= $this->getBdd()->prepare($req);
+    $stmt = $this->getBdd()->prepare($req);
     $stmt->bindValue(':email', $email, PDO::PARAM_STR);
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
     $stmt->closeCursor();
     Model::sendJSON($user);
-   }
-   public function getUser($email){
-    $req ="SELECT user_id, user_prenom, user_nom, user_mail, user_role 
+  }
+  public function getUser($email)
+  {
+    $req = "SELECT user_id, user_prenom, user_nom, user_mail, user_role 
             FROM user where user_mail = :email";
-    $stmt= $this->getBdd()->prepare($req);
+    $stmt = $this->getBdd()->prepare($req);
     $stmt->bindValue(':email', $email, PDO::PARAM_STR);
     $stmt->execute();
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
     $stmt->closeCursor();
     Model::sendJSON($user);
-   }
+  }
 }

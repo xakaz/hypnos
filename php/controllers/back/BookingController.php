@@ -21,11 +21,13 @@ class BookingController
 
     $data = json_decode(file_get_contents('php://input'));
 
-    if (isset($data->user) 
-    && isset($data->suite) 
-    && isset($data->start) 
-    && isset($data->end) 
-    && isset($data->date)) {
+    if (
+      isset($data->user)
+      && isset($data->suite)
+      && isset($data->start)
+      && isset($data->end)
+      && isset($data->date)
+    ) {
 
       $user = $data->user;
       $suite = $data->suite;
@@ -36,12 +38,13 @@ class BookingController
       var_dump($data);
     }
   }
-  
-  public function getBooking(){
+
+  public function getBooking()
+  {
     $booking = $this->bookingManager->getDBBooking();
     Model::sendJSON($booking);
   }
-  
+
   public function modifyBooking()
   {
 
