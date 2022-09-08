@@ -14,7 +14,7 @@ class ManagerSuite extends Model
     return $manager['password'] ?? null;
   }
 
-  public function isConnexionValid($login, $password): bool
+  public function isConnexionValid($login, $password)
   {
     if (!$this->getPasswordUser($login)) {
       $passwordBD = $this->getPasswordUser($login);

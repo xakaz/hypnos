@@ -20,11 +20,6 @@ class APIController
     $suites = $this->apiManager->getDBSuites();
     Model::sendJSON($suites);
   }
-  public function getContact()
-  {
-    $contact = $this->apiManager->getDBContact();
-    Model::sendJSON($contact);
-  }
   public function getServices()
   {
     $services = $this->apiManager->getDBServices();

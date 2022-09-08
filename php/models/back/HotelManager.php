@@ -4,7 +4,7 @@ require_once 'models/Model.php';
 class HotelManager extends Model
 {
 
-  public function setDBHotel(string $nom, string $adresse, string $cp, string $ville, string $telephone, string $description, string $image): void
+  public function setDBHotel($nom,  $adresse,  $cp,  $ville,  $telephone,  $description,  $image)
   {
     $req = " INSERT INTO hotels 
     (hotel_name, hotel_adresse, hotel_cp, hotel_ville, hotel_telephone, hotel_description, hotel_image ) 
@@ -21,7 +21,7 @@ class HotelManager extends Model
     $stmt->closeCursor();
   }
 
-  public function modifyDBHotel(int $id, string $nom, string $adresse, string $cp, string $ville, string $telephone, string $description, string $image): void
+  public function modifyDBHotel($id,  $nom,  $adresse,  $cp,  $ville,  $telephone,  $description,  $image)
   {
     $req = " UPDATE hotels SET 
       hotel_name = :nom, 
@@ -48,7 +48,7 @@ class HotelManager extends Model
     $stmt->closeCursor();
   }
 
-  public function deleteDBHotel(int $id): void
+  public function deleteDBHotel($id)
   {
     $req = "DELETE FROM hotels where hotel_id = :id";
     $stmt = $this->getBdd()->prepare($req);

@@ -36,10 +36,6 @@ try {
                         $apiController = new APIController();
                         $apiController->getSuites();
                         break;
-                    case "contact":
-                        $apiController = new APIController();
-                        $apiController->getContact();
-                        break;
                     case "services":
                         $apiController = new APIController();
                         $apiController->getServices();

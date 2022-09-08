@@ -3,7 +3,7 @@ require_once 'models/Model.php';
 
 class ConnexionManager extends Model
 {
-  public function getDBEmailAddresses(): array|false
+  public function getDBEmailAddresses()
   {
     $req = 'SELECT user_mail FROM user';
     $stmt = $this->getBdd()->prepare($req);
@@ -13,7 +13,7 @@ class ConnexionManager extends Model
     return $mails;
   }
 
-  private function getpasswordUser(string $email): string|null
+  private function getpasswordUser( $email)
   {
     $req = 'SELECT * FROM user WHERE user_mail = :email';
     $stmt = $this->getBdd()->prepare($req);
@@ -24,13 +24,13 @@ class ConnexionManager extends Model
     return $user['user_password'];
   }
 
-  public function verifConnexion(string $email, string $password): bool
+  public function verifConnexion( $email,  $password)
   {
     $passwordBD = $this->getPasswordUser($email);
     return password_verify($password, $passwordBD);
   }
 
-  public function getRoleUser(string $email): string|null
+  public function getRoleUser( $email)
   {
     $req = 'SELECT * FROM user WHERE user_mail = :email';
     $stmt = $this->getBdd()->prepare($req);
@@ -41,7 +41,7 @@ class ConnexionManager extends Model
     return $user['user_role'];
   }
 
-  public function getAdmin(string $email)
+  public function getAdmin( $email)
   {
     $req = "SELECT user_id, user_prenom, user_nom, user_mail, user_role 
             FROM user where user_mail = :email";
@@ -52,7 +52,7 @@ class ConnexionManager extends Model
     $stmt->closeCursor();
     Model::sendJSON($user);
   }
-  public function getManager(string $email)
+  public function getManager( $email)
   {
     $req = "SELECT user_id, user_prenom, user_nom, user_mail, user_role 
             FROM user where user_mail = :email";

@@ -5,7 +5,7 @@ abstract class Model
 {
   private static $pdo;
 
-  protected function getBdd(): mixed
+  protected function getBdd()
   {
     try {
       if ($_SERVER['HTTP_HOST'] === "localhost") {
@@ -21,8 +21,7 @@ abstract class Model
     }
   }
 
-  public static function sendJSON(array $info): void
-  {
+  public static function sendJSON($info){
     header("Access-Control-Allow-Origin: *");
     header("Content-Type: application/json");
     echo json_encode($info);

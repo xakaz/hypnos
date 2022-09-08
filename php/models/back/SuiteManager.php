@@ -5,7 +5,7 @@ require_once 'models/Model.php';
 class SuiteManager extends Model
 {
 
-  public function addDBSuite(string $name, string $description, string $image, int $hotel, int $prix, string $link)
+  public function addDBSuite ($name, $description, $image, $hotel, $prix, $link)
   {
     $req = "INSERT INTO suites ( 
       suite_name, 
@@ -32,7 +32,7 @@ class SuiteManager extends Model
     $stmt->closeCursor();
   }
 
-  public function modifyDBSuite(int $id, string $name, string $description, string $image, int $prix, string $link): void
+  public function modifyDBSuite( $id, $name, $description, $image, $prix, $link)
   {
     $req = "UPDATE suites SET 
     suite_name = :name, 
@@ -52,7 +52,7 @@ class SuiteManager extends Model
     $stmt->closeCursor();
   }
 
-  public function deleteDBSuite(int $id): void
+  public function deleteDBSuite( $id)
   {
     $req = "DELETE FROM suites where suite_id = :id";
     $stmt = $this->getBdd()->prepare($req);

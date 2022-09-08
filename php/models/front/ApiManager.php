@@ -3,7 +3,7 @@ require_once 'models/Model.php';
 
 class APIManager extends Model
 {
-  public function getDBHotels(): array|false
+  public function getDBHotels()
   {
     $req = "SELECT * FROM hotels";
     $stmt = $this->getBdd()->prepare($req);
@@ -13,7 +13,7 @@ class APIManager extends Model
     return $hotels;
   }
 
-  public function getDBSuites(): array|false
+  public function getDBSuites()
   {
     $req = "SELECT * FROM suites";
     $stmt = $this->getBdd()->prepare($req);
@@ -22,18 +22,7 @@ class APIManager extends Model
     $stmt->closeCursor();
     return $suites;
   }
-
-  public function getDBContact(): array|false
-  {
-    $req = "SELECT * FROM contact";
-    $stmt = $this->getBdd()->prepare($req);
-    $stmt->execute();
-    $contact = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    $stmt->closeCursor();
-    return $contact;
-  }
-
-  public function getDBServices(): array|false
+  public function getDBServices()
   {
     $req = "SELECT * FROM service";
     $stmt = $this->getBdd()->prepare($req);
@@ -43,7 +32,7 @@ class APIManager extends Model
     return $services;
   }
 
-  public function getDBSelected(int $hotel_id): array|false
+  public function getDBSelected($hotel_id)
   {
     $req = "SELECT * FROM hotels 
           WHERE hotel_id = :hotel_id";
@@ -55,7 +44,7 @@ class APIManager extends Model
     return $selectedHotel;
   }
 
-  public function getDBManagers(): array|false
+  public function getDBManagers()
   {
     $req = "SELECT * FROM manager";
     $stmt = $this->getBdd()->prepare($req);
@@ -65,7 +54,7 @@ class APIManager extends Model
     return $managers;
   }
 
-  public function getDBManager(string $email): array|false
+  public function getDBManager($email)
   {
     $req = "SELECT * FROM manager WHERE email = :email";
     $stmt = $this->getBdd()->prepare($req);

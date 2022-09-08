@@ -20,7 +20,7 @@ export default function Inscription() {
 
   const handleForm = async (e) => {
     e.preventDefault()
-    if ((inputs.current[1].value.length || inputs.current[2].value.length) < 6) {
+    if (inputs.current[1].value.length < 6) {
       setValidation("6 caractères minimum")
       return
     }
@@ -44,7 +44,6 @@ export default function Inscription() {
       await inscription(
         inputs.current[0].value, inputs.current[1].value
       )
-      
       formRef.current.reset()
       setValidation("")
       navigate("/mon-compte")

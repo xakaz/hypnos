@@ -27,12 +27,10 @@ export default function CompteCreation() {
       prenom: inputs.current[1].value,
       nom: inputs.current[2].value,
     })
-      .then(response => {
-        console.info(response); 
-      })
       .catch(err => {
         console.error(err)
       })
+
     formRef.current.reset()
     setValidation("")
     window.location.reload()

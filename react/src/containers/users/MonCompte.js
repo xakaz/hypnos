@@ -52,7 +52,6 @@ export default function MonCompte() {
         .then(response => {
           response.data.map(mailUser => {
             return (
-              currentUser &&
               mailUser.user_mail === currentUser.email &&
               setEmail(mailUser.user_mail)
             )
@@ -113,7 +112,7 @@ export default function MonCompte() {
                           booking ?
                             booking.map(book => {
                               return (
-                                user.user_id === book.booking_user && today < book.booking_start &&
+                                user.user_id === book.booking_user && today <= book.booking_start &&
                                 <div key={uuid_v4()} className="mb-5">
                                   {
                                     suites && suites.map(suite => {
@@ -152,7 +151,7 @@ export default function MonCompte() {
                                                         <p className='mb-1'>Effectuée le : {new Date(book.booking_date * 1000).toLocaleDateString()}</p>
                                                         {console.log(book.booking_start)}
                                                         <div>
-                                                          A régler : {suite.suite_prix * ((book.booking_end - book.booking_start) / 86400)} € - {((book.booking_end - book.booking_start) / 86400)} nuits
+                                                          A régler : {suite.suite_prix * ((book.booking_end - book.booking_start) / 86400)} € pour {((book.booking_end - book.booking_start) / 86400)} nuits
                                                         </div>
                                                       </div>
                                                       <div className="col-6 d-flex justify-content-end align-items-center bbg-warning">

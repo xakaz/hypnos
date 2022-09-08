@@ -7,15 +7,16 @@ import { v4 as uuid_v4 } from "uuid"
 class Restaurants extends Component {
 
   state = {
-    restaurants: null
+    restaurants: []
   }
 
   componentDidMount = () => {
     document.title = "Restaurants";
     const fetchRestaurants = async () => {
-      await axios.get(process.env.REACT_APP_AXIOS_URL+"/server/front/services")
+      await 
+      axios.get(process.env.REACT_APP_AXIOS_URL+"/front/services")
       .then(response => {
-        console.log(response.data)
+
         let restaurantArr = []
         for (let i = 0; i < response.data.length; i++) {
           if (response.data[i].service_role === "2") {

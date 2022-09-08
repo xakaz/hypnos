@@ -17,7 +17,8 @@
   <?php } ?>
   <?php if (isset($_SESSION['access']) && $_SESSION['access'] === "empty") { ?>
     <p class="text-center text-danger">Veuillez renseigner vos identifiants</p>
-  <?php } ?>
+  <?php } 
+  ?>
 
 </form>
 

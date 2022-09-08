@@ -52,7 +52,7 @@ const toggleModals = modal => {
 
 
  return (
-   <UserContext.Provider value ={{modalState, toggleModals, inscription, connexion, currentUser}}>
+   <UserContext.Provider value ={{modalState, toggleModals, inscription, connexion, currentUser, setCurrentUser}}>
      {!loadingData && props.children}
    </UserContext.Provider>
  ) 

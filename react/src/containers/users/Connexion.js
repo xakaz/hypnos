@@ -17,10 +17,10 @@ export default function Connexion() {
     }
   }
 
-  const handleForm = (e) => {
+  const handleForm = async (e) => {
     e.preventDefault()
     try {
-      connexion(inputs.current[0].value, inputs.current[1].value)
+      await connexion(inputs.current[0].value, inputs.current[1].value)
       formRef.current.reset()
       setValidation("")
       navigate("/mon-compte")
@@ -80,7 +80,7 @@ export default function Connexion() {
 
                     <div className='row'>
                       <div className="col-6">
-                        <button className="btn btn-primary ">Se connecter</button>
+                        <button className="btn btn-primary">Se connecter</button>
                       </div>
                       <div className="col-6 d-flex align-items-center">
                         <button className="btn text-primary" onClick={() => toggleModals('inscription')} >S'inscrire ?</button>
