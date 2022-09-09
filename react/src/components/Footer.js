@@ -88,6 +88,7 @@ export default function Footer() {
                     <li key={uuid_v4()} className="nav-item mb-2">
                       <a 
                       href={"/hotel/" + hotel.hotel_ville.toLowerCase().replace(" ", "")} 
+                      onClick={() =>localStorage.setItem('ville', hotel.hotel_ville.toLowerCase().replace(" ", ""))}
                       className="nav-link p-0 text-muted"
                       >{hotel.hotel_ville}</a>
                     </li>

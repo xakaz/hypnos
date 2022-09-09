@@ -1,7 +1,7 @@
 import React from "react";
-import BedRoom from '../assets/componentsAssets/carousel/bedroom.jpg'
-import BedRoom2 from '../assets/componentsAssets/carousel/bedroom2.jpg'
-import Breakfast from '../assets/componentsAssets/carousel/breakfast.jpg'
+import BedRoom from '../assets/componentsAssets/carousel/bedroom.webp'
+import BedRoom2 from '../assets/componentsAssets/carousel/bedroom2.webp'
+import Breakfast from '../assets/componentsAssets/carousel/breakfast.webp'
 
 const component = () => (
   <div className="container-fluid">
@@ -11,15 +11,15 @@ const component = () => (
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
       </div>
-      <div className="carousel-inner">
-        <div className="carousel-item active ">
-          <img src={BedRoom} className="rounded-bottom d-block w-100 img-fluid" style={{maxHeight:"700px "}} alt="chambre"/>
+      <div className="carousel-inner ">
+        <div className="carousel-item active  ">
+          <img src={BedRoom} className="rounded-bottom d-block w-75 img-fluid m-auto"  alt="chambre"/>
         </div>
-        <div className="carousel-item">
-          <img src={BedRoom2} className="rounded-bottom d-block w-100 img-fluid" style={{maxHeight:"700px "}} alt="chambre"/>
+        <div className="carousel-item ">
+          <img src={BedRoom2} className="rounded-bottom d-block w-75 img-fluid m-auto"  alt="chambre"/>
         </div>
-        <div className="carousel-item">
-          <img src={Breakfast} className="rounded-bottom d-block w-100 img-fluid" style={{maxHeight:"700px "}} alt="petit déjeuner"/>
+        <div className="carousel-item ">
+          <img src={Breakfast} className="rounded-bottom d-block w-75 img-fluid m-auto"  alt="petit déjeuner"/>
         </div>
       </div>
       <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">

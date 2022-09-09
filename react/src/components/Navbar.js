@@ -14,7 +14,6 @@ export default function Navbar() {
 
   const logOut = async () => {
     try {
-      localStorage.clear();
       await signOut(auth)
       window.location.reload();
       navigate("/")

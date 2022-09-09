@@ -16,10 +16,7 @@ class ManagerSuite extends Model
 
   public function isConnexionValid($login, $password)
   {
-    if (!$this->getPasswordUser($login)) {
       $passwordBD = $this->getPasswordUser($login);
       return password_verify($password, $passwordBD);
-    }
-    return false;
   }
 }

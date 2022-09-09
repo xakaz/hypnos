@@ -17,27 +17,20 @@ export default function Inscription() {
   }
   const formRef = useRef()
   const [validation, setValidation] = useState("")
+  const [passRules, setPassRules] = useState(true)
 
   const handleForm = async (e) => {
     e.preventDefault()
-    if (inputs.current[1].value.length < 6) {
-      setValidation("6 caractères minimum")
-      return
-    }
-    if(!inputs.current[1].value.match(/[0-9]/g)){
-      setValidation("1 chiffre minimum")
-      return
-    }
-    if(!inputs.current[1].value.match(/[A-Z]/g)){
-      setValidation("1 majuscule minimum")
-      return
-    }
-    if(!inputs.current[1].value.match(/\W+/g)){
-      setValidation("1 caractère spécial minimum")
-      return
-    }
     if (inputs.current[1].value !== inputs.current[2].value) {
       setValidation("Les mots de passes sont différents")
+    }
+    if(
+      inputs.current[1].value.length < 6 ||
+      !inputs.current[1].value.match(/[0-9]/g) ||
+      !inputs.current[1].value.match(/[A-Z]/g) ||
+      !inputs.current[1].value.match(/\W+/g)
+    ) {
+      setPassRules(false)
       return
     }
     try {
@@ -46,7 +39,7 @@ export default function Inscription() {
       )
       formRef.current.reset()
       setValidation("")
-      navigate("/mon-compte")
+      navigate("/compte-creation")
       toggleModals("close")
     } catch (error) {
       if (error.code === "auth/invalid-email") {
@@ -59,6 +52,7 @@ export default function Inscription() {
   }
 
   const closeModal = () => {
+    setPassRules(true)
     setValidation("")
     toggleModals("close")
   }
@@ -112,7 +106,16 @@ export default function Inscription() {
                         id="confirmPwd"
                         ref={addInputs}
                       />
-                      <p className="text-danger mt-1">{validation}</p>
+                      <p className={ passRules ? "text-danger mt-1 visually-hidden " : "text-danger mt-1" } >
+                        Le mot de passe doit contenir au moins :
+                        <ul>
+                          <li>6 caractères</li>
+                          <li>1 nombre</li>
+                          <li>1 majuscule</li>
+                          <li>1 caractère spécial</li>
+                        </ul>
+                      </p>
+                      <p>{validation}</p>
                     </div>
                     <div className='row'>
                       <div className="col-6">

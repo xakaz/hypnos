@@ -21,6 +21,7 @@ import HotelTemplate from './components/hotelTemplate'
 import Inscription from './containers/users/Inscription'
 import Connexion from './containers/users/Connexion'
 import MonCompte from "./containers/users/MonCompte";
+import CompteCreation from "./containers/users/compteCreation";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/reservation" element={<Reservation />} />
         <Route path="/mon-compte" element={<MonCompte />} />
+        <Route path="/compte-creation" element={<CompteCreation />} />
         <Route path="*" element={<h1 className="text-center text-white m-5 p-5">Erreur 404 - Page non trouvée</h1>} />
       </Routes>
       <Footer />

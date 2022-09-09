@@ -23,7 +23,7 @@ export default function Connexion() {
       await connexion(inputs.current[0].value, inputs.current[1].value)
       formRef.current.reset()
       setValidation("")
-      navigate("/mon-compte")
+      // navigate("/reservation")
       toggleModals("close")
     } catch {
       document.querySelector('form').reset();

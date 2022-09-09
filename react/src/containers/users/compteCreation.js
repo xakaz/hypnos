@@ -21,20 +21,26 @@ export default function CompteCreation() {
   const formRef = useRef()
 
   const handleForm = async (e) => {
+
     e.preventDefault()
-    await axios.post(process.env.REACT_APP_AXIOS_URL+"/back/inscription", {
-      email: inputs.current[0].value,
-      prenom: inputs.current[1].value,
-      nom: inputs.current[2].value,
-    })
+    if(inputs.current[1].value && inputs.current[2].value){
+      await axios.post(process.env.REACT_APP_AXIOS_URL+"/back/inscription", {
+        email: inputs.current[0].value,
+        prenom: inputs.current[1].value,
+        nom: inputs.current[2].value,
+      })
       .catch(err => {
         console.error(err)
       })
-
-    formRef.current.reset()
-    setValidation("")
-    window.location.reload()
-    navigate("/mon-compte")
+      
+      // formRef.current.reset()
+      // setValidation("")
+      // window.location.reload()
+      navigate("/mon-compte")
+    } else {
+      window.location.reload()
+      setValidation("Veuillez renseigner votre nom et votre prénom.")
+    }
   }
 
   return (

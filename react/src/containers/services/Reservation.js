@@ -100,25 +100,29 @@ export default function Reservation() {
   //////////////////////////////////////// REQUETES POST AXIOS
   const handleReservation = (e) => {
     e.preventDefault()
-
-    if (data !== "") {
-      if (startDate !== 0) {
-        if (endDate !== null) {
-          if (data.end !== data.start) {
-            axios.post(process.env.REACT_APP_AXIOS_URL + "/back/setBooking", data)
-              .then(navigate("/mon-compte"))
-              .catch(err => { (console.error(err)) })
-          }
-          else {
-            setValidation("La date de fin de séjour doit être différente de celle du début !")
+    if (currentUser) {
+      if (data !== "") {
+        if (startDate !== 0) {
+          if (endDate !== null) {
+            if (data.end !== data.start) {
+              axios.post(process.env.REACT_APP_AXIOS_URL + "/back/setBooking", data)
+                .then(alert(`Votre réservation du ${startDate ? startDate.toLocaleDateString() : ""} au ${endDate ? endDate.toLocaleDateString() : ""} est validée.\nNous vous attendons avec impatience !`))
+                .catch(err => { (console.error(err)) })
+            }
+            else {
+              setValidation("La date de fin de séjour doit être différente de celle du début !")
+              return
+            }
+          } else {
+            setValidation("Vous devez choisir une date de fin de séjour !")
+            return
           }
         } else {
-          setValidation("Vous devez choisir une date de fin de séjour !")
+          setValidation("Vous devez choisir une date de début de séjour !")
+          return
         }
-      } else {
-        setValidation("Vous devez choisir une date de début de séjour !")
       }
-    }
+    } 
   }
 
   const replaceText = (text) => {

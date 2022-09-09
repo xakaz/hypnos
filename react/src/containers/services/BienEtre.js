@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Content from '../../components/Content'
-import Wellness from '../../assets/containersAssets/bien-etre/spa.jpg'
 import axios from 'axios'
 import { v4 as uuid_v4 } from "uuid"
 
@@ -32,13 +31,7 @@ class BienEtre extends Component {
     return (
       <>
         <div className='text-white'>
-          <div className="d-flex justify-content-center">
-            <img src={Wellness}
-              alt="bien-être"
-              className="img-fluid"
-              width="1200px"
-            />
-          </div>
+          <h1 className='text-center my-5'>Nos services bien-être</h1>
           {
             this.state.bienEtre &&
             this.state.bienEtre.map(wellness => {

@@ -25,10 +25,12 @@ export default function Accueil() {
       })
   }, [])
 
+  console.dir(accueilCards);
+
   return (
     <>
       <div className="container">
-        <h1 className="text-center mb-3 text-white display-3">HYPNOS - Bienvenue chez vous</h1>
+        <h1 className="text-center my-5 text-white display-3">HYPNOS - Bienvenue chez vous</h1>
 
         {/** CAROUSEL */}
         <Carousel />
@@ -38,7 +40,7 @@ export default function Accueil() {
           {
             accueilCards && accueilCards.map(accueilCard => {
               return (
-                <Card image={require('../assets/containersAssets/accueil/' + accueilCard.service_image)}
+                <Card image={require('..//assets/containersAssets/accueil/' + accueilCard.service_image)}
                   title={accueilCard.service_titre}
                   description={accueilCard.service_description}
                   key={uuid_v4()} />

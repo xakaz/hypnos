@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Content from '../../components/Content'
-import Resto from '../../assets/containersAssets/restaurants/toulouseRestaurant.jpg'
 import axios from 'axios'
 import { v4 as uuid_v4 } from "uuid"
 
@@ -31,13 +30,7 @@ class Restaurants extends Component {
   render() {
     return (
       <div className='text-white'>
-        <div className="d-flex justify-content-center">
-          <img src={Resto}
-            alt="restaurants"
-            className="img-fluid"
-            width="1200px" />
-        </div>
-
+         <h1 className='text-center my-5'>Nos services de restauration</h1>
         {
           this.state.restaurants &&
           this.state.restaurants.map(restaurant => {
