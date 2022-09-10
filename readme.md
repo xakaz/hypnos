@@ -2,11 +2,10 @@
   
 Le site est la vitrine d'un groupe hotelier Hypnos.  
 Il permet à n'importe quel utilisateur connecté de réserver une suite pour une ou plusieurs nuits.  
-Les différents hôtels poosèdent plusieurs suites.  
-Une fois la suite réservée, l'utilisateur peut gérer sa suite dans son espace.  
-Les réservations y sont affichées dans 2 sections distinctes:  
+Les différents hôtels possèdent plusieurs suites.  
+Une fois la suite réservée, l'utilisateur peut gérer sa réservation dans son espace. Les réservations y sont affichées dans 2 sections distinctes:  
 - les réservations en cours   
--l'historique des réservations  
+- l'historique des réservations  
   
 A moins de 72h de la date réservée, l'utilisateur n'a plus la possiblité d'annuler la réservation.  
   
