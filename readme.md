@@ -60,12 +60,11 @@ Et l'interface permettra de créer des managers
   
 ## DEPLOIEMENT EN LIGNE   
   
-  - ACCES ADMIN & MANAGERS
-  adresse : "http://hypnoshernandez.alwaysdata.net/"  
+- ACCES ADMIN & MANAGERS  
+adresse : "http://hypnoshernandez.alwaysdata.net/"  
   
-
-  - SITE   
-  adresse : "https://hypnos-test-deployment.herokuapp.com/ "  
+- SITE  
+adresse : "https://hypnos-test-deployment.herokuapp.com/ "  
 
 
 
