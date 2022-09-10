@@ -54,9 +54,9 @@ Architecture MVC :
   --> se connecter à l'admin sur "http://localhost/hypnos/php/"  
   --> l'interface permettra de créer des managers  
   
-SI LES VARIABLES D'ENVIRONNEMENTS (.env, credentials.php) NE FONCTIONNENT PAS :
+## SI LES VARIABLES D'ENVIRONNEMENTS (.env, credentials.php) NE FONCTIONNENT PAS :
 - FERMEZ LE NAVIGATEUR  
-- REDEMARREZ VOTRE SERVEUR LOCAL
+- REDEMARREZ VOTRE SERVEUR LOCAL  
 --> LES VARIABLES DEVRAIENT ETRE REINITIALISEES !!!
   
   
