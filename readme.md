@@ -33,8 +33,7 @@ Architecture MVC :
   
 ## Auth   
 2 types d'authentification :  
-- USER  
-- Firebase   
+- USER : Firebase   
   --> créer un compte firebase   
   --> authentification  
   --> cliquez sur commencer  
@@ -51,8 +50,7 @@ Architecture MVC :
 
 
   
-- ADMIN & MANAGERS  
- - Base de données locale   
+- ADMIN & MANAGERS : Base de données locale   
 copier/coller les commandes présentes dans "--SQLite.sql"  
 lier sa base de données au projet.  
 Ajouter un admin avec son id et son password dans la base de données.  
@@ -62,12 +60,10 @@ Et l'interface permettra de créer des managers
   
 ## DEPLOIEMENT EN LIGNE   
   
-  ## ACCES ADMINISTRATEUR   
+  ## ACCES ADMIN & MANAGERS
   adresse : "http://hypnoshernandez.alwaysdata.net/"  
   
-  ## ACCES GERANTS   
-  adresse : "http://hypnoshernandez.alwaysdata.net/"  
-  
+
   ## SITE   
   adresse : "https://hypnos-test-deployment.herokuapp.com/ "  
 
