@@ -42,19 +42,22 @@ Architecture MVC :
   --> cliquez sur le logo </>  
   --> entrez le pseudo de l'application  
   --> récupérez les données dans le champ texte  
-  --> remplir les variables d'environnement dans .env.template.   
+  --> remplir les variables d'environnement dans "react/.env.template".   
   --> supprimer "_TEMPLATE" à la fin de la constante.  
   --> transformer .env.template en .env  
-  --> NORMALEMENT C'EST BON !!!
-
-
   
 - ADMIN & MANAGERS : Base de données locale   
   --> copier/coller les commandes présentes dans "--SQLite.sql"  
-  --> lier sa base de données au projet.  
+  --> lier sa base de données au projet
+  --> dans le fichier "php/credentials.template.php" suivez les indications
   --> ajouter un admin avec son id et son password dans la base de données.  
   --> se connecter à l'admin sur "http://localhost/hypnos/php/"  
   --> l'interface permettra de créer des managers  
+  
+SI LES VARIABLES D'ENVIRONNEMENTS (.env, credentials.php) NE FONCTIONNENT PAS :
+- FERMEZ LE NAVIGATEUR  
+- REDEMARREZ VOTRE SERVEUR LOCAL
+--> LES VARIABLES DEVRAIENT ETRE REINITIALISEES !!!
   
   
 ## DEPLOIEMENT EN LIGNE   
