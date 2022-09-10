@@ -32,10 +32,7 @@ export default function CompteCreation() {
       .catch(err => {
         console.error(err)
       })
-      
-      // formRef.current.reset()
-      // setValidation("")
-      // window.location.reload()
+
       navigate("/mon-compte")
     } else {
       window.location.reload()

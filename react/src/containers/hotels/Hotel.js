@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 
 export default function Hotels() {
 
+  document.title = "Hôtels";
 
   const [hotels, setHotels] = useState();
 

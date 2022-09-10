@@ -11,6 +11,8 @@ registerLocale('fr', fr)
 
 export default function Reservation() {
 
+  document.title = "Réservations";
+
   ///////////////////////////////////////// CONTEXTS
   const { currentHotel, currentSuite } = useContext(HotelContext)
   const { currentUser, toggleModals } = useContext(UserContext)

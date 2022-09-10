@@ -107,7 +107,7 @@ export default withFormik({
       .min(2, 'Le prenom doit avoir plus de 2 caractères')
       .required("Le prenom est obligatoire !"),
     nom: Yup.string()
-      .min(5, 'Le nom doit avoir plus de 2 caractères')
+      .min(3, 'Le nom doit avoir plus de 3 caractères')
       .required("Le nom est obligatoire !"),
     email: Yup.string()
       .email("L'email n'a pas le bon format")

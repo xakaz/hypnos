@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom'
 
 export default function Contact() {
 
+  document.title = "Contact";
+
   const [hotels, setHotels] = useState()
   const navigate = useNavigate()
 

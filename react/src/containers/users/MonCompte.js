@@ -176,7 +176,9 @@ export default function MonCompte() {
                             )
                           })
                           :
-                          <p className='text-center my-5 opacity-50'>Vous n'avez aucune réservation en cours...</p>
+                          <div>
+                            <p className='text-center my-5'>Vous n'avez aucune réservation en cours...</p>
+                          </div>
                       }
                       {/********************************************************* HISTORIQUE */}
                       <h3 className='text-primary mt-5 pt-5'>HISTORIQUE DES RESERVATIONS</h3>

@@ -7,6 +7,8 @@ import { HotelContext } from "../context/HotelContext";
 
 export default function HotelTemplate() {
 
+  document.title = "Hôtel & suites";
+
   const [suites, setSuites] = useState()
   const [hotels, setHotels] = useState();
   const { setCurrentHotel, setCurrentSuite } = useContext(HotelContext);

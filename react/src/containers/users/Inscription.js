@@ -30,6 +30,7 @@ export default function Inscription() {
       !inputs.current[1].value.match(/[A-Z]/g) ||
       !inputs.current[1].value.match(/\W+/g)
     ) {
+      formRef.current.reset()
       setPassRules(false)
       return
     }

@@ -15,7 +15,7 @@ export default function Navbar() {
   const logOut = async () => {
     try {
       await signOut(auth)
-      window.location.reload();
+      // window.location.reload();
       navigate("/")
     } catch (error) {
       alert("Déconnexion impossible, veuillez réessayer plus tard")

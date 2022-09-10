@@ -1,74 +1,74 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<urlset xmlns="https://hypnos-studi.herokuapp.com/">
+<urlset xmlns="https://hypnos-test-deployment.herokuapp.com/">
 
   <url>
-      <loc>https://hypnos-studi.herokuapp.com/</loc>
+      <loc>https://hypnos-test-deployment.herokuapp.com/</loc>
       <lastmod>2022-09-07</lastmod>
       <changefreq>yearly</changefreq>
   </url>
   <url>
-      <loc>https://hypnos-studi.herokuapp.com/hotels</loc>
+      <loc>https://hypnos-test-deployment.herokuapp.com/hotels</loc>
       <lastmod>2022-09-07</lastmod>
       <changefreq>yearly</changefreq>
   </url>
   <url>
-      <loc>https://hypnos-studi.herokuapp.com/restaurants</loc>
+      <loc>https://hypnos-test-deployment.herokuapp.com/restaurants</loc>
       <lastmod>2022-09-07</lastmod>
       <changefreq>yearly</changefreq>
   </url>
   <url>
-      <loc>https://hypnos-studi.herokuapp.com/bien-etre</loc>
+      <loc>https://hypnos-test-deployment.herokuapp.com/bien-etre</loc>
       <lastmod>2022-09-07</lastmod>
       <changefreq>yearly</changefreq>
   </url>
   <url>
-      <loc>https://hypnos-studi.herokuapp.com/evenements</loc>
+      <loc>https://hypnos-test-deployment.herokuapp.com/evenements</loc>
       <lastmod>2022-09-07</lastmod>
       <changefreq>yearly</changefreq>
   </url>
   <url>
-      <loc>https://hypnos-studi.herokuapp.com/reservation</loc>
+      <loc>https://hypnos-test-deployment.herokuapp.com/reservation</loc>
       <lastmod>2022-09-07</lastmod>
       <changefreq>yearly</changefreq>
   </url>
   <url>
-      <loc>https://hypnos-studi.herokuapp.com/contact</loc>
+      <loc>https://hypnos-test-deployment.herokuapp.com/contact</loc>
       <lastmod>2022-09-07</lastmod>
       <changefreq>yearly</changefreq>
   </url>
   <url>
-      <loc>https://hypnos-studi.herokuapp.com/hotel/paris</loc>
+      <loc>https://hypnos-test-deployment.herokuapp.com/hotel/paris</loc>
       <lastmod>2022-09-07</lastmod>
       <changefreq>yearly</changefreq>
   </url>
   <url>
-      <loc>https://hypnos-studi.herokuapp.com/hotel/bordeaux</loc>
+      <loc>https://hypnos-test-deployment.herokuapp.com/hotel/bordeaux</loc>
       <lastmod>2022-09-07</lastmod>
       <changefreq>yearly</changefreq>
   </url>
   <url>
-      <loc>https://hypnos-studi.herokuapp.com/hotel/toulouse</loc>
+      <loc>https://hypnos-test-deployment.herokuapp.com/hotel/toulouse</loc>
       <lastmod>2022-09-07</lastmod>
       <changefreq>yearly</changefreq>
   </url>
   <url>
-      <loc>https://hypnos-studi.herokuapp.com/hotel/leconquet</loc>
+      <loc>https://hypnos-test-deployment.herokuapp.com/hotel/leconquet</loc>
       <lastmod>2022-09-07</lastmod>
       <changefreq>yearly</changefreq>
   </url>
   <url>
-      <loc>https://hypnos-studi.herokuapp.com/hotel/marseille</loc>
+      <loc>https://hypnos-test-deployment.herokuapp.com/hotel/marseille</loc>
       <lastmod>2022-09-07</lastmod>
       <changefreq>yearly</changefreq>
   </url>
   <url>
-      <loc>https://hypnos-studi.herokuapp.com/hotel/champillon</loc>
+      <loc>https://hypnos-test-deployment.herokuapp.com/hotel/champillon</loc>
       <lastmod>2022-09-07</lastmod>
       <changefreq>yearly</changefreq>
   </url>
   <url>
-      <loc>https://hypnos-studi.herokuapp.com/hotel/lyon</loc>
+      <loc>https://hypnos-test-deployment.herokuapp.com/hotel/lyon</loc>
       <lastmod>2022-09-07</lastmod>
       <changefreq>yearly</changefreq>
   </url>
