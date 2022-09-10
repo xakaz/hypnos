@@ -36,25 +36,25 @@ Architecture MVC :
   --> créer un compte firebase   
   --> authentification  
   --> cliquez sur commencer  
-  --> Choisissez adresse e-mail/mot de passe  
+  --> choisissez adresse e-mail/mot de passe  
   --> cliquez activer e-mail/mot de passe  
   --> barre latérale : vue d'ensemble du projet  
   --> cliquez sur le logo </>  
   --> entrez le pseudo de l'application  
   --> récupérez les données dans le champ texte  
   --> remplir les variables d'environnement dans .env.template.   
-  --> Supprimer "_TEMPLATE" à la fin de la constante.  
+  --> supprimer "_TEMPLATE" à la fin de la constante.  
   --> transformer .env.template en .env  
   --> NORMALEMENT C'EST BON !!!
 
 
   
 - ADMIN & MANAGERS : Base de données locale   
-copier/coller les commandes présentes dans "--SQLite.sql"  
-lier sa base de données au projet.  
-Ajouter un admin avec son id et son password dans la base de données.  
-Se connecter à l'admin sur "http://localhost/hypnos/php/"  
-Et l'interface permettra de créer des managers  
+  --> copier/coller les commandes présentes dans "--SQLite.sql"  
+  --> lier sa base de données au projet.  
+  --> ajouter un admin avec son id et son password dans la base de données.  
+  --> se connecter à l'admin sur "http://localhost/hypnos/php/"  
+  --> l'interface permettra de créer des managers  
   
   
 ## DEPLOIEMENT EN LIGNE   
